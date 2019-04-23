@@ -17,9 +17,9 @@ public class Exercise : MonoBehaviour {
     //public GameObject rightExerciseBox;
     //private GameObject exerciseBoxGroup;
 
-    public GameObject leftTargets;
-    public GameObject rightTargets;
-    private GameObject targets;
+    //public GameObject leftTargets;
+    //public GameObject rightTargets;
+    public GameObject targets;
 
     private AudioClip beep;
     private AudioSource audioSource;
@@ -28,7 +28,7 @@ public class Exercise : MonoBehaviour {
 
     private bool isGroing;
 
-    private bool hasRegisteredOutOfPath;
+    //private bool hasRegisteredOutOfPath;
     private bool isBlinking;
 
     private int repCounter;
@@ -67,24 +67,24 @@ public class Exercise : MonoBehaviour {
     }
 
     private void setArea() {
-        if (State.isLeftArmSelected()) {
+        if (State.isLeftArmSelected() || State.isRightArmSelected()) {
             activate(true);
             //exerciseBoxGroup = leftExerciseBox;
-            targets = leftTargets;
+            //targets = leftTargets;
 
-        }
-        else if (State.isRightArmSelected()) {
-            activate(false);
-            //exerciseBoxGroup = rightExerciseBox;
-            targets = rightTargets;
         }
     }
 
-    private void activate(bool left) {
+    private void activate(bool targetgrid) {
+
+        targets.SetActive(targetgrid);
+        /*
         leftTargets.SetActive(left);
         //leftExerciseBox.SetActive(left);
         rightTargets.SetActive(!left);
         //rightExerciseBox.SetActive(!left);
+        
+         */
     }
 
     // Update is called once per frame
@@ -99,14 +99,20 @@ public class Exercise : MonoBehaviour {
             }
 
             if (Physics.Raycast(landingRay, out hit)) {
-                hasRegisteredOutOfPath = false;
+
+                // ------------------------------- Regista se o doente está dentro do caminho --------------------------------// 
+
+                /*hasRegisteredOutOfPath = false;
                 if (hit.collider.tag == "ExerciseCollider") { // is inside of the exercise area
-                    /*if (State.hasStartedExercise) {
+                    if (State.hasStartedExercise) {
                         foreach (Transform exerciseBox in exerciseBoxGroup.transform) {
                             exerciseBox.gameObject.GetComponent<Renderer>().material.color = new Color(0, 1, 0, 0.3f);
                         }
-                    }*/
-                }
+                    }
+            }*/
+
+                // -----------------------------------------------------------------------------------------------------------//
+
                 if (hit.collider.tag == "TargetCollider") { // has hit a target
                     bool hasHitTheCurrentTarget = hit.transform.position == targets.transform.GetChild(State.currentTarget).transform.position;
 
