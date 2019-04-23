@@ -121,12 +121,18 @@ public class Exercise : MonoBehaviour {
                             State.hasStartedExercise = true;
                         }
 
+                        // Grau de dificuldade elevado // - Pensar em como implementar a dificuldade adaptativa a partir daqui
+
+                        // Neste "if" o código ativa o caminho inverso da repetição assim que o cursor toca num target com índice menor que o anterior
+
                         targets.transform.GetChild(State.currentTarget).gameObject.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
                         if (State.currentTarget == (targets.transform.childCount - 1)) { // end of one correct repetition, need to start from the first target again
                             reversePath = true;
                             State.currentTarget--;
 
                         }
+
+                        // Neste "elseif" ele procura se o caminho inverso já foi ativo e o cursor já voltou ao primeiro target. Se sim, incrementa o número de reps corretas (sem compensações)
                         else if (reversePath && State.currentTarget == 0) {
                             State.currentTarget = 0;
                             State.tries++;
@@ -166,7 +172,7 @@ public class Exercise : MonoBehaviour {
                 }
             }*/
 
-            if (State.compensationInCurrentRep) { // if is detected a compensation we restart the repetition
+            if (State.compensationInCurrentRep) { // Caso seja detetada uma compensação o exercício recomeça do início
                 State.compensationInCurrentRep = false;
                 reversePath = false;
                 if(State.currentTarget != 0) {
@@ -183,6 +189,7 @@ public class Exercise : MonoBehaviour {
 
         Renderer renderer = null;
         int target = State.currentTarget;
+        Debug.Log(target);
         while (renderer == null) {
             Renderer rendererTemp = targets.transform.GetChild(target).gameObject.GetComponent<Renderer>();
 
