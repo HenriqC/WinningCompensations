@@ -29,25 +29,31 @@ public class CompensationMatrix : MonoBehaviour {
     public GameObject spineSlider;
 
     public GameObject shoulderArrow;
+    public GameObject shoulderSphere;
     public GameObject hipArrow;
+    //public GameObject hipSphere;
     public GameObject spineLeftArrow;
+    //public GameObject spineLeftSphere;
     public GameObject spineRightArrow;
+    //public GameObject spineRightSphere;
 
     public GameObject shoulders;
     public GameObject hips;
     public GameObject spine;
 
-    private bool hasRegistredShoulderCompensation;
-    private bool hasRegistredHipCompensation;
-    private bool hasRegistredSpineCompensation;
+    public bool SphereComp;
+    private bool hasRegisteredShoulderCompensation;
+    private bool hasRegisteredHipCompensation;
+    private bool hasRegisteredSpineCompensation;
 
     private float arrowOffset = 0.1f;
 
     // Use this for initialization
     void Start () {
-		
-	}
-	
+
+        
+    }
+
     private void setBarColorToRed(GameObject bar) {
         bar.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 0.3f);
     }
@@ -65,35 +71,69 @@ public class CompensationMatrix : MonoBehaviour {
         bool shoulderToggleIsOn = shoulderToggle.GetComponent<Toggle>().isOn;
         if (shoulderToggleIsOn) {
             shoulderBar.transform.position = new Vector3(spineBase.transform.position.x, spineShoulder.transform.position.y, shoulderBar.transform.position.z);
-            shoulderToggle.transform.position = new Vector3(shoulderToggle.transform.position.x, shoulderBar.transform.position.y, shoulderToggle.transform.position.z);
+            shoulderToggle.transform.position = new Vector3(shoulderToggle.transform.position.x, shoulderBar.transform.position.y, shoulderToggle.transform.position.z);       
 
             bool hasShoulderCompensation = Math.Abs(leftShoulder.transform.position.y - rightShoulder.transform.position.y) > shoulderSlider.GetComponent<Slider>().value;
+            
             if (hasShoulderCompensation) {
                 State.compensationInCurrentRep = true;
-
                 setBarColorToRed(shoulderBar);
-                shoulderArrow.SetActive(true);
 
+                if (SphereComp)
+                {
+                    Debug.LogWarning("Entrou");
+                    shoulderSphere.SetActive(true);
+                }
+                else
+                {
+                    shoulderArrow.SetActive(true);
+                }
+                
+                // ---- Guarda a diferença de alturas entre os ombros para aumentar o tamanho das esferas de acordo com este valor ---- //
+
+                float shoulderOffset = leftShoulder.transform.position.y - rightShoulder.transform.position.y;
+
+                // -------------------------------------------------------------------------------------------------------------------- //
+
+                /* Mudança por keyboard input não funciona porque só pode ser carregado quando há uma compensação e, em simultâneo, não dá para fazer
+                 
+                Alteração da representação das setas para esferas de tamanho variável
+
+                if (Input.GetKeyDown(KeyCode.V)
+                {
+                    shoulderArrow.SetActive(false);
+                    shoulderSphere.SetActive(true);
+                } 
+                
+                 */            
+                
                 if (leftShoulder.transform.position.y > rightShoulder.transform.position.y) {
-                    if(!hasRegistredShoulderCompensation && State.isTherapyOnGoing) {
+                    if(!hasRegisteredShoulderCompensation && State.isTherapyOnGoing) {
                         State.leftShoulderUp++;
-                        State.tries++;
+                        State.tries++;                        
                     }
                     shoulderArrow.transform.position = new Vector3(leftShoulder.transform.position.x - arrowOffset, leftShoulder.transform.position.y + arrowOffset, leftShoulder.transform.position.z);
+                    shoulderOffset = Math.Abs(leftShoulder.transform.position.y - rightShoulder.transform.position.y);
+                    shoulderSphere.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f) * shoulderOffset;
+                    shoulderSphere.transform.position = shoulderArrow.transform.position;
                 }
                 else {
-                    if (!hasRegistredShoulderCompensation && State.isTherapyOnGoing) { 
+                    if (!hasRegisteredShoulderCompensation && State.isTherapyOnGoing) { 
                         State.rightShoulderUp++;
-                        State.tries++;
+                        State.tries++;                        
                     }
-                shoulderArrow.transform.position = new Vector3(rightShoulder.transform.position.x + arrowOffset, rightShoulder.transform.position.y + arrowOffset, rightShoulder.transform.position.z);
+                    shoulderArrow.transform.position = new Vector3(rightShoulder.transform.position.x + arrowOffset, rightShoulder.transform.position.y + arrowOffset, rightShoulder.transform.position.z);
+                    shoulderOffset = Math.Abs(leftShoulder.transform.position.y - rightShoulder.transform.position.y);
+                    shoulderSphere.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f) * shoulderOffset;
+                    shoulderSphere.transform.position = new Vector3(rightShoulder.transform.position.x, rightShoulder.transform.position.y, rightShoulder.transform.position.z);
                 }
-                hasRegistredShoulderCompensation = true;
+                hasRegisteredShoulderCompensation = true;
             }
             else {
                 setBarColorToGreen(shoulderBar);
                 shoulderArrow.SetActive(false);
-                hasRegistredShoulderCompensation = false;
+                shoulderSphere.SetActive(false);
+                hasRegisteredShoulderCompensation = false;
             }
         }
 
@@ -111,25 +151,25 @@ public class CompensationMatrix : MonoBehaviour {
                 hipArrow.SetActive(true);
 
                 if (leftHip.transform.position.y > rightHip.transform.position.y) {
-                    if (!hasRegistredHipCompensation && State.isTherapyOnGoing) {
+                    if (!hasRegisteredHipCompensation && State.isTherapyOnGoing) {
                         State.leftHipUp++;
                         State.tries++;
                     }
                     hipArrow.transform.position = new Vector3(leftHip.transform.position.x - arrowOffset, leftHip.transform.position.y + arrowOffset, leftHip.transform.position.z);
                 }
                 else {
-                    if (!hasRegistredHipCompensation && State.isTherapyOnGoing) {
+                    if (!hasRegisteredHipCompensation && State.isTherapyOnGoing) {
                         State.rightHipUp++;
                         State.tries++;
                     }
                     hipArrow.transform.position = new Vector3(rightHip.transform.position.x + arrowOffset, rightHip.transform.position.y + arrowOffset, rightHip.transform.position.z);
                 }
-                hasRegistredHipCompensation = true;
+                hasRegisteredHipCompensation = true;
             }
             else {
                 setBarColorToGreen(hipBar);
                 hipArrow.SetActive(false);
-                hasRegistredHipCompensation = false;
+                hasRegisteredHipCompensation = false;
             }
         }
 
@@ -146,7 +186,7 @@ public class CompensationMatrix : MonoBehaviour {
                 setBarColorToRed(spineBar);
 
                 if (spineShoulder.transform.position.x > spineBase.transform.position.x) {
-                    if (!hasRegistredSpineCompensation && State.isTherapyOnGoing) {
+                    if (!hasRegisteredSpineCompensation && State.isTherapyOnGoing) {
                         State.leaningRight++;
                         State.tries++;
                     }
@@ -155,20 +195,20 @@ public class CompensationMatrix : MonoBehaviour {
 
                 }
                 else {
-                    if (!hasRegistredSpineCompensation && State.isTherapyOnGoing) {
+                    if (!hasRegisteredSpineCompensation && State.isTherapyOnGoing) {
                         State.leaningLeft++;
                         State.tries++;
                     }
                     spineLeftArrow.SetActive(true);
                     spineLeftArrow.transform.position = new Vector3(spineBar.transform.position.x - arrowOffset, spineBar.transform.position.y, spineBar.transform.position.z);
                 }
-                hasRegistredSpineCompensation = true;
+                hasRegisteredSpineCompensation = true;
             }
             else {
                 setBarColorToGreen(spineBar);
                 spineLeftArrow.SetActive(false);
                 spineRightArrow.SetActive(false);
-                hasRegistredSpineCompensation = false;
+                hasRegisteredSpineCompensation = false;
             }
         }
     }
