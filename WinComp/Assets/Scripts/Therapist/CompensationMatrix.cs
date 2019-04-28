@@ -31,11 +31,11 @@ public class CompensationMatrix : MonoBehaviour {
     public GameObject shoulderArrow;
     public GameObject shoulderSphere;
     public GameObject hipArrow;
-    //public GameObject hipSphere;
+    public GameObject hipSphere;
     public GameObject spineLeftArrow;
-    //public GameObject spineLeftSphere;
+    public GameObject spineLeftSphere;
     public GameObject spineRightArrow;
-    //public GameObject spineRightSphere;
+    public GameObject spineRightSphere;
 
     public GameObject shoulders;
     public GameObject hips;
@@ -104,18 +104,7 @@ public class CompensationMatrix : MonoBehaviour {
                 float shoulderOffset = Math.Abs(leftShoulder.transform.position.y - rightShoulder.transform.position.y);
 
                 // -------------------------------------------------------------------------------------------------------------------- //
-
-                /* Mudança por keyboard input não funciona porque só pode ser carregado quando há uma compensação e, em simultâneo, não dá para fazer
-                 
-                Alteração da representação das setas para esferas de tamanho variável
-
-                if (Input.GetKeyDown(KeyCode.V)
-                {
-                    shoulderArrow.SetActive(false);
-                    shoulderSphere.SetActive(true);
-                } 
-                
-                 */            
+                         
                 
                 if (leftShoulder.transform.position.y > rightShoulder.transform.position.y) {
                     if(!hasRegisteredShoulderCompensation && State.isTherapyOnGoing) {
@@ -161,11 +150,34 @@ public class CompensationMatrix : MonoBehaviour {
             hipToggle.transform.position = new Vector3(hipToggle.transform.position.x, hipBar.transform.position.y, hipToggle.transform.position.z);
 
             bool hasHipCompensation = Math.Abs(leftHip.transform.position.y - rightHip.transform.position.y) > hipSlider.GetComponent<Slider>().value;
+
+            // Define o diâmetro inicial da esfera
+            originalSphereSize = new Vector3(1f, 1f, 1f);
+            originalSphereScale = originalSphereSize.magnitude;
+            // Definem o diâmetro máximo da esfera
+            maxSphereSize = new Vector3(2f, 2f, 2f);
+            maxSphereScale = maxSphereSize.magnitude;
+
+
             if (hasHipCompensation) {
                 State.compensationInCurrentRep = true;
-
                 setBarColorToRed(hipBar);
-                hipArrow.SetActive(true);
+
+                if (SphereComp)
+                {
+                    //Debug.LogWarning("Entrou");
+                    hipSphere.SetActive(true);
+                }
+                else
+                {
+                    hipArrow.SetActive(true);
+                }
+
+                // ---- Guarda a diferença de alturas entre os ombros para aumentar o tamanho das esferas de acordo com este valor ---- //
+
+                float hipOffset = Math.Abs(leftHip.transform.position.y - rightHip.transform.position.y);
+
+                // -------------------------------------------------------------------------------------------------------------------- //
 
                 if (leftHip.transform.position.y > rightHip.transform.position.y) {
                     if (!hasRegisteredHipCompensation && State.isTherapyOnGoing) {
@@ -173,6 +185,11 @@ public class CompensationMatrix : MonoBehaviour {
                         State.tries++;
                     }
                     hipArrow.transform.position = new Vector3(leftHip.transform.position.x - arrowOffset, leftHip.transform.position.y + arrowOffset, leftHip.transform.position.z);
+                    hipSphere.transform.position = new Vector3(leftHip.transform.position.x - (arrowOffset / 2), leftHip.transform.position.y + arrowOffset, leftHip.transform.position.z);
+                    if (hipSphere.transform.localScale.magnitude < maxSphereScale)
+                    {
+                        hipSphere.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f) * hipOffset;
+                    }
                 }
                 else {
                     if (!hasRegisteredHipCompensation && State.isTherapyOnGoing) {
@@ -180,6 +197,11 @@ public class CompensationMatrix : MonoBehaviour {
                         State.tries++;
                     }
                     hipArrow.transform.position = new Vector3(rightHip.transform.position.x + arrowOffset, rightHip.transform.position.y + arrowOffset, rightHip.transform.position.z);
+                    hipSphere.transform.position = new Vector3(rightHip.transform.position.x + arrowOffset, rightHip.transform.position.y + arrowOffset, rightHip.transform.position.z);
+                    if (hipSphere.transform.localScale.magnitude < maxSphereScale)
+                    {
+                        hipSphere.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f) * hipOffset;
+                    }
                 }
                 hasRegisteredHipCompensation = true;
             }
@@ -187,6 +209,7 @@ public class CompensationMatrix : MonoBehaviour {
                 setBarColorToGreen(hipBar);
                 hipArrow.SetActive(false);
                 hasRegisteredHipCompensation = false;
+                hipSphere.transform.localScale = originalSphereSize;
             }
         }
 
@@ -202,13 +225,30 @@ public class CompensationMatrix : MonoBehaviour {
 
                 setBarColorToRed(spineBar);
 
+                // ---- Guarda a diferença de alturas entre os ombros para aumentar o tamanho das esferas de acordo com este valor ---- //
+
+                float spineOffset = Math.Abs(spineShoulder.transform.position.y - spineBase.transform.position.y);
+
+                // -------------------------------------------------------------------------------------------------------------------- //
+
                 if (spineShoulder.transform.position.x > spineBase.transform.position.x) {
                     if (!hasRegisteredSpineCompensation && State.isTherapyOnGoing) {
                         State.leaningRight++;
                         State.tries++;
                     }
-                    spineRightArrow.SetActive(true);
+                    if (SphereComp)
+                    {
+                        spineRightSphere.SetActive(true);
+                    } else
+                    {
+                        spineRightArrow.SetActive(true);
+                    }                                      
                     spineRightArrow.transform.position = new Vector3(spineBar.transform.position.x + arrowOffset, spineBar.transform.position.y, spineBar.transform.position.z);
+                    spineRightSphere.transform.position = new Vector3(spineBar.transform.position.x + (arrowOffset * 2), spineBar.transform.position.y, spineBar.transform.position.z);
+                    if (spineRightSphere.transform.localScale.magnitude < maxSphereScale)
+                    {
+                        spineRightSphere.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f) * spineOffset;
+                    }
 
                 }
                 else {
@@ -216,8 +256,20 @@ public class CompensationMatrix : MonoBehaviour {
                         State.leaningLeft++;
                         State.tries++;
                     }
-                    spineLeftArrow.SetActive(true);
+                    if (SphereComp)
+                    {
+                        spineLeftSphere.SetActive(true);
+                    }
+                    else
+                    {
+                        spineLeftArrow.SetActive(true);
+                    }
                     spineLeftArrow.transform.position = new Vector3(spineBar.transform.position.x - arrowOffset, spineBar.transform.position.y, spineBar.transform.position.z);
+                    spineLeftSphere.transform.position = new Vector3(spineBar.transform.position.x - (arrowOffset * 2), spineBar.transform.position.y, spineBar.transform.position.z);
+                    if (spineLeftSphere.transform.localScale.magnitude < maxSphereScale)
+                    {
+                        spineLeftSphere.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f) * spineOffset;
+                    }
                 }
                 hasRegisteredSpineCompensation = true;
             }
@@ -225,7 +277,11 @@ public class CompensationMatrix : MonoBehaviour {
                 setBarColorToGreen(spineBar);
                 spineLeftArrow.SetActive(false);
                 spineRightArrow.SetActive(false);
+                spineLeftSphere.SetActive(false);
+                spineRightSphere.SetActive(false);
                 hasRegisteredSpineCompensation = false;
+                spineRightSphere.transform.localScale = originalSphereSize;
+                spineLeftSphere.transform.localScale = originalSphereSize;
             }
         }
     }
