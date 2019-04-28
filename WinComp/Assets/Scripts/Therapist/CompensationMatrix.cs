@@ -41,6 +41,11 @@ public class CompensationMatrix : MonoBehaviour {
     public GameObject hips;
     public GameObject spine;
 
+    private Vector3 originalSphereSize;
+    private float originalSphereScale;
+    private Vector3 maxSphereSize;
+    private float maxSphereScale;
+
     public bool SphereComp;
     private bool hasRegisteredShoulderCompensation;
     private bool hasRegisteredHipCompensation;
@@ -49,9 +54,7 @@ public class CompensationMatrix : MonoBehaviour {
     private float arrowOffset = 0.1f;
 
     // Use this for initialization
-    void Start () {
-
-        
+    void Start () {        
     }
 
     private void setBarColorToRed(GameObject bar) {
@@ -74,24 +77,31 @@ public class CompensationMatrix : MonoBehaviour {
             shoulderToggle.transform.position = new Vector3(shoulderToggle.transform.position.x, shoulderBar.transform.position.y, shoulderToggle.transform.position.z);       
 
             bool hasShoulderCompensation = Math.Abs(leftShoulder.transform.position.y - rightShoulder.transform.position.y) > shoulderSlider.GetComponent<Slider>().value;
-            
+
+            // Define o diâmetro inicial da esfera
+            originalSphereSize = new Vector3 (1f,1f,1f);
+            originalSphereScale = originalSphereSize.magnitude;
+            // Definem o diâmetro máximo da esfera
+            maxSphereSize = new Vector3(2f, 2f, 2f);
+            maxSphereScale = maxSphereSize.magnitude;
+
             if (hasShoulderCompensation) {
                 State.compensationInCurrentRep = true;
                 setBarColorToRed(shoulderBar);
 
                 if (SphereComp)
                 {
-                    Debug.LogWarning("Entrou");
+                    //Debug.LogWarning("Entrou");
                     shoulderSphere.SetActive(true);
                 }
                 else
                 {
                     shoulderArrow.SetActive(true);
                 }
-                
+
                 // ---- Guarda a diferença de alturas entre os ombros para aumentar o tamanho das esferas de acordo com este valor ---- //
 
-                float shoulderOffset = leftShoulder.transform.position.y - rightShoulder.transform.position.y;
+                float shoulderOffset = Math.Abs(leftShoulder.transform.position.y - rightShoulder.transform.position.y);
 
                 // -------------------------------------------------------------------------------------------------------------------- //
 
@@ -113,9 +123,12 @@ public class CompensationMatrix : MonoBehaviour {
                         State.tries++;                        
                     }
                     shoulderArrow.transform.position = new Vector3(leftShoulder.transform.position.x - arrowOffset, leftShoulder.transform.position.y + arrowOffset, leftShoulder.transform.position.z);
-                    shoulderOffset = Math.Abs(leftShoulder.transform.position.y - rightShoulder.transform.position.y);
-                    shoulderSphere.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f) * shoulderOffset;
-                    shoulderSphere.transform.position = shoulderArrow.transform.position;
+                    shoulderSphere.transform.position = new Vector3(leftShoulder.transform.position.x + (arrowOffset/2), leftShoulder.transform.position.y + arrowOffset, leftShoulder.transform.position.z);
+                    if (shoulderSphere.transform.localScale.magnitude < maxSphereScale)
+                    {
+                        shoulderSphere.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f) * shoulderOffset;
+                    }                                         
+                    //Debug.LogWarning(shoulderSphere.transform.position);
                 }
                 else {
                     if (!hasRegisteredShoulderCompensation && State.isTherapyOnGoing) { 
@@ -123,9 +136,12 @@ public class CompensationMatrix : MonoBehaviour {
                         State.tries++;                        
                     }
                     shoulderArrow.transform.position = new Vector3(rightShoulder.transform.position.x + arrowOffset, rightShoulder.transform.position.y + arrowOffset, rightShoulder.transform.position.z);
-                    shoulderOffset = Math.Abs(leftShoulder.transform.position.y - rightShoulder.transform.position.y);
-                    shoulderSphere.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f) * shoulderOffset;
-                    shoulderSphere.transform.position = new Vector3(rightShoulder.transform.position.x, rightShoulder.transform.position.y, rightShoulder.transform.position.z);
+                    shoulderSphere.transform.position = new Vector3(rightShoulder.transform.position.x + arrowOffset, rightShoulder.transform.position.y + arrowOffset, rightShoulder.transform.position.z);
+                    if (shoulderSphere.transform.localScale.magnitude < maxSphereScale)
+                    {
+                        shoulderSphere.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f) * shoulderOffset;
+                    }
+                    //Debug.LogWarning(shoulderSphere.transform.position);
                 }
                 hasRegisteredShoulderCompensation = true;
             }
@@ -134,6 +150,7 @@ public class CompensationMatrix : MonoBehaviour {
                 shoulderArrow.SetActive(false);
                 shoulderSphere.SetActive(false);
                 hasRegisteredShoulderCompensation = false;
+                shoulderSphere.transform.localScale = originalSphereSize;
             }
         }
 
