@@ -20,11 +20,15 @@ public class PatientController : MonoBehaviour {
     public GameObject restTherapist;
     public GameObject completed;
 
+    public RadialCompletionBar completion;
+    public AsyncOperation completionCalculation;
+
     private int sessionTimeInt;
     private int setTimeInt;
     private int restTimeInt;
     private int startCounterInt;
-     
+    public float completionPercentage = 0f;
+
     void init() {
         if (State.setDuration <= 0) {
             State.setDuration = 60;
@@ -132,10 +136,14 @@ public class PatientController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        completion.OnChange(this.OnRadialBarChange);
+        completion.OnDone(this.OnRadialBarDone);
+        StartCoroutine(this.CalculateCompletion(completionCalculation));
     }
 
     // Update is called once per frame
     void Update() {
+
         if (State.hasFinishedExercise) {
             startCounterPatient.transform.gameObject.SetActive(false);
             CancelInvoke("countDown");
@@ -147,6 +155,37 @@ public class PatientController : MonoBehaviour {
 
         correctRepetitionsPatient.text = "" + State.correctReps;
         correctRepetitionsTherapist.text = "" + State.correctReps;
-        triesTherapist.text = "" + State.tries;
+        triesTherapist.text = "" + State.tries;        
+    }
+
+    public void CompletionCalculation(float result)
+    {
+        if (!State.hasFinishedExercise && completionPercentage <= 100f)
+        {
+            completionPercentage = ((State.correctReps / State.maxReps) * 100);
+        }
+        result = completionPercentage;
+        return;
+    }
+
+    void OnRadialBarChange (float value)
+    {
+        print("Radial completion is : " + value);
+    }
+
+    void OnRadialBarDone()
+    {
+        print("Radial completion is done");
+    }
+
+    IEnumerator CalculateCompletion(object completionCalculation)
+    {
+        completionCalculation = CalculateCompletion(this.completionPercentage);
+
+        while (!completionCalculation.Equals(100f))
+        {
+            completion.SetValue(completionPercentage / 0.9f);
+            yield return null;
+        }
     }
 }

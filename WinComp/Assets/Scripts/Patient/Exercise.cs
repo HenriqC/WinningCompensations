@@ -129,6 +129,7 @@ public class Exercise : MonoBehaviour {
                         if (State.currentTarget == (targets.transform.childCount - 1)) { // end of one correct repetition, need to start from the first target again
                             reversePath = true;
                             State.currentTarget--;
+                            State.correctReps++;
 
                         }
 
