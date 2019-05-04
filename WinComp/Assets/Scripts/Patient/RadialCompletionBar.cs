@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class RadialCorrectnessBar : MonoBehaviour
+public class RadialCompletionBar : MonoBehaviour
 {
-    public Image correctness;
-    public Text percentage;
-    public Exercise amount;
 
-    [Range(0, 100)]
-    public float Correct;
+    public Image completion;
+    public Text percentage;
+    public Exercise_Grid amount;
+
+    [Range (0,100)]
+    public float Amount;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +25,10 @@ public class RadialCorrectnessBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Correct = amount.correctness;
-        correctness.fillAmount = (Correct / 100);
+        Amount = amount.completion;
+        completion.fillAmount = (Amount/100);
 
-        percentage.text = string.Format("{0} %", Correct);
+        percentage.text = string.Format("{0} %", Amount);
     }
+
 }

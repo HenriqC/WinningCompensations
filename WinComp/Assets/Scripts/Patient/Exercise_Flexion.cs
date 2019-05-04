@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Exercise : MonoBehaviour {
+public class Exercise_Flexion : MonoBehaviour
+{
 
     public GameObject cursor;
     public bool hasSecondaryCursor;
 
-    public Text avgTime;    
+    public Text avgTime;
 
     public string exerciseName;
 
@@ -35,11 +36,14 @@ public class Exercise : MonoBehaviour {
     private int repCounter;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
     }
 
-    void init() {
-        if (State.maxReps <= 0) {
+    void init()
+    {
+        if (State.maxReps <= 0)
+        {
             State.maxReps = 10;
         }
 
@@ -59,16 +63,20 @@ public class Exercise : MonoBehaviour {
         renderer.material.color = color;
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         init();
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         CancelInvoke();
     }
 
-    private void setArea() {
-        if (State.isLeftArmSelected() || State.isRightArmSelected()) {
+    private void setArea()
+    {
+        if (State.isLeftArmSelected() || State.isRightArmSelected())
+        {
             activate(true);
             //exerciseBoxGroup = leftExerciseBox;
             //targets = leftTargets;
@@ -76,7 +84,8 @@ public class Exercise : MonoBehaviour {
         }
     }
 
-    private void activate(bool targetgrid) {
+    private void activate(bool targetgrid)
+    {
 
         targets.SetActive(targetgrid);
         /*
@@ -89,18 +98,22 @@ public class Exercise : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         RaycastHit hit;
         Ray landingRay = new Ray(cursor.transform.position, Vector3.back);
-             
 
-        if (State.isTherapyOnGoing) {
-            if(!isBlinking) {
+
+        if (State.isTherapyOnGoing)
+        {
+            if (!isBlinking)
+            {
                 InvokeRepeating("blinkTarget", 0, 0.05f);
                 isBlinking = true;
             }
 
-            if (Physics.Raycast(landingRay, out hit)) {
+            if (Physics.Raycast(landingRay, out hit))
+            {
 
                 // ------------------------------- Regista se o doente está dentro do caminho --------------------------------// 
 
@@ -115,11 +128,31 @@ public class Exercise : MonoBehaviour {
 
                 // -----------------------------------------------------------------------------------------------------------//
 
-                if (hit.collider.tag == "TargetCollider") { // has hit a target
+                if (hit.collider.tag == "TargetCollider")
+                { // has hit a target
                     bool hasHitTheCurrentTarget = hit.transform.position == targets.transform.GetChild(State.currentTarget).transform.position;
 
-                    if (hasHitTheCurrentTarget) {
-                        if (!State.hasStartedExercise) {
+                    // Esta secção faz o preenchimento das barras radiais de acordo com correção e progressão do ex
+                    float complete = State.correctReps;
+
+                    completion = complete / State.maxReps * 100f;
+
+                    if (State.tries > 0)
+                    {
+                        correctness = complete / State.tries * 100f;
+                        int icorrectness = (int)correctness;
+                        //Debug.LogError(icorrectness);
+                    }
+
+                    /*Debug.LogError(State.correctReps);
+                    Debug.LogError(State.maxReps);                            
+                    Debug.LogError(completion);*/
+
+
+                    if (hasHitTheCurrentTarget)
+                    {
+                        if (!State.hasStartedExercise)
+                        {
                             State.hasStartedExercise = true;
                         }
 
@@ -128,62 +161,38 @@ public class Exercise : MonoBehaviour {
                         // Neste "if" o código ativa o caminho inverso da repetição assim que o cursor toca num target com índice menor que o anterior
 
                         targets.transform.GetChild(State.currentTarget).gameObject.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
-                        if (State.currentTarget == (targets.transform.childCount - 1)) { // end of one correct repetition, need to start from the first target again
+                        if (State.currentTarget == (targets.transform.childCount - 1))
+                        { // end of one correct repetition, need to start from the first target again
                             reversePath = true;
                             State.currentTarget--;
                             State.correctReps++;
-                            State.tries++;
-
-                            // Esta secção faz o preenchimento das barras radiais de acordo com correção e progressão do ex
-                            float complete = State.correctReps;
-
-                            completion = complete / State.maxReps * 100f;
-
-                            if (State.tries > 0)
-                            {
-                                correctness = complete / State.tries * 100f;
-                                int icorrectness = (int)correctness;
-                                Debug.LogError(icorrectness);
-                            }
-                            
-                            /*Debug.LogError(State.correctReps);
-                            Debug.LogError(State.maxReps);                            
-                            Debug.LogError(completion);*/
+                            State.tries++;                           
                         }
 
                         // Neste "elseif" ele procura se o caminho inverso já foi ativo e o cursor já voltou ao primeiro target. Se sim, incrementa o número de reps corretas (sem compensações)
-                        else if (reversePath && State.currentTarget == 0) {
+                        else if (reversePath && State.currentTarget == 0)
+                        {
                             State.currentTarget = 0;
                             State.tries++;
                             State.correctReps++;
                             reversePath = false;
-
-                            float complete = State.correctReps;
-
-                            completion = complete / State.maxReps * 100f;
-
-                            if (State.tries > 0)
-                            {
-                                correctness = complete / State.tries * 100f;
-                                int icorrectness = (int)correctness;
-                                Debug.LogError(icorrectness);
-                            }
-
-
 
                             int minutes = (State.sessionTimeInt / State.correctReps) / 60;
                             int seconds = (State.sessionTimeInt / State.correctReps) % 60;
 
                             avgTime.text = minutes.ToString("00") + ":" + seconds.ToString("00");
 
-                            if (State.correctReps >= State.maxReps) { // done all the needed reps
+                            if (State.correctReps >= State.maxReps)
+                            { // done all the needed reps
                                 State.hasFinishedExercise = true;
                             }
                         }
-                        else if (!reversePath) {
+                        else if (!reversePath)
+                        {
                             State.currentTarget++;
                         }
-                        else if (reversePath) {
+                        else if (reversePath)
+                        {
                             State.currentTarget--;
                         }
                         audioSource.PlayOneShot(beep);
@@ -204,10 +213,12 @@ public class Exercise : MonoBehaviour {
                 }
             }*/
 
-            if (State.compensationInCurrentRep) { // Caso seja detetada uma compensação o exercício recomeça do início
+            if (State.compensationInCurrentRep)
+            { // Caso seja detetada uma compensação o exercício recomeça do início
                 State.compensationInCurrentRep = false;
                 reversePath = false;
-                if(State.currentTarget != 0) {
+                if (State.currentTarget != 0)
+                {
                     targets.transform.GetChild(State.currentTarget).gameObject.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
                 }
                 State.currentTarget = 0;
@@ -215,40 +226,49 @@ public class Exercise : MonoBehaviour {
         }
     }
 
-    private void blinkTarget() {
+    private void blinkTarget()
+    {
         if (targets.transform.childCount == 0)
             return;
 
         Renderer renderer = null;
         int target = State.currentTarget;
         Debug.Log(target);
-        while (renderer == null) {
+        while (renderer == null)
+        {
             Renderer rendererTemp = targets.transform.GetChild(target).gameObject.GetComponent<Renderer>();
 
-            if (rendererTemp.enabled) {
+            if (rendererTemp.enabled)
+            {
                 renderer = rendererTemp;
             }
-            else if (reversePath) {
+            else if (reversePath)
+            {
                 target--;
             }
-            else {
+            else
+            {
                 target++;
             }
         }
 
         float delta;
 
-        if (isGroing && renderer.material.color.r > 1) {
+        if (isGroing && renderer.material.color.r > 1)
+        {
             isGroing = false;
         }
-        else if (!isGroing && renderer.material.color.r < 0) {
+        else if (!isGroing && renderer.material.color.r < 0)
+        {
             isGroing = true;
         }
 
-        if (isGroing) {
+        if (isGroing)
+        {
             delta = 0.1f;
         }
-        else {
+        else
+        {
             delta = -0.1f;
         }
 
