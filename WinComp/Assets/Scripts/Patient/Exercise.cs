@@ -20,7 +20,7 @@ public class Exercise : MonoBehaviour {
     //public GameObject leftTargets;
     //public GameObject rightTargets;
     public GameObject targets;
-
+    public float completion;
     private AudioClip beep;
     private AudioSource audioSource;
 
@@ -91,8 +91,9 @@ public class Exercise : MonoBehaviour {
     void Update () {
         RaycastHit hit;
         Ray landingRay = new Ray(cursor.transform.position, Vector3.back);
+             
 
-        if(State.isTherapyOnGoing) {
+        if (State.isTherapyOnGoing) {
             if(!isBlinking) {
                 InvokeRepeating("blinkTarget", 0, 0.05f);
                 isBlinking = true;
@@ -130,7 +131,11 @@ public class Exercise : MonoBehaviour {
                             reversePath = true;
                             State.currentTarget--;
                             State.correctReps++;
-
+                            float correct = State.correctReps;
+                            completion = correct / State.maxReps * 100f;
+                            /*Debug.LogError(State.correctReps);
+                            Debug.LogError(State.maxReps);                            
+                            Debug.LogError(completion);*/
                         }
 
                         // Neste "elseif" ele procura se o caminho inverso já foi ativo e o cursor já voltou ao primeiro target. Se sim, incrementa o número de reps corretas (sem compensações)
@@ -139,6 +144,10 @@ public class Exercise : MonoBehaviour {
                             State.tries++;
                             State.correctReps++;
                             reversePath = false;
+                            float correct = State.correctReps;
+                            completion = correct / State.maxReps * 100f;
+
+
 
                             int minutes = (State.sessionTimeInt / State.correctReps) / 60;
                             int seconds = (State.sessionTimeInt / State.correctReps) % 60;
