@@ -21,6 +21,7 @@ public class Exercise : MonoBehaviour {
     //public GameObject rightTargets;
     public GameObject targets;
     public float completion;
+    public float correctness;
     private AudioClip beep;
     private AudioSource audioSource;
 
@@ -131,8 +132,20 @@ public class Exercise : MonoBehaviour {
                             reversePath = true;
                             State.currentTarget--;
                             State.correctReps++;
-                            float correct = State.correctReps;
-                            completion = correct / State.maxReps * 100f;
+                            State.tries++;
+
+                            // Esta secção faz o preenchimento das barras radiais de acordo com correção e progressão do ex
+                            float complete = State.correctReps;
+
+                            completion = complete / State.maxReps * 100f;
+
+                            if (State.tries > 0)
+                            {
+                                correctness = complete / State.tries * 100f;
+                                int icorrectness = (int)correctness;
+                                Debug.LogError(icorrectness);
+                            }
+                            
                             /*Debug.LogError(State.correctReps);
                             Debug.LogError(State.maxReps);                            
                             Debug.LogError(completion);*/
@@ -144,8 +157,17 @@ public class Exercise : MonoBehaviour {
                             State.tries++;
                             State.correctReps++;
                             reversePath = false;
-                            float correct = State.correctReps;
-                            completion = correct / State.maxReps * 100f;
+
+                            float complete = State.correctReps;
+
+                            completion = complete / State.maxReps * 100f;
+
+                            if (State.tries > 0)
+                            {
+                                correctness = complete / State.tries * 100f;
+                                int icorrectness = (int)correctness;
+                                Debug.LogError(icorrectness);
+                            }
 
 
 
