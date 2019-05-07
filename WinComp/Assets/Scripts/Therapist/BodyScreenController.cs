@@ -15,7 +15,6 @@ public class BodyScreenController : MonoBehaviour {
     public Text shoulderLift;
     public Text outOfPath;
     public Text exerciseName;
-    public Text Angles;
 
     private bool hasWroteReport;
 
@@ -46,7 +45,6 @@ public class BodyScreenController : MonoBehaviour {
         shoulderLift.text = "" + (State.leftShoulderUp + State.rightShoulderUp);
         outOfPath.text = "" + State.outOfPath;
         exerciseName.text = State.exerciseName;
-        Angles.text = "" + KinectDataManager.result;
 
         if(State.hasFinishedExercise) {
             StopTherapy();
