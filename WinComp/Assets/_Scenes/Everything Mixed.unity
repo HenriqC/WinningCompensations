@@ -1310,7 +1310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &102518756
 Transform:
   m_ObjectHideFlags: 0
@@ -1851,8 +1851,8 @@ RectTransform:
   m_Father: {fileID: 1656363974}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5333333, y: 0}
+  m_AnchorMax: {x: 0.5333333, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3684,7 +3684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &293085676
 Transform:
   m_ObjectHideFlags: 0
@@ -4571,7 +4571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &347911027
 Transform:
   m_ObjectHideFlags: 0
@@ -4665,7 +4665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &355692593
 Transform:
   m_ObjectHideFlags: 0
@@ -5010,7 +5010,29 @@ MonoBehaviour:
   hasSecondaryCursor: 0
   avgTime: {fileID: 791509182}
   exerciseName: Flexion Height
+  leftExerciseBox: {fileID: 868426453}
+  leftExerciseBox0: {fileID: 1538346497}
+  leftExerciseBox1: {fileID: 1139051183}
+  leftExerciseBox2: {fileID: 1518178512}
+  leftExerciseBox3: {fileID: 969866371}
+  rightExerciseBox: {fileID: 347911026}
+  rightExerciseBox0: {fileID: 1724421626}
+  rightExerciseBox1: {fileID: 102518755}
+  rightExerciseBox2: {fileID: 1521966662}
+  rightExerciseBox3: {fileID: 530239951}
   targets: {fileID: 0}
+  leftTargets: {fileID: 1365716007}
+  leftTarget0: {fileID: 961547684}
+  leftTarget20: {fileID: 1558175878}
+  leftTarget50: {fileID: 293085675}
+  leftTarget80: {fileID: 355692592}
+  leftTarget100: {fileID: 1697448808}
+  rightTargets: {fileID: 822129593}
+  rightTarget0: {fileID: 2023834877}
+  rightTarget20: {fileID: 1731850786}
+  rightTarget50: {fileID: 963510480}
+  rightTarget80: {fileID: 920977536}
+  rightTarget100: {fileID: 1829179149}
   completion: 0
   correctness: 0
 --- !u!1 &368850781
@@ -6925,7 +6947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &530239952
 Transform:
   m_ObjectHideFlags: 0
@@ -11798,7 +11820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &822129594
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12240,7 +12262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &868426454
 Transform:
   m_ObjectHideFlags: 0
@@ -13108,7 +13130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &920977537
 Transform:
   m_ObjectHideFlags: 0
@@ -13544,7 +13566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &961547685
 Transform:
   m_ObjectHideFlags: 0
@@ -13732,7 +13754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &963510481
 Transform:
   m_ObjectHideFlags: 0
@@ -13823,12 +13845,12 @@ GameObject:
   - component: {fileID: 969866374}
   - component: {fileID: 969866373}
   m_Layer: 10
-  m_Name: Right exercise box (3)
+  m_Name: Left exercise box (3)
   m_TagString: ExerciseCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &969866372
 Transform:
   m_ObjectHideFlags: 0
@@ -15503,8 +15525,8 @@ RectTransform:
   m_Father: {fileID: 1226982204}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5333333, y: 0}
+  m_AnchorMax: {x: 0.5333333, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -16190,12 +16212,12 @@ GameObject:
   - component: {fileID: 1139051186}
   - component: {fileID: 1139051185}
   m_Layer: 10
-  m_Name: Right exercise box (1)
+  m_Name: Left exercise box (1)
   m_TagString: ExerciseCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1139051184
 Transform:
   m_ObjectHideFlags: 0
@@ -19286,7 +19308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1365716008
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21708,12 +21730,12 @@ GameObject:
   - component: {fileID: 1518178515}
   - component: {fileID: 1518178514}
   m_Layer: 10
-  m_Name: Right exercise box (2)
+  m_Name: Left exercise box (2)
   m_TagString: ExerciseCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1518178513
 Transform:
   m_ObjectHideFlags: 0
@@ -21804,7 +21826,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1521966663
 Transform:
   m_ObjectHideFlags: 0
@@ -22079,7 +22101,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.5333333, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -22145,12 +22167,12 @@ GameObject:
   - component: {fileID: 1538346500}
   - component: {fileID: 1538346499}
   m_Layer: 10
-  m_Name: Right exercise box
+  m_Name: Left exercise box
   m_TagString: ExerciseCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1538346498
 Transform:
   m_ObjectHideFlags: 0
@@ -22529,7 +22551,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.5333333, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -22588,7 +22610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1558175879
 Transform:
   m_ObjectHideFlags: 0
@@ -24621,7 +24643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1697448809
 Transform:
   m_ObjectHideFlags: 0
@@ -25127,7 +25149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1724421627
 Transform:
   m_ObjectHideFlags: 0
@@ -25219,7 +25241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1731850787
 Transform:
   m_ObjectHideFlags: 0
@@ -27237,7 +27259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1829179150
 Transform:
   m_ObjectHideFlags: 0
@@ -28407,7 +28429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1872076103
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29957,7 +29979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2023834878
 Transform:
   m_ObjectHideFlags: 0

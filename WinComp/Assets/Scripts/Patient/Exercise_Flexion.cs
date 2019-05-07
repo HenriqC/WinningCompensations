@@ -14,13 +14,37 @@ public class Exercise_Flexion : MonoBehaviour
 
     public string exerciseName;
 
-    //public GameObject leftExerciseBox;
-    //public GameObject rightExerciseBox;
-    //private GameObject exerciseBoxGroup;
 
-    //public GameObject leftTargets;
-    //public GameObject rightTargets;
+    private GameObject exerciseBoxGroup;
+
+    public GameObject leftExerciseBox;
+    public GameObject leftExerciseBox0;
+    public GameObject leftExerciseBox1;
+    public GameObject leftExerciseBox2;
+    public GameObject leftExerciseBox3;
+
+    public GameObject rightExerciseBox;
+    public GameObject rightExerciseBox0;
+    public GameObject rightExerciseBox1;
+    public GameObject rightExerciseBox2;
+    public GameObject rightExerciseBox3;
+
+
     public GameObject targets;
+    public GameObject leftTargets;
+    public GameObject leftTarget0;
+    public GameObject leftTarget20;
+    public GameObject leftTarget50;
+    public GameObject leftTarget80;
+    public GameObject leftTarget100;
+
+    public GameObject rightTargets;
+    public GameObject rightTarget0;
+    public GameObject rightTarget20;
+    public GameObject rightTarget50;
+    public GameObject rightTarget80;
+    public GameObject rightTarget100;
+
     public float completion;
     public float correctness;
     private AudioClip beep;
@@ -46,6 +70,32 @@ public class Exercise_Flexion : MonoBehaviour
         {
             State.maxReps = 10;
         }
+
+        leftExerciseBox.SetActive(false);
+        leftExerciseBox0.SetActive(false);
+        leftExerciseBox1.SetActive(false);
+        leftExerciseBox2.SetActive(false);
+        leftExerciseBox3.SetActive(false);
+
+        rightExerciseBox.SetActive(false);
+        rightExerciseBox0.SetActive(false);
+        rightExerciseBox1.SetActive(false);
+        rightExerciseBox2.SetActive(false);
+        rightExerciseBox3.SetActive(false);
+
+        rightTargets.SetActive(false);
+        rightTarget0.SetActive(false);
+        rightTarget20.SetActive(false);
+        rightTarget50.SetActive(false);
+        rightTarget80.SetActive(false);
+        rightTarget100.SetActive(false);
+
+        leftTargets.SetActive(false);
+        leftTarget0.SetActive(false);
+        leftTarget20.SetActive(false);
+        leftTarget50.SetActive(false);
+        leftTarget80.SetActive(false);
+        leftTarget100.SetActive(false);
 
         State.hasSecondaryCursor = hasSecondaryCursor;
         State.exerciseName = exerciseName;
@@ -75,27 +125,47 @@ public class Exercise_Flexion : MonoBehaviour
 
     private void setArea()
     {
-        if (State.isLeftArmSelected() || State.isRightArmSelected())
+        if (State.isLeftArmSelected())
         {
-            activate(true);
-            //exerciseBoxGroup = leftExerciseBox;
-            //targets = leftTargets;
 
+            targets = leftTargets;
+            leftTargets.SetActive(true);
+            leftTarget0.SetActive(true);
+            leftTarget20.SetActive(true);
+
+            exerciseBoxGroup = leftExerciseBox;
+            leftExerciseBox.SetActive(true);
+            leftExerciseBox0.SetActive(true);
+
+        }
+        else if (State.isRightArmSelected())
+        {
+            targets = rightTargets;
+            rightTargets.SetActive(true);
+            rightTarget0.SetActive(true);
+            rightTarget20.SetActive(true);
+
+            exerciseBoxGroup = rightExerciseBox;
+            rightExerciseBox.SetActive(true);
+            rightExerciseBox0.SetActive(true);
+            
         }
     }
 
-    private void activate(bool targetgrid)
+    /* 
+    private void activate(bool left)
     {
 
         targets.SetActive(targetgrid);
-        /*
+
         leftTargets.SetActive(left);
         //leftExerciseBox.SetActive(left);
         rightTargets.SetActive(!left);
         //rightExerciseBox.SetActive(!left);
         
-         */
-    }
+    } 
+    
+    */
 
     // Update is called once per frame
     void Update()
