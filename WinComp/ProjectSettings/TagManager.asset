@@ -3,7 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - TargetCollider
+  - ExerciseCollider
+  - FixedHandPosition
+  - R_Target0
+  - R_Target20
+  - R_Target50
+  - R_Target80
+  - R_Target100
+  - L_Target0
+  - L_Target20
+  - L_Target50
+  - L_Target80
+  - L_Target100
   layers:
   - Default
   - TransparentFX

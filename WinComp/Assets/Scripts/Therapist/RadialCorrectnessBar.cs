@@ -7,7 +7,7 @@ public class RadialCorrectnessBar : MonoBehaviour
 {
     public Image correctness;
     public Text percentage;
-    public Exercise_Grid amount;
+    public Exercise_Flexion amount;
 
     [Range(0, 100)]
     public float Correct;

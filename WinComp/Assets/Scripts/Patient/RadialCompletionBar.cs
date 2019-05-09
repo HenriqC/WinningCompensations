@@ -7,7 +7,7 @@ public class RadialCompletionBar : MonoBehaviour
 
     public Image completion;
     public Text percentage;
-    public Exercise_Grid amount;
+    public Exercise_Flexion amount;
 
     [Range (0,100)]
     public float Amount;
