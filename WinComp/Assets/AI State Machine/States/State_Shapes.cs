@@ -22,7 +22,7 @@ public class State_Shapes : IState
     public bool changeState;
     private bool shapeComplete;
     private GameObject currentShape;
-    private int new_subStateIndex;
+    private float timer = 5f;
 
     public State_Shapes(/*Vector3 originPoint,*/ Transform cursor, AudioSource audio, GameObject[] new_shape, /*GameObject ownerGameObject,*/ string tagToLookFor, Color color)
     {
@@ -57,7 +57,7 @@ public class State_Shapes : IState
             State.maxReps = 10;
         }
         //spawnRadius = 30;
-        //personal_space = 2;        
+        //personal_space = 2;
     }
 
     public void Execute()
@@ -67,21 +67,21 @@ public class State_Shapes : IState
         //originPoint = ownerGameObject.transform.position;
         
         if (State.isTherapyOnGoing)
-        { 
-            
+        {             
             if (Physics.Raycast(landingRay, out hit))
-            {
-                
+            {                
                 if (hit.collider.tag == this.tagToLookFor)
                 {
+
                     //Debug.Log("colidiu");
                     //Debug.Log(new_shape);
                     //Debug.Log(originPoint);
-                    Debug.LogError(subState_index);                   
-                    hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.green;
-                                      
-                    audio.PlayOneShot(beep);                   
+                    //Debug.LogError(subState_index);                   
+                    hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.green;                                      
+                    audio.PlayOneShot(beep);
+
                 }
+                
                 if (hit.collider.tag == "ExerciseCollider_0")
                 {           
                     shapeComplete = true;
@@ -89,37 +89,31 @@ public class State_Shapes : IState
                     this.new_shape[0].SetActive(false);
                     if (subState_index == 1) //Poor Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[0].SetActive(true);
                         currentShape = this.new_shape[0];
                     }
                     else if (subState_index == 2) //Avg Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[1].SetActive(true);
                         currentShape = this.new_shape[1];
                     }
                     else if (subState_index == 3) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[2].SetActive(true);
                         currentShape = this.new_shape[2];
                     }
                     else if (subState_index == 4) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[3].SetActive(true);
                         currentShape = this.new_shape[3];
                     }
                     else if (subState_index == 5) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[4].SetActive(true);
                         currentShape = this.new_shape[4];
                     }
                     else if (subState_index == 6) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[5].SetActive(true);
                         currentShape = this.new_shape[4];
                     }
@@ -137,37 +131,31 @@ public class State_Shapes : IState
                     this.new_shape[1].SetActive(false);
                     if (subState_index == 1) //Poor Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[0].SetActive(true);
                         currentShape = this.new_shape[0];
                     }
                     else if (subState_index == 2) //Avg Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[1].SetActive(true);
                         currentShape = this.new_shape[1];
                     }
                     else if (subState_index == 3) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[2].SetActive(true);
                         currentShape = this.new_shape[2];
                     }
                     else if (subState_index == 4) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[3].SetActive(true);
                         currentShape = this.new_shape[3];
                     }
                     else if (subState_index == 5) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[4].SetActive(true);
                         currentShape = this.new_shape[4];
                     }
                     else if (subState_index == 6) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[5].SetActive(true);
                         currentShape = this.new_shape[5];
                     }
@@ -184,37 +172,31 @@ public class State_Shapes : IState
                     this.new_shape[2].SetActive(false);
                     if (subState_index == 1) //Poor Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[0].SetActive(true);
                         currentShape = this.new_shape[0];
                     }
                     else if (subState_index == 2) //Avg Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[1].SetActive(true);
                         currentShape = this.new_shape[1];
                     }
                     else if (subState_index == 3) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[2].SetActive(true);
                         currentShape = this.new_shape[2];
                     }
                     else if (subState_index == 4) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[3].SetActive(true);
                         currentShape = this.new_shape[3];
                     }
                     else if (subState_index == 5) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[4].SetActive(true);
                         currentShape = this.new_shape[4];
                     }
                     else if (subState_index == 6) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[5].SetActive(true);
                         currentShape = this.new_shape[5];
                     }
@@ -231,37 +213,31 @@ public class State_Shapes : IState
                     this.new_shape[3].SetActive(false);
                     if (subState_index == 1) //Poor Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[0].SetActive(true);
                         currentShape = this.new_shape[0];
                     }
                     else if (subState_index == 2) //Avg Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[1].SetActive(true);
                         currentShape = this.new_shape[1];
                     }
                     else if (subState_index == 3) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[2].SetActive(true);
                         currentShape = this.new_shape[2];
                     }
                     else if (subState_index == 4) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[3].SetActive(true);
                         currentShape = this.new_shape[3];
                     }
                     else if (subState_index == 5) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[4].SetActive(true);
                         currentShape = this.new_shape[4];
                     }
                     else if (subState_index == 6) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[5].SetActive(true);
                         currentShape = this.new_shape[5];
                     }
@@ -278,37 +254,31 @@ public class State_Shapes : IState
                     this.new_shape[4].SetActive(false);
                     if (subState_index == 1) //Poor Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[0].SetActive(true);
                         currentShape = this.new_shape[0];
                     }
                     else if (subState_index == 2) //Avg Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[1].SetActive(true);
                         currentShape = this.new_shape[1];
                     }
                     else if (subState_index == 3) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[2].SetActive(true);
                         currentShape = this.new_shape[2];
                     }
                     else if (subState_index == 4) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[3].SetActive(true);
                         currentShape = this.new_shape[3];
                     }
                     else if (subState_index == 5) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[4].SetActive(true);
                         currentShape = this.new_shape[4];
                     }
                     else if (subState_index == 6) //Exc Sub-state
                     {
-                        shapeComplete = false;
                         this.new_shape[5].SetActive(true);
                         currentShape = this.new_shape[5];
                     }
@@ -319,10 +289,8 @@ public class State_Shapes : IState
                 }
                 else if (hit.collider.tag == "ExerciseCollider_5")
                 {
-                    shapeComplete = true;
                     subState_index += 1;
-                    //this.new_shape[subState_index - 1].SetActive(true);
-                    this.new_shape[5].SetActive(false);
+                    currentShape.SetActive(false);
                     Debug.Log("Acabou Estrela");
                     Debug.Log("muda de estado");                    
                 }                
@@ -350,20 +318,45 @@ public class State_Shapes : IState
                 shapeComplete = false;
             }
             // Caso seja detetada uma compensação o nível é reduzido de novo
-            if (State.compensationInCurrentRep)
+            if (State.compensationInCurrentRep && Instantiate_target.instance.cooldownTimer == 0)
             {
                 State.compensationInCurrentRep = false;
+                Instantiate_target.instance.CooldownTimer(5);
                 if (subState_index > 1)
                 {
                     subState_index -= 1;
                     currentShape.SetActive(false);
-                    this.new_shape[(subState_index - 1)].SetActive(true);
-                }
-                else
-                {
-                    currentShape.SetActive(false);                    
-                    subState_index = 1;
-                    this.new_shape[0].SetActive(true);
+
+                    if (subState_index == 1)
+                    {
+                        this.new_shape[0].SetActive(true);
+                        currentShape = this.new_shape[0];
+                    }
+                    else if (subState_index == 2)
+                    {
+                        this.new_shape[1].SetActive(true);
+                        currentShape = this.new_shape[1];
+                    }
+                    else if (subState_index == 3)
+                    {
+                        this.new_shape[2].SetActive(true);
+                        currentShape = this.new_shape[2];
+                    }
+                    else if (subState_index == 4)
+                    {
+                        this.new_shape[3].SetActive(true);
+                        currentShape = this.new_shape[3];
+                    }
+                    else if (subState_index == 5)
+                    {
+                        this.new_shape[4].SetActive(true);
+                        currentShape = this.new_shape[4];
+                    }
+                    else if (subState_index == 6)
+                    {
+                        this.new_shape[5].SetActive(true);
+                        currentShape = this.new_shape[5];
+                    }
                 }
                 if (State.correctReps > 0)
                 {

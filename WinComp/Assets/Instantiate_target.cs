@@ -15,6 +15,7 @@ public class Instantiate_target : MonoBehaviour
     public float completion;
     public float correctness;
     public int icorrectness;
+    public float cooldownTimer;
 
 
     void Awake()
@@ -26,6 +27,18 @@ public class Instantiate_target : MonoBehaviour
         else if (instance != this)
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void Update()
+    {
+        if (cooldownTimer > 0)
+        {
+            cooldownTimer -= Time.deltaTime;
+        }
+        if (cooldownTimer < 0)
+        {
+            cooldownTimer = 0;
         }
     }
     // Start is called before the first frame update
@@ -43,6 +56,11 @@ public class Instantiate_target : MonoBehaviour
     public void DestroyObject(GameObject oldShape)
     {
         Object.Destroy(oldShape);
+    }
+
+    public void CooldownTimer(float timer)
+    {        
+        cooldownTimer = timer;
     }
 
     /*public void OnDrawGizmos()
