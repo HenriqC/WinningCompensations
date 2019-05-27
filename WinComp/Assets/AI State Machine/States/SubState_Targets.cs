@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Targets : IState
+public class SubState_Targets : IState
 {
     public int n_targets;
     public void Enter()

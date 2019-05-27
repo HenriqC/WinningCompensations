@@ -92,8 +92,7 @@ public class Exercise_Grid : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         RaycastHit hit;
-        Ray landingRay = new Ray(cursor.transform.position, Vector3.back);
-             
+        Ray landingRay = new Ray(cursor.transform.position, Vector3.back);             
 
         if (State.isTherapyOnGoing) {
             if(!isBlinking) {
@@ -197,7 +196,7 @@ public class Exercise_Grid : MonoBehaviour {
                 if(State.currentTarget != 0) {
                     targets.transform.GetChild(State.currentTarget).gameObject.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
                 }
-                State.currentTarget = 0;
+                State.currentTarget = 0;                
             }
         }
     }

@@ -7,7 +7,8 @@ public class RadialCorrectnessBar : MonoBehaviour
 {
     public Image correctness;
     public Text percentage;
-    public Exercise_Flexion amount;
+    public Exercise_Flexion amount_flexion;
+    public DDA_Exercise_Grid amount_grid;
 
     [Range(0, 100)]
     public float Correct;
@@ -25,9 +26,20 @@ public class RadialCorrectnessBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Correct = amount.icorrectness;
-        correctness.fillAmount = (Correct / 100);
+        if (amount_flexion.isActiveAndEnabled)
+        {
+            Correct = amount_flexion.icorrectness;
+            correctness.fillAmount = (Correct / 100);
 
-        percentage.text = string.Format("{0} %", Correct);
+            percentage.text = string.Format("{0} %", Correct);
+        }
+        else if (amount_grid.isActiveAndEnabled)
+        {
+            Correct = amount_grid.icorrectness;
+            correctness.fillAmount = (Correct / 100);
+
+            percentage.text = string.Format("{0} %", Correct);
+        }
+        
     }
 }

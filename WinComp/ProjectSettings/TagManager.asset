@@ -17,6 +17,12 @@ TagManager:
   - L_Target50
   - L_Target80
   - L_Target100
+  - ExerciseCollider_0
+  - ExerciseCollider_1
+  - ExerciseCollider_2
+  - ExerciseCollider_3
+  - ExerciseCollider_4
+  - ExerciseCollider_5
   layers:
   - Default
   - TransparentFX
@@ -26,7 +32,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Targets
   - 
   - 
   - 
