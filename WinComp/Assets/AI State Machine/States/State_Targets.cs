@@ -174,6 +174,7 @@ public class State_Targets : IState
                     Debug.Log(DDA_Exercise_Grid.instance.nShapes);
                     Debug.Log("Muda de estado");
                     Object.Destroy(hit.collider.gameObject);
+                    Exit();
                 }
             }
 
@@ -248,11 +249,10 @@ public class State_Targets : IState
                 }            
         }
     }
-
     public void Exit()
     {
 
-        DDA_Exercise_Grid.instance.nTargets = false;
+        DDA_Exercise_Grid.instance.nShapes = true;
     }    
 }
 

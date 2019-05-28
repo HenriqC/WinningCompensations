@@ -13,7 +13,6 @@ public class StateMachine : MonoBehaviour
             this.currentlyRunningState.Exit();
         }        
         this.previousState = this.currentlyRunningState;
-
         this.currentlyRunningState = newState;
         this.currentlyRunningState.Enter();
     }
