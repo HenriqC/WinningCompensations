@@ -15,7 +15,6 @@ public class State_Targets : IState
     private Transform cursor;
     private Transform secondaryCursor;
     public Vector3 originPoint;
-    //public int poor_count;
     //public int exc_count;
     private AudioClip beep;
     private DDA_Exercise_Grid Objects;

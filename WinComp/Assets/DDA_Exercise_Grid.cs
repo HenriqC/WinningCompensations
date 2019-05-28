@@ -87,7 +87,7 @@ public class DDA_Exercise_Grid : MonoBehaviour
         }
 
         this.stateMachine.ChangeState(new State_Targets(this.originPoint_t, this.cPosition_t, this.scPosition_t, this.audio, this.new_target_t, this.owner_target_t, this.radius, this.Targets_Tag_t));
-        
+
     }
 
     private void Update()
@@ -96,6 +96,11 @@ public class DDA_Exercise_Grid : MonoBehaviour
         {
             nShapes = false;
             this.stateMachine.ChangeState(new State_Shapes(this.cPosition_sp, this.audio, this.new_shape_sp, this.Targets_Tag_sp, this.color));
+        }
+        if (nTargets == true)
+        {
+            nTargets = false;
+            this.stateMachine.ChangeState(new State_Targets(this.originPoint_t, this.cPosition_t, this.scPosition_t, this.audio, this.new_target_t, this.owner_target_t, this.radius, this.Targets_Tag_t));
         }
         this.stateMachine.ExecuteStateUpdate(); //Alteração para um estado diferente
     }
