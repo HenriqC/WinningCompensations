@@ -24,6 +24,8 @@ public class State_Shapes : IState
     private GameObject currentShape;
     private float timer = 5f;
     private int poor_count;
+    private bool sobe;
+    private bool desce;
 
     public State_Shapes(/*Vector3 originPoint,*/ Transform cursor, AudioSource audio, GameObject[] new_shape, /*GameObject ownerGameObject,*/ string tagToLookFor, Color color)
     {
@@ -292,6 +294,8 @@ public class State_Shapes : IState
                 {
                     subState_index += 1;
                     currentShape.SetActive(false);
+                    sobe = true;
+                    Exit();
                     Debug.Log("Acabou Estrela");
                     Debug.Log("muda de estado");                    
                 }                
@@ -320,12 +324,17 @@ public class State_Shapes : IState
             }
             // Caso seja detetada uma compensação o nível é reduzido de novo
             if (State.compensationInCurrentRep && Instantiate_target.instance.cooldownTimer == 0)
-            {
-                poor_count += 1;
-                if (poor_count == 3 && currentShape == this.new_shape[0])
+            {                
+                if (currentShape == this.new_shape[0])
                 {
-                    DDA_Exercise_Grid.instance.nTargets = true;
+                    poor_count += 1;
+                    if (poor_count == 3)
+                    {
+                        desce = true;
+                        Exit();
+                    }
                 }
+                
                 State.compensationInCurrentRep = false;
                 Instantiate_target.instance.CooldownTimer(5);
                 if (subState_index > 1)
@@ -374,6 +383,13 @@ public class State_Shapes : IState
 
     public void Exit()
     {
-
+        /*if (sobe)
+        {
+            DDA_Exercise_Grid.instance.nSilhuetas = true
+        }*/
+        if (desce)
+        {
+            DDA_Exercise_Grid.instance.nTargets = true;
+        }
     }
 }
