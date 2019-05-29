@@ -47,7 +47,10 @@ public class State_Shapes : IState
 
     public void Enter()
     {
+        DDA_Exercise_Grid.instance.nShapes = false;
+        DDA_Exercise_Grid.instance.nTargets = false;
         Debug.Log("Entrou Shapes");
+
         subState_index = 1;
         this.new_shape[0].SetActive(true);
         currentShape = this.new_shape[0];
@@ -383,12 +386,14 @@ public class State_Shapes : IState
 
     public void Exit()
     {
+        Instantiate_target.instance.DestroyObject(currentShape);
         /*if (sobe)
         {
             DDA_Exercise_Grid.instance.nSilhuetas = true
         }*/
         if (desce)
         {
+            DDA_Exercise_Grid.instance.nShapes = false;
             DDA_Exercise_Grid.instance.nTargets = true;
         }
     }
