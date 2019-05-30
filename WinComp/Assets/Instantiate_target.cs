@@ -22,7 +22,7 @@ public class Instantiate_target : MonoBehaviour
     public GameObject mediumArea;
     public GameObject hardArea;
 
-    // -------- Color change variables -------- //
+   // -------- Color change variables -------- //
     public GameObject Target;
     public float speed = 1.0f;
     public Color startColor;
@@ -32,7 +32,7 @@ public class Instantiate_target : MonoBehaviour
 
     private void Start()
     {
-        startTime = Time.time;
+        //startTime = Time.time;
     }
     void Awake()
     {

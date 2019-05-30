@@ -49,6 +49,7 @@ public class State_Targets : IState
         subState_index = 1;
         originPoint = ownerGameObject.transform.position;
         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
+        Instantiate_target.instance.circularGrid.SetActive(true);
         Instantiate_target.instance.easyArea.SetActive(true);
 
         if (State.maxReps <= 0)
@@ -126,7 +127,7 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Poor");
 
-                        parameter.speed = 0.1f;
+                        Instantiate_target.instance.speed = 0.1f;
                         Instantiate_target.instance.radius = this.instantiateRadius = 0.15f;
                         //originPoint += (Vector3)randomVector * d;                        
                         Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);                        
@@ -136,7 +137,7 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Mediocre");
 
-                        parameter.speed = 0.5f;
+                        Instantiate_target.instance.speed = 0.5f;
                         Instantiate_target.instance.radius = this.instantiateRadius = 0.2f;
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(true);
@@ -150,7 +151,7 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Avg");
 
-                        parameter.speed = 0.7f;
+                        Instantiate_target.instance.speed = 0.7f;
                         Instantiate_target.instance.radius = this.instantiateRadius = 0.3f;
                         Instantiate_target.instance.mediumArea.SetActive(false);
                         Instantiate_target.instance.hardArea.SetActive(true);
@@ -162,7 +163,7 @@ public class State_Targets : IState
                     else if (n_targets <10 && subState_index == 4) // Exc Sub-state -----------------------------------
                     {
                         Debug.LogError("Exc");
-                        parameter.speed = 1f;
+                        Instantiate_target.instance.speed = 1f;
                         Instantiate_target.instance.radius = this.instantiateRadius = 0.4f;
                         //originPoint += (Vector3)randomVector * d;
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
@@ -262,6 +263,7 @@ public class State_Targets : IState
     public void Exit()
     {
         Instantiate_target.instance.DestroyObject(new_target);
+        Instantiate_target.instance.circularGrid.SetActive(false);
         Instantiate_target.instance.easyArea.SetActive(false);
         Instantiate_target.instance.mediumArea.SetActive(false);
         Instantiate_target.instance.hardArea.SetActive(false);
