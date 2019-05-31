@@ -12,7 +12,7 @@ public class ResetColor : MonoBehaviour
             if (parent.transform.GetChild(i).tag == "TargetCollider")
             {
                 parent.transform.GetChild(i).GetComponent<Renderer>().material.color = Color.white;
-                Debug.Log("Funcionou");
+                //Debug.Log("Funcionou");
             }
         }
     }

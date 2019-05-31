@@ -126,7 +126,7 @@ public class State_Targets : IState
                         Debug.LogError("Poor");
 
                         Instantiate_target.instance.speed = 0.1f;
-                        Instantiate_target.instance.radius = this.instantiateRadius = 0.15f;
+                        this.instantiateRadius = 0.15f;
                         //originPoint += (Vector3)randomVector * d;                        
                         Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);                        
                         Object.Destroy(hit.collider.gameObject);
@@ -136,7 +136,7 @@ public class State_Targets : IState
                         Debug.LogError("Mediocre");
 
                         Instantiate_target.instance.speed = 0.5f;
-                        Instantiate_target.instance.radius = this.instantiateRadius = 0.3f;
+                        this.instantiateRadius = 0.3f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(true);
@@ -153,7 +153,7 @@ public class State_Targets : IState
                         Debug.LogError("Avg");
 
                         Instantiate_target.instance.speed = 0.7f;
-                        Instantiate_target.instance.radius = this.instantiateRadius = 0.4f;
+                        this.instantiateRadius = 0.4f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(false);
@@ -168,7 +168,7 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Exc");
                         Instantiate_target.instance.speed = 1f;
-                        Instantiate_target.instance.radius = this.instantiateRadius = 0.5f;
+                        this.instantiateRadius = 0.5f;
                         //originPoint += (Vector3)randomVector * d;
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
                         //Instantiate_target.instance.ColorChanger(new_target, 0.5f);
