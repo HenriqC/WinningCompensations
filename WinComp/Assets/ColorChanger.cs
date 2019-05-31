@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class ColorChanger : MonoBehaviour
 {
+    public static ColorChanger instance = null;
     // -------- Color change variables -------- //
     public GameObject Target;
-    public float speed = 1.0f;
+    public float speed;
     public Color startColor;
     public Color endColor;
     float startTime;
     // -------- Color change variables -------- //
 
+    public bool mudou;
+
     void Start()
     {
+        Instantiate_target.instance.mudouDeCor = false;
         startTime = Time.time;
     }
 
@@ -22,5 +26,11 @@ public class ColorChanger : MonoBehaviour
     {
         float t = (Time.time - startTime) * speed;
         Target.GetComponent<Renderer>().sharedMaterial.color = Color.Lerp(startColor, endColor, t);
+
+        if (Target.GetComponent<Renderer>().sharedMaterial.color == endColor)
+        {
+            Instantiate_target.instance.mudouDeCor = true;
+            //Debug.Log("mudou de cor");
+        }
     }
 }

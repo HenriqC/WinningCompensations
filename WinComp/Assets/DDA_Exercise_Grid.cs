@@ -101,6 +101,11 @@ public class DDA_Exercise_Grid : MonoBehaviour
             nTargets = false;
             this.stateMachine.ChangeState(new State_Targets(this.originPoint_t, this.cPosition_t, this.scPosition_t, this.new_target_t, this.owner_target_t, this.radius, this.Targets_Tag_t));
         }
+        /*else if (nFreeDraw == true)
+        {
+            nFreeDraw = false;
+            this.stateMachine.ChangeState(new State_FreeDraw());
+        }*/
         this.stateMachine.ExecuteStateUpdate(); //Alteração para um estado diferente
     }
 

@@ -23,6 +23,7 @@ public class Instantiate_target : MonoBehaviour
     public GameObject easyArea;
     public GameObject mediumArea;
     public GameObject hardArea;
+    public bool mudouDeCor;
 
    /*// -------- Color change variables -------- //
     public GameObject Target;
@@ -76,7 +77,7 @@ public class Instantiate_target : MonoBehaviour
 
     public void DestroyObject(GameObject oldShape)
     {
-        Object.Destroy(oldShape);
+        Destroy(oldShape);
     }
 
     public void CooldownTimer(float timer)

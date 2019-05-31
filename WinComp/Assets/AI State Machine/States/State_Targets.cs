@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class State_Targets : IState
 {
-    private int n_targets;
+    public int n_targets;
     public bool nShapes;
-    private int subState_index;    
+    public int subState_index;    
     private GameObject ownerGameObject;
     private GameObject new_target;
-    private GameObject current_target;
     public float instantiateRadius;
     private string tagToLookFor;
     private Transform cursor;
@@ -17,8 +16,6 @@ public class State_Targets : IState
     public Vector3 originPoint;
     //public int exc_count;
     private AudioClip beep;
-    private DDA_Exercise_Grid Objects;
-    private ColorChanger parameter;
 
     public State_Targets(Vector3 originPoint, Transform cursor, Transform secondaryCursor, GameObject new_target, GameObject ownerGameObject, float instantiateRadius, string tagToLookFor)
     {
@@ -107,10 +104,12 @@ public class State_Targets : IState
                     if (n_targets <= 2)
                     {
                         subState_index = 1; //Poor
-                    }
+                        
+}
                     else if (n_targets > 2 && n_targets <= 4)
                     {
                         subState_index = 2; // Mediocre
+                        
                     }
                     else if (n_targets > 4 && n_targets <= 6)
                     {
@@ -128,10 +127,10 @@ public class State_Targets : IState
                         Debug.LogError("Poor");
 
                         //Instantiate_target.instance.speed = 0.1f;
-                        this.instantiateRadius = 0.15f;      
-                        
+                        this.instantiateRadius = 0.0005f;
+
+                        //ColorChanger.instance.speed = 0.1f;
                         Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
-                        current_target = new_target;
                         Object.Destroy(hit.collider.gameObject);
                     }
                     else if (n_targets < 10 && subState_index == 2) //Med Sub-state ----------------------------------
@@ -139,14 +138,14 @@ public class State_Targets : IState
                         Debug.LogError("Mediocre");
 
                         //Instantiate_target.instance.speed = 0.5f;
-                        this.instantiateRadius = 0.3f;
+                        this.instantiateRadius = 0.15f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(true);
                         Instantiate_target.instance.hardArea.SetActive(false);
 
+                        //ColorChanger.instance.speed = 0.3f;
                         Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
-                        current_target = new_target;
                         Object.Destroy(hit.collider.gameObject);
 
                     }
@@ -155,15 +154,15 @@ public class State_Targets : IState
                         Debug.LogError("Avg");
 
                         //Instantiate_target.instance.speed = 0.7f;
-                        this.instantiateRadius = 0.4f;
+                        this.instantiateRadius = 0.35f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(false);
                         Instantiate_target.instance.hardArea.SetActive(true);
 
+                        //ColorChanger.instance.speed = 0.3f;
                         //originPoint += (Vector3)randomVector * d;
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
-                        current_target = new_target;
                         //Instantiate_target.instance.ColorChanger(new_target, 1f);
                         Object.Destroy(hit.collider.gameObject);
                     }
@@ -171,10 +170,10 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Exc");
                         //Instantiate_target.instance.speed = 1f;
-                        this.instantiateRadius = 0.5f;
+                        this.instantiateRadius = 0.55f;
 
+                        //ColorChanger.instance.speed = 0.3f;
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
-                        current_target = new_target;
                         //Instantiate_target.instance.ColorChanger(new_target, 0.5f);
                         Object.Destroy(hit.collider.gameObject);
                     }                    
@@ -192,7 +191,6 @@ public class State_Targets : IState
             if (State.compensationInCurrentRep)
                 { // Caso seja detetada uma compensação o exercício recomeça do início
                     State.compensationInCurrentRep = false;
-
                     if (State.correctReps > 0)
                     {
                         State.correctReps--;
@@ -207,8 +205,23 @@ public class State_Targets : IState
                     }
             }
 
+            /*if (Instantiate_target.instance.mudouDeCor == true)
+            {
+                Instantiate_target.instance.mudouDeCor = false;
+                State.tries++;
+
+                if (subState_index > 1 && n_targets > 0)
+                {
+                    n_targets--;
+                }
+                else
+                {
+                    n_targets = 0;
+                }
+            }*/
+
             // ------ Inserir aqui código dos timings das bolas, de verde a vermelho, sendo que muda o subEstado consoante o subEstado em que está e se a bola fica totalmente vermelha ------ //
-            
+
             /*
                 if (subState_index == 1)
                 {

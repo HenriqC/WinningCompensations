@@ -18,7 +18,6 @@ public class State_Shapes : IState
     private int subState_index;
     private AudioClip beep;
     private DDA_Exercise_Grid Objects;
-    public bool changeState;
     private bool shapeComplete;
     private GameObject currentShape;
     private float timer = 5f;
@@ -386,7 +385,7 @@ public class State_Shapes : IState
         currentShape.SetActive(false);
         /*if (sobe)
         {
-            DDA_Exercise_Grid.instance.nSilhuetas = true
+            DDA_Exercise_Grid.instance.nFreeDraw = true;
         }*/
         if (desce)
         {
