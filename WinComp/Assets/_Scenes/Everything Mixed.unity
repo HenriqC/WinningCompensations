@@ -2203,7 +2203,6 @@ MonoBehaviour:
   new_target_t: {fileID: 5576748548856634713, guid: 350a8186e5c018b4085a1f840c9e860d,
     type: 3}
   Targets_Tag_t: TargetCollider
-  audio: {fileID: 1012393707}
   cPosition_t: {fileID: 1177253422}
   scPosition_t: {fileID: 1475079476}
   nShapes: 0
@@ -2244,7 +2243,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2576467c0e116ef4982914ef71aa60f7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2350,6 +2349,7 @@ MonoBehaviour:
   correctness: 0
   icorrectness: 0
   cooldownTimer: 0
+  Source: {fileID: 1012393707}
   circularGrid: {fileID: 737737561}
   easyArea: {fileID: 582960543}
   mediumArea: {fileID: 1976848203}
@@ -13516,7 +13516,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2576467c0e116ef4982914ef71aa60f7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

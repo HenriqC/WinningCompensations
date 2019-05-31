@@ -6,6 +6,7 @@ public class DDA_Exercise_Grid : MonoBehaviour
 {
     private StateMachine stateMachine = new StateMachine();
 
+
     // Primeiro estado da máquina, exercício dos targets
 
     public bool nTargets; //Se o doente atingir o sub-estado "poor" 3x. Serve para fazer a mudança de estado
@@ -19,9 +20,7 @@ public class DDA_Exercise_Grid : MonoBehaviour
     [SerializeField]
     private GameObject new_target_t;
     [SerializeField]
-    private string Targets_Tag_t;    
-    [SerializeField]
-    private AudioSource audio;
+    private string Targets_Tag_t;
     [SerializeField]
     private Transform cPosition_t;
     [SerializeField]
@@ -95,12 +94,12 @@ public class DDA_Exercise_Grid : MonoBehaviour
         if (nShapes == true)
         {
             nShapes = false;
-            this.stateMachine.ChangeState(new State_Shapes(this.cPosition_sp, this.audio, this.new_shape_sp, this.Targets_Tag_sp, this.color));
+            this.stateMachine.ChangeState(new State_Shapes(this.cPosition_sp, this.new_shape_sp, this.Targets_Tag_sp, this.color));
         }
         else if (nTargets == true)
         {
             nTargets = false;
-            this.stateMachine.ChangeState(new State_Targets(this.originPoint_t, this.cPosition_t, this.scPosition_t, this.audio, this.new_target_t, this.owner_target_t, this.radius, this.Targets_Tag_t));
+            this.stateMachine.ChangeState(new State_Targets(this.originPoint_t, this.cPosition_t, this.scPosition_t, this.new_target_t, this.owner_target_t, this.radius, this.Targets_Tag_t));
         }
         this.stateMachine.ExecuteStateUpdate(); //Alteração para um estado diferente
     }

@@ -17,6 +17,8 @@ public class Instantiate_target : MonoBehaviour
     public int icorrectness;
     public float cooldownTimer;
 
+    public AudioSource Source;
+    
     public GameObject circularGrid;
     public GameObject easyArea;
     public GameObject mediumArea;
@@ -32,7 +34,7 @@ public class Instantiate_target : MonoBehaviour
 
     private void Start()
     {
-        //startTime = Time.time;
+        startTime = Time.time;
     }
     void Awake()
     {
@@ -82,6 +84,10 @@ public class Instantiate_target : MonoBehaviour
         cooldownTimer = timer;
     }
 
+    public void PlayClip()
+    {
+        Source.Play();
+    }
     /*public void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

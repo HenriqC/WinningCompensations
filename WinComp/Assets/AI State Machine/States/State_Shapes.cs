@@ -8,7 +8,6 @@ public class State_Shapes : IState
 
     //private Vector3 originPoint;
     private Transform cursor;
-    private AudioSource audio;
     private GameObject[] new_shape;
     //private GameObject ownerGameObject;
     private string tagToLookFor;
@@ -27,12 +26,11 @@ public class State_Shapes : IState
     private bool sobe;
     private bool desce;
 
-    public State_Shapes(/*Vector3 originPoint,*/ Transform cursor, AudioSource audio, GameObject[] new_shape, /*GameObject ownerGameObject,*/ string tagToLookFor, Color color)
+    public State_Shapes(/*Vector3 originPoint,*/ Transform cursor, GameObject[] new_shape, /*GameObject ownerGameObject,*/ string tagToLookFor, Color color)
     {
         
         //this.originPoint = originPoint;
         this.cursor = cursor;
-        this.audio = audio;
         this.new_shape = new_shape;
         //this.ownerGameObject = ownerGameObject;
         //this.instantiateRadius = instantiateRadius;
@@ -83,10 +81,7 @@ public class State_Shapes : IState
                     //Debug.Log(new_shape);
                     //Debug.Log(originPoint);
                     //Debug.LogError(subState_index);                   
-                    hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.green;                                      
-                    audio.PlayOneShot(beep);
-
-                }
+                    hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.green;                }
                 
                 if (hit.collider.tag == "ExerciseCollider_0")
                 {           
@@ -304,7 +299,8 @@ public class State_Shapes : IState
                 }                
             }
             if (shapeComplete == true)
-            {          
+            {
+                Instantiate_target.instance.PlayClip();
                 State.correctReps+=1;
                 State.tries+=1;
                 float complete = State.correctReps;
@@ -386,7 +382,7 @@ public class State_Shapes : IState
 
     public void Exit()
     {
-        Instantiate_target.instance.DestroyObject(currentShape);
+        currentShape.SetActive(false);
         /*if (sobe)
         {
             DDA_Exercise_Grid.instance.nSilhuetas = true

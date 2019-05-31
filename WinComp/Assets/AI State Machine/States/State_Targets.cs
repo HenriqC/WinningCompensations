@@ -11,7 +11,6 @@ public class State_Targets : IState
     private GameObject new_target;
     public float instantiateRadius;
     private string tagToLookFor;
-    private AudioSource audio;
     private Transform cursor;
     private Transform secondaryCursor;
     public Vector3 originPoint;
@@ -20,12 +19,11 @@ public class State_Targets : IState
     private DDA_Exercise_Grid Objects;
     private ColorChanger parameter;
 
-    public State_Targets(Vector3 originPoint, Transform cursor, Transform secondaryCursor, AudioSource audio, GameObject new_target, GameObject ownerGameObject, float instantiateRadius, string tagToLookFor)
+    public State_Targets(Vector3 originPoint, Transform cursor, Transform secondaryCursor, GameObject new_target, GameObject ownerGameObject, float instantiateRadius, string tagToLookFor)
     {
         this.originPoint = originPoint;
         this.cursor = cursor;
         this.secondaryCursor = secondaryCursor;
-        this.audio = audio;
         this.new_target = new_target;
         this.ownerGameObject = ownerGameObject;
         this.instantiateRadius = instantiateRadius;
@@ -34,7 +32,7 @@ public class State_Targets : IState
 
     void init()
     {
-        beep = (AudioClip)Resources.Load("Sounds/beep");
+        //beep = (AudioClip)Resources.Load("Sounds/beep");
     }
 
     public void Enter()
@@ -83,10 +81,11 @@ public class State_Targets : IState
                     //Debug.Log(originPoint);
                     //Debug.LogError(subState_index);
                     Debug.Log(n_targets);
-                    n_targets++;
-
+                    n_targets++;                    
                     State.correctReps++;
                     State.tries++;
+
+                    Instantiate_target.instance.PlayClip();
 
                     float complete = State.correctReps;
                     int minutes = (State.sessionTimeInt / State.correctReps) / 60;
@@ -101,7 +100,6 @@ public class State_Targets : IState
                         DDA_Exercise_Grid.instance.icorrectness = (int)DDA_Exercise_Grid.instance.correctness;
                         //Debug.LogError(icorrectness);
                     }
-                    audio.PlayOneShot(beep);
 
                     // ------------------- Sub índices dos sub niveis de dificuldade ------------------- //
                     if (n_targets <= 2)
@@ -138,9 +136,12 @@ public class State_Targets : IState
                         Debug.LogError("Mediocre");
 
                         Instantiate_target.instance.speed = 0.5f;
-                        Instantiate_target.instance.radius = this.instantiateRadius = 0.2f;
+                        Instantiate_target.instance.radius = this.instantiateRadius = 0.3f;
+
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(true);
+                        Instantiate_target.instance.hardArea.SetActive(false);
+
                         //originPoint += (Vector3)randomVector * d;
                         Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
                         //Instantiate_target.instance.ColorChanger(new_target, 1.5f);
@@ -152,9 +153,12 @@ public class State_Targets : IState
                         Debug.LogError("Avg");
 
                         Instantiate_target.instance.speed = 0.7f;
-                        Instantiate_target.instance.radius = this.instantiateRadius = 0.3f;
+                        Instantiate_target.instance.radius = this.instantiateRadius = 0.4f;
+
+                        Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(false);
                         Instantiate_target.instance.hardArea.SetActive(true);
+
                         //originPoint += (Vector3)randomVector * d;
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
                         //Instantiate_target.instance.ColorChanger(new_target, 1f);
@@ -164,7 +168,7 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Exc");
                         Instantiate_target.instance.speed = 1f;
-                        Instantiate_target.instance.radius = this.instantiateRadius = 0.4f;
+                        Instantiate_target.instance.radius = this.instantiateRadius = 0.5f;
                         //originPoint += (Vector3)randomVector * d;
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
                         //Instantiate_target.instance.ColorChanger(new_target, 0.5f);
