@@ -292,7 +292,8 @@ public class State_Shapes : IState
                 {
                     subState_index += 1;
                     currentShape.SetActive(false);
-                    sobe = true;
+                    //sobe = true;
+                    desce = true;
                     Exit();
                     Debug.Log("Acabou Estrela");
                     Debug.Log("muda de estado");                    
