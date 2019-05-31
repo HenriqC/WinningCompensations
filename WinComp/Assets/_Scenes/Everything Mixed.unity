@@ -2354,10 +2354,6 @@ MonoBehaviour:
   easyArea: {fileID: 582960543}
   mediumArea: {fileID: 1976848203}
   hardArea: {fileID: 882830312}
-  Target: {fileID: 5576748548856634713, guid: 350a8186e5c018b4085a1f840c9e860d, type: 3}
-  speed: 1
-  startColor: {r: 0.05900679, g: 0.9622642, b: 0.09458446, a: 0}
-  endColor: {r: 0.9622642, g: 0.004538993, b: 0.004538993, a: 0}
 --- !u!1 &177872105 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1875313047807284363, guid: cbfa3cbd5d5352a4d9e76e1bd64f77ef,
@@ -10300,7 +10296,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &763004849
 RectTransform:
   m_ObjectHideFlags: 0

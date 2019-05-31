@@ -9,6 +9,7 @@ public class State_Targets : IState
     private int subState_index;    
     private GameObject ownerGameObject;
     private GameObject new_target;
+    private GameObject current_target;
     public float instantiateRadius;
     private string tagToLookFor;
     private Transform cursor;
@@ -46,6 +47,7 @@ public class State_Targets : IState
         n_targets = 0;
         subState_index = 1;
         originPoint = ownerGameObject.transform.position;
+        //Instantiate_target.instance.speed = 0.1f;
         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
         Instantiate_target.instance.circularGrid.SetActive(true);
         Instantiate_target.instance.easyArea.SetActive(true);
@@ -125,26 +127,26 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Poor");
 
-                        Instantiate_target.instance.speed = 0.1f;
-                        this.instantiateRadius = 0.15f;
-                        //originPoint += (Vector3)randomVector * d;                        
-                        Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);                        
+                        //Instantiate_target.instance.speed = 0.1f;
+                        this.instantiateRadius = 0.15f;      
+                        
+                        Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
+                        current_target = new_target;
                         Object.Destroy(hit.collider.gameObject);
                     }
                     else if (n_targets < 10 && subState_index == 2) //Med Sub-state ----------------------------------
                     {
                         Debug.LogError("Mediocre");
 
-                        Instantiate_target.instance.speed = 0.5f;
+                        //Instantiate_target.instance.speed = 0.5f;
                         this.instantiateRadius = 0.3f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(true);
                         Instantiate_target.instance.hardArea.SetActive(false);
 
-                        //originPoint += (Vector3)randomVector * d;
                         Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
-                        //Instantiate_target.instance.ColorChanger(new_target, 1.5f);
+                        current_target = new_target;
                         Object.Destroy(hit.collider.gameObject);
 
                     }
@@ -152,7 +154,7 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Avg");
 
-                        Instantiate_target.instance.speed = 0.7f;
+                        //Instantiate_target.instance.speed = 0.7f;
                         this.instantiateRadius = 0.4f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
@@ -161,29 +163,24 @@ public class State_Targets : IState
 
                         //originPoint += (Vector3)randomVector * d;
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
+                        current_target = new_target;
                         //Instantiate_target.instance.ColorChanger(new_target, 1f);
                         Object.Destroy(hit.collider.gameObject);
                     }
                     else if (n_targets <10 && subState_index == 4) // Exc Sub-state -----------------------------------
                     {
                         Debug.LogError("Exc");
-                        Instantiate_target.instance.speed = 1f;
+                        //Instantiate_target.instance.speed = 1f;
                         this.instantiateRadius = 0.5f;
-                        //originPoint += (Vector3)randomVector * d;
+
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
+                        current_target = new_target;
                         //Instantiate_target.instance.ColorChanger(new_target, 0.5f);
                         Object.Destroy(hit.collider.gameObject);
                     }                    
                 }
                 if (n_targets >= 10 && subState_index == 4)
                 {
-                    /*this.instantiateRadius = 0.7f;
-                    originPoint += (Vector3)randomVector * d;
-
-                    Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
-                    Object.Destroy(hit.collider.gameObject);
-                    */
-                    //nShapes = true;
                     Debug.Log(DDA_Exercise_Grid.instance.nShapes);
                     Debug.Log("Muda de estado");
                     Object.Destroy(hit.collider.gameObject);
@@ -195,6 +192,7 @@ public class State_Targets : IState
             if (State.compensationInCurrentRep)
                 { // Caso seja detetada uma compensação o exercício recomeça do início
                     State.compensationInCurrentRep = false;
+
                     if (State.correctReps > 0)
                     {
                         State.correctReps--;

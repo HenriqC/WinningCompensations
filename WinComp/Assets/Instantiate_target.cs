@@ -24,17 +24,17 @@ public class Instantiate_target : MonoBehaviour
     public GameObject mediumArea;
     public GameObject hardArea;
 
-   // -------- Color change variables -------- //
+   /*// -------- Color change variables -------- //
     public GameObject Target;
     public float speed = 1.0f;
     public Color startColor;
     public Color endColor;
     float startTime;
-    // -------- Color change variables -------- //
+    // -------- Color change variables -------- //*/
 
     private void Start()
     {
-        startTime = Time.time;
+        //startTime = Time.time;
     }
     void Awake()
     {
@@ -59,8 +59,8 @@ public class Instantiate_target : MonoBehaviour
             cooldownTimer = 0;
         }
 
-        float t = (Time.time - startTime) * speed;
-        Target.GetComponent<Renderer>().sharedMaterial.color = Color.Lerp(startColor, endColor, t);
+        /*float t = (Time.time - startTime) * speed;
+        Target.GetComponent<Renderer>().sharedMaterial.color = Color.Lerp(startColor, endColor, t);*/
     }
 
     public void InstantiateObject (GameObject NewTarget, Vector3 position, Quaternion rotation)
