@@ -23,6 +23,8 @@ TagManager:
   - ExerciseCollider_3
   - ExerciseCollider_4
   - ExerciseCollider_5
+  - CognitiveCollider_B
+  - CognitiveCollider_P
   layers:
   - Default
   - TransparentFX

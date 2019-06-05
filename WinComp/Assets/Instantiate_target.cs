@@ -12,30 +12,33 @@ public class Instantiate_target : MonoBehaviour
     public Text avgTime;
     public State_Targets radial_Data;
 
-    public float completion;
-    public float correctness;
-    public int icorrectness;
-    public float cooldownTimer;
+    // -------- Variáveis de instanciação dos alvos cognitivos --------//
+    public GameObject cognitTarget;                                    //
+    public Transform cogPosition;                                        //
+    public bool stopSpawning = false;                                  //
+    public float spawnStart;                                           //
+    public float spawnRate;                                            //
+    // --------------------------------------------------------------- //
+
+    // -------- Variáveis das barras radiais --------//
+    public float completion;                         //
+    public float correctness;                        //
+    public int icorrectness;                         //
+    public float cooldownTimer;                      //
+    // ----------------------------------------------//
 
     public AudioSource Source;
-    
-    public GameObject circularGrid;
-    public GameObject easyArea;
-    public GameObject mediumArea;
-    public GameObject hardArea;
-    public bool mudouDeCor;
 
-   /*// -------- Color change variables -------- //
-    public GameObject Target;
-    public float speed = 1.0f;
-    public Color startColor;
-    public Color endColor;
-    float startTime;
-    // -------- Color change variables -------- //*/
-
+    // -------- Grelha circular de amplitudes e diâmetros de dificuldade -------- //
+    public GameObject circularGrid;                                               //
+    public GameObject easyArea;                                                   // 
+    public GameObject mediumArea;                                                 //
+    public GameObject hardArea;                                                   //
+    public bool mudouDeCor;                                                       //
+    // -------------------------------------------------------------------------- //
     private void Start()
     {
-        //startTime = Time.time;
+        InvokeRepeating("SpawnObject", spawnStart, spawnRate);
     }
     void Awake()
     {
@@ -59,21 +62,12 @@ public class Instantiate_target : MonoBehaviour
         {
             cooldownTimer = 0;
         }
-
-        /*float t = (Time.time - startTime) * speed;
-        Target.GetComponent<Renderer>().sharedMaterial.color = Color.Lerp(startColor, endColor, t);*/
     }
 
     public void InstantiateObject (GameObject NewTarget, Vector3 position, Quaternion rotation)
     {
         Instantiate(NewTarget, Random.insideUnitSphere * radius + position, rotation, parent);
     }
-
-    /*public void ColorChanger(GameObject NewTarget, float duration)
-    {
-        Renderer colorChange = NewTarget.gameObject.GetComponent<Renderer>();
-        colorChange.sharedMaterial.color = Color.Lerp(Color.red, Color.green, Mathf.PingPong(Time.time, duration));
-    }*/
 
     public void DestroyObject(GameObject oldShape)
     {
@@ -89,9 +83,14 @@ public class Instantiate_target : MonoBehaviour
     {
         Source.Play();
     }
-    /*public void OnDrawGizmos()
+
+    public void SpawnObject()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(radial_Data.originPoint, radial_Data.instantiateRadius);
-    }*/
+        Instantiate(cognitTarget, Random.insideUnitSphere * radius + cogPosition.position, Quaternion.identity, parent);
+
+        if (stopSpawning)
+        {
+            CancelInvoke("SpawnObject");
+        }
+    }
 }

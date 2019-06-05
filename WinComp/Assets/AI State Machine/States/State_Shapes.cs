@@ -57,7 +57,7 @@ public class State_Shapes : IState
 
         if (State.maxReps <= 0)
         {
-            State.maxReps = 10;
+            State.maxReps = 20;
         }
         //spawnRadius = 30;
         //personal_space = 2;

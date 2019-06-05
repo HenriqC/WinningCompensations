@@ -106,6 +106,7 @@ public class DDA_Exercise_Grid : MonoBehaviour
             nFreeDraw = false;
             this.stateMachine.ChangeState(new State_FreeDraw());
         }*/
+
         this.stateMachine.ExecuteStateUpdate(); //Alteração para um estado diferente
     }
 

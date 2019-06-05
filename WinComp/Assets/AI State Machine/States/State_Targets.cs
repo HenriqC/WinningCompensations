@@ -19,6 +19,7 @@ public class State_Targets : IState
 
     public State_Targets(Vector3 originPoint, Transform cursor, Transform secondaryCursor, GameObject new_target, GameObject ownerGameObject, float instantiateRadius, string tagToLookFor)
     {
+        
         this.originPoint = originPoint;
         this.cursor = cursor;
         this.secondaryCursor = secondaryCursor;
@@ -43,8 +44,8 @@ public class State_Targets : IState
 
         n_targets = 0;
         subState_index = 1;
-        originPoint = ownerGameObject.transform.position;
-        //Instantiate_target.instance.speed = 0.1f;
+        originPoint = ownerGameObject.transform.position;       
+
         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
         Instantiate_target.instance.circularGrid.SetActive(true);
         Instantiate_target.instance.easyArea.SetActive(true);
@@ -58,7 +59,7 @@ public class State_Targets : IState
 
     public void Execute()
     {
-        Instantiate_target.instance.radius = this.instantiateRadius;
+        Instantiate_target.instance.radius = instantiateRadius;
 
         RaycastHit hit;
         Ray landingRay = new Ray (cursor.position, Vector3.back);
@@ -68,11 +69,11 @@ public class State_Targets : IState
         {
             if (Physics.Raycast(landingRay, out hit) || Physics.Raycast(secondaryRay, out hit))
             {
-                /*Vector2 randomVector = new Vector2(1,1);
-                randomVector = randomVector.normalized;
-
-                float d = Random.Range(-instantiateRadius, instantiateRadius);*/
-
+                if (hit.collider.tag == "CognitiveCollider_B")
+                {
+                    Object.Destroy(hit.collider.gameObject);
+                    State.correctReps++;
+                }
 
                 if (hit.collider.tag == this.tagToLookFor)
                 {
@@ -101,91 +102,86 @@ public class State_Targets : IState
                     }
 
                     // ------------------- Sub índices dos sub niveis de dificuldade ------------------- //
-                    if (n_targets <= 2)
+                    if (n_targets <= 5)
                     {
-                        subState_index = 1; //Poor
-                        
-}
-                    else if (n_targets > 2 && n_targets <= 4)
-                    {
-                        subState_index = 2; // Mediocre
-                        
+                        subState_index = 1; //Poor                        
                     }
-                    else if (n_targets > 4 && n_targets <= 6)
+                    else if (n_targets > 5 && n_targets <= 10)
+                    {
+                        subState_index = 2; // Mediocre                        
+                    }
+                    else if (n_targets > 1 && n_targets <= 15)
                     {
                         subState_index = 3; // Avg
                     }
-                    else if(n_targets >= 6 && n_targets < 10)
+                    else if (n_targets >= 15 && n_targets < 20)
                     {
                         subState_index = 4; // Exc
                     }
 
                     // ------------------- ---------------------------------------- ---------------------------------- //
 
-                    if (n_targets < 10 && subState_index == 1) // Poor Sub-state -------------------------------------
+                    if (n_targets < 20 && subState_index == 1) // Poor Sub-state -------------------------------------
                     {
                         Debug.LogError("Poor");
 
-                        //Instantiate_target.instance.speed = 0.1f;
                         this.instantiateRadius = 0.0005f;
 
-                        //ColorChanger.instance.speed = 0.1f;
+                        Instantiate_target.instance.spawnStart = 1f;
+                        Instantiate_target.instance.spawnRate = 5f;
                         Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
                         Object.Destroy(hit.collider.gameObject);
                     }
-                    else if (n_targets < 10 && subState_index == 2) //Med Sub-state ----------------------------------
+                    else if (n_targets < 20 && subState_index == 2) //Med Sub-state ----------------------------------
                     {
                         Debug.LogError("Mediocre");
 
-                        //Instantiate_target.instance.speed = 0.5f;
                         this.instantiateRadius = 0.15f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(true);
                         Instantiate_target.instance.hardArea.SetActive(false);
 
-                        //ColorChanger.instance.speed = 0.3f;
+                        Instantiate_target.instance.spawnStart = 1f;
+                        Instantiate_target.instance.spawnRate = 4f;
                         Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
                         Object.Destroy(hit.collider.gameObject);
 
                     }
-                    else if (n_targets < 10 && subState_index == 3) //Avg Sub-state -----------------------------------
+                    else if (n_targets < 20 && subState_index == 3) //Avg Sub-state -----------------------------------
                     {
                         Debug.LogError("Avg");
 
-                        //Instantiate_target.instance.speed = 0.7f;
                         this.instantiateRadius = 0.35f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(false);
                         Instantiate_target.instance.hardArea.SetActive(true);
 
-                        //ColorChanger.instance.speed = 0.3f;
-                        //originPoint += (Vector3)randomVector * d;
+                        Instantiate_target.instance.spawnStart = 1f;
+                        Instantiate_target.instance.spawnRate = 3f;
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
-                        //Instantiate_target.instance.ColorChanger(new_target, 1f);
                         Object.Destroy(hit.collider.gameObject);
                     }
-                    else if (n_targets <10 && subState_index == 4) // Exc Sub-state -----------------------------------
+                    else if (n_targets < 20 && subState_index == 4) // Exc Sub-state -----------------------------------
                     {
                         Debug.LogError("Exc");
-                        //Instantiate_target.instance.speed = 1f;
-                        this.instantiateRadius = 0.55f;
+                        this.instantiateRadius = 0.45f;
 
-                        //ColorChanger.instance.speed = 0.3f;
+                        Instantiate_target.instance.spawnStart = 1f;
+                        Instantiate_target.instance.spawnRate = 2f;
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
-                        //Instantiate_target.instance.ColorChanger(new_target, 0.5f);
                         Object.Destroy(hit.collider.gameObject);
                     }                    
                 }
-                if (n_targets >= 10 && subState_index == 4)
+                if (n_targets >= 20 && subState_index == 4)
                 {
                     Debug.Log(DDA_Exercise_Grid.instance.nShapes);
                     Debug.Log("Muda de estado");
                     Object.Destroy(hit.collider.gameObject);
                     Exit();
-                }
-            }
+                }                
+            }            
 
             // ------------------- ---------------------------------------- ------------------------------------------- //
             if (State.compensationInCurrentRep)
@@ -203,7 +199,7 @@ public class State_Targets : IState
                     {
                         n_targets = 0;
                     }
-            }
+            }            
 
             /*if (Instantiate_target.instance.mudouDeCor == true)
             {
