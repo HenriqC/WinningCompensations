@@ -38,7 +38,7 @@ public class Instantiate_target : MonoBehaviour
     // -------------------------------------------------------------------------- //
     private void Start()
     {
-        InvokeRepeating("SpawnObject", spawnStart, spawnRate);
+
     }
     void Awake()
     {
@@ -63,10 +63,19 @@ public class Instantiate_target : MonoBehaviour
             cooldownTimer = 0;
         }
     }
-
+    Vector3 RandomCircle(Vector3 center)
+    {
+        float ang = Random.value * 360;
+        Vector3 pos;
+        pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
+        pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
+        pos.z = center.z;
+        return pos;
+    }
     public void InstantiateObject (GameObject NewTarget, Vector3 position, Quaternion rotation)
     {
-        Instantiate(NewTarget, Random.insideUnitSphere * radius + position, rotation, parent);
+        Vector3 pos = RandomCircle(position);
+        Instantiate(NewTarget, pos, rotation, parent);
     }
 
     public void DestroyObject(GameObject oldShape)
@@ -82,15 +91,5 @@ public class Instantiate_target : MonoBehaviour
     public void PlayClip()
     {
         Source.Play();
-    }
-
-    public void SpawnObject()
-    {
-        Instantiate(cognitTarget, Random.insideUnitSphere * radius + cogPosition.position, Quaternion.identity, parent);
-
-        if (stopSpawning)
-        {
-            CancelInvoke("SpawnObject");
-        }
     }
 }

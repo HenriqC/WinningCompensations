@@ -125,10 +125,11 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Poor");
 
-                        this.instantiateRadius = 0.0005f;
+                        instantiateRadius = 0.03f;
+                        Instantiate_target.instance.easyArea.SetActive(true);
+                        Instantiate_target.instance.mediumArea.SetActive(false);
+                        Instantiate_target.instance.hardArea.SetActive(false);
 
-                        Instantiate_target.instance.spawnStart = 1f;
-                        Instantiate_target.instance.spawnRate = 5f;
                         Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
                         Object.Destroy(hit.collider.gameObject);
                     }
@@ -136,14 +137,12 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Mediocre");
 
-                        this.instantiateRadius = 0.15f;
+                        instantiateRadius = 0.09f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(true);
                         Instantiate_target.instance.hardArea.SetActive(false);
 
-                        Instantiate_target.instance.spawnStart = 1f;
-                        Instantiate_target.instance.spawnRate = 4f;
                         Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
                         Object.Destroy(hit.collider.gameObject);
 
@@ -152,24 +151,20 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Avg");
 
-                        this.instantiateRadius = 0.35f;
+                        instantiateRadius = 0.15f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(false);
                         Instantiate_target.instance.hardArea.SetActive(true);
 
-                        Instantiate_target.instance.spawnStart = 1f;
-                        Instantiate_target.instance.spawnRate = 3f;
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
                         Object.Destroy(hit.collider.gameObject);
                     }
                     else if (n_targets < 20 && subState_index == 4) // Exc Sub-state -----------------------------------
                     {
                         Debug.LogError("Exc");
-                        this.instantiateRadius = 0.45f;
+                        instantiateRadius = 0.25f;
 
-                        Instantiate_target.instance.spawnStart = 1f;
-                        Instantiate_target.instance.spawnRate = 2f;
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
                         Object.Destroy(hit.collider.gameObject);
                     }                    
