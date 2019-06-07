@@ -14,7 +14,7 @@ public class Instantiate_target : MonoBehaviour
 
     // -------- Variáveis de instanciação dos alvos cognitivos --------//
     public GameObject cognitTarget;                                    //
-    public Transform cogPosition;                                        //
+    public Transform cogPosition;                                      //
     public bool stopSpawning = false;                                  //
     public float spawnStart;                                           //
     public float spawnRate;                                            //

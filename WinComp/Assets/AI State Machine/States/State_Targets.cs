@@ -39,12 +39,12 @@ public class State_Targets : IState
         DDA_Exercise_Grid.instance.nShapes = false;
         DDA_Exercise_Grid.instance.nTargets = false;
         Debug.Log("Entrou Targets");
-
+        originPoint = ownerGameObject.transform.position;
         State.hasSecondaryCursor = true;
 
         n_targets = 0;
         subState_index = 1;
-        originPoint = ownerGameObject.transform.position;       
+        
 
         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
         Instantiate_target.instance.circularGrid.SetActive(true);
@@ -54,7 +54,6 @@ public class State_Targets : IState
         {
             State.maxReps = 10;
         }
-        Debug.Log("chegou aqui");
     }
 
     public void Execute()
@@ -67,6 +66,7 @@ public class State_Targets : IState
 
         if (State.isTherapyOnGoing)
         {
+            originPoint = ownerGameObject.transform.position;
             if (Physics.Raycast(landingRay, out hit) || Physics.Raycast(secondaryRay, out hit))
             {
                 if (hit.collider.tag == "CognitiveCollider_B")
@@ -102,30 +102,33 @@ public class State_Targets : IState
                     }
 
                     // ------------------- Sub índices dos sub niveis de dificuldade ------------------- //
-                    if (n_targets <= 5)
+                    if (n_targets <= (State.maxReps/4))
                     {
                         subState_index = 1; //Poor                        
                     }
-                    else if (n_targets > 5 && n_targets <= 10)
+                    else if (n_targets > (State.maxReps / 4) && n_targets <= (State.maxReps / 2))
                     {
                         subState_index = 2; // Mediocre                        
                     }
-                    else if (n_targets > 1 && n_targets <= 15)
+                    else if (n_targets > (State.maxReps / 2) && n_targets <= 3*(State.maxReps / 4))
                     {
                         subState_index = 3; // Avg
                     }
-                    else if (n_targets >= 15 && n_targets < 20)
+                    else if (n_targets >= 3 * (State.maxReps / 4) && n_targets < State.maxReps)
                     {
                         subState_index = 4; // Exc
                     }
 
                     // ------------------- ---------------------------------------- ---------------------------------- //
 
-                    if (n_targets < 20 && subState_index == 1) // Poor Sub-state -------------------------------------
+                    if (n_targets < State.maxReps && subState_index == 1) // Poor Sub-state -------------------------------------
                     {
                         Debug.LogError("Poor");
 
-                        instantiateRadius = 0.03f;
+                        instantiateRadius = 0.1f;
+                        CognitiveSphereSpawner.instance.spawnStart = 1f;
+                        CognitiveSphereSpawner.instance.spawnRate = 15f;
+
                         Instantiate_target.instance.easyArea.SetActive(true);
                         Instantiate_target.instance.mediumArea.SetActive(false);
                         Instantiate_target.instance.hardArea.SetActive(false);
@@ -133,11 +136,13 @@ public class State_Targets : IState
                         Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
                         Object.Destroy(hit.collider.gameObject);
                     }
-                    else if (n_targets < 20 && subState_index == 2) //Med Sub-state ----------------------------------
+                    else if (n_targets < State.maxReps && subState_index == 2) //Med Sub-state ----------------------------------
                     {
                         Debug.LogError("Mediocre");
 
-                        instantiateRadius = 0.09f;
+                        instantiateRadius = 0.2f;
+                        CognitiveSphereSpawner.instance.spawnStart = 1f;
+                        CognitiveSphereSpawner.instance.spawnRate = 10f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(true);
@@ -147,11 +152,13 @@ public class State_Targets : IState
                         Object.Destroy(hit.collider.gameObject);
 
                     }
-                    else if (n_targets < 20 && subState_index == 3) //Avg Sub-state -----------------------------------
+                    else if (n_targets < State.maxReps && subState_index == 3) //Avg Sub-state -----------------------------------
                     {
                         Debug.LogError("Avg");
 
-                        instantiateRadius = 0.15f;
+                        instantiateRadius = 0.3f;
+                        CognitiveSphereSpawner.instance.spawnStart = 1f;
+                        CognitiveSphereSpawner.instance.spawnRate = 6f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(false);
@@ -160,16 +167,18 @@ public class State_Targets : IState
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
                         Object.Destroy(hit.collider.gameObject);
                     }
-                    else if (n_targets < 20 && subState_index == 4) // Exc Sub-state -----------------------------------
+                    else if (n_targets < State.maxReps && subState_index == 4) // Exc Sub-state -----------------------------------
                     {
                         Debug.LogError("Exc");
-                        instantiateRadius = 0.25f;
+                        instantiateRadius = 0.4f;
+                        CognitiveSphereSpawner.instance.spawnStart = 1f;
+                        CognitiveSphereSpawner.instance.spawnRate = 5f;
 
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
                         Object.Destroy(hit.collider.gameObject);
                     }                    
                 }
-                if (n_targets >= 20 && subState_index == 4)
+                if (n_targets >= State.maxReps && subState_index == 4)
                 {
                     Debug.Log(DDA_Exercise_Grid.instance.nShapes);
                     Debug.Log("Muda de estado");
@@ -268,6 +277,9 @@ public class State_Targets : IState
     }
     public void Exit()
     {
+        State.correctReps = 0;
+        State.tries = 0;
+        CognitiveSphereSpawner.instance.stopSpawning = true;
         Instantiate_target.instance.DestroyObject(new_target);
         Instantiate_target.instance.circularGrid.SetActive(false);
         Instantiate_target.instance.easyArea.SetActive(false);

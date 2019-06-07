@@ -13502,6 +13502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1012393708}
   - component: {fileID: 1012393707}
+  - component: {fileID: 1012393709}
   m_Layer: 10
   m_Name: Spawn_target
   m_TagString: Untagged
@@ -13619,6 +13620,23 @@ Transform:
   m_Father: {fileID: 322908694}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1012393709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012393706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f3b656b6b1bcd74c89c1dbb085b20ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toSpawn: {fileID: 8785023540675293507, guid: 586c655d3ee8e8d409596fa0efc8833c, type: 3}
+  parent: {fileID: 2074098267}
+  stopSpawning: 0
+  spawnStart: 0
+  spawnRate: 0
 --- !u!1 &1015419948
 GameObject:
   m_ObjectHideFlags: 0
