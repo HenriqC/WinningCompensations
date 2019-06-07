@@ -8,6 +8,7 @@ public class Instantiate_target : MonoBehaviour
     public GameObject center;
     public float radius;
     public static Instantiate_target instance = null;
+    public GameObject ObInstance;
     public Transform parent;
     public Text avgTime;
     public State_Targets radial_Data;
@@ -75,7 +76,7 @@ public class Instantiate_target : MonoBehaviour
     public void InstantiateObject (GameObject NewTarget, Vector3 position, Quaternion rotation)
     {
         Vector3 pos = RandomCircle(position);
-        Instantiate(NewTarget, pos, rotation, parent);
+        ObInstance = Instantiate(NewTarget, pos, rotation, parent);
     }
 
     public void DestroyObject(GameObject oldShape)

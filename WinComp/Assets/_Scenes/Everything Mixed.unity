@@ -13632,11 +13632,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3b656b6b1bcd74c89c1dbb085b20ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSpawn: {fileID: 8785023540675293507, guid: 586c655d3ee8e8d409596fa0efc8833c, type: 3}
+  toSpawn_B: {fileID: 8785023540675293507, guid: 586c655d3ee8e8d409596fa0efc8833c,
+    type: 3}
+  toSpawn_P: {fileID: 8785023540675293507, guid: c8427c2e290c20a4aa5fd4b994c1f8e2,
+    type: 3}
   parent: {fileID: 2074098267}
   stopSpawning: 0
-  spawnStart: 0
-  spawnRate: 0
+  spawnStart_B: 0
+  spawnRate_B: 0
+  spawnStart_P: 0
+  spawnRate_P: 0
 --- !u!1 &1015419948
 GameObject:
   m_ObjectHideFlags: 0

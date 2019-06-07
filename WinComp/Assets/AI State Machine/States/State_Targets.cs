@@ -74,8 +74,13 @@ public class State_Targets : IState
                     Object.Destroy(hit.collider.gameObject);
                     State.correctReps++;
                 }
+                else if (hit.collider.tag == "CognitiveCollider_P")
+                {
+                    Object.Destroy(hit.collider.gameObject);
+                    State.correctReps--;
+                }
 
-                if (hit.collider.tag == this.tagToLookFor)
+                if (hit.collider.tag == tagToLookFor)
                 {
                     //Debug.Log(new_target);
                     //Debug.Log(originPoint);
@@ -126,8 +131,8 @@ public class State_Targets : IState
                         Debug.LogError("Poor");
 
                         instantiateRadius = 0.1f;
-                        CognitiveSphereSpawner.instance.spawnStart = 1f;
-                        CognitiveSphereSpawner.instance.spawnRate = 15f;
+                        CognitiveSphereSpawner.instance.spawnStart_B = 1f;
+                        CognitiveSphereSpawner.instance.spawnRate_B = 15f;
 
                         Instantiate_target.instance.easyArea.SetActive(true);
                         Instantiate_target.instance.mediumArea.SetActive(false);
@@ -141,8 +146,11 @@ public class State_Targets : IState
                         Debug.LogError("Mediocre");
 
                         instantiateRadius = 0.2f;
-                        CognitiveSphereSpawner.instance.spawnStart = 1f;
-                        CognitiveSphereSpawner.instance.spawnRate = 10f;
+                        CognitiveSphereSpawner.instance.spawnStart_B = 1f;
+                        CognitiveSphereSpawner.instance.spawnRate_B = 10f;
+
+                        CognitiveSphereSpawner.instance.spawnStart_P = 1f;
+                        CognitiveSphereSpawner.instance.spawnRate_P = 8f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(true);
@@ -157,8 +165,11 @@ public class State_Targets : IState
                         Debug.LogError("Avg");
 
                         instantiateRadius = 0.3f;
-                        CognitiveSphereSpawner.instance.spawnStart = 1f;
-                        CognitiveSphereSpawner.instance.spawnRate = 6f;
+                        CognitiveSphereSpawner.instance.spawnStart_B = 1f;
+                        CognitiveSphereSpawner.instance.spawnRate_B = 6f;
+
+                        CognitiveSphereSpawner.instance.spawnStart_P = 1f;
+                        CognitiveSphereSpawner.instance.spawnRate_P = 6f;
 
                         Instantiate_target.instance.easyArea.SetActive(false);
                         Instantiate_target.instance.mediumArea.SetActive(false);
@@ -170,9 +181,13 @@ public class State_Targets : IState
                     else if (n_targets < State.maxReps && subState_index == 4) // Exc Sub-state -----------------------------------
                     {
                         Debug.LogError("Exc");
+
                         instantiateRadius = 0.4f;
-                        CognitiveSphereSpawner.instance.spawnStart = 1f;
-                        CognitiveSphereSpawner.instance.spawnRate = 5f;
+                        CognitiveSphereSpawner.instance.spawnStart_B = 1f;
+                        CognitiveSphereSpawner.instance.spawnRate_B = 5f;
+
+                        CognitiveSphereSpawner.instance.spawnStart_P = 1f;
+                        CognitiveSphereSpawner.instance.spawnRate_P = 4f;
 
                         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
                         Object.Destroy(hit.collider.gameObject);
@@ -188,27 +203,31 @@ public class State_Targets : IState
             }            
 
             // ------------------- ---------------------------------------- ------------------------------------------- //
-            if (State.compensationInCurrentRep)
-                { // Caso seja detetada uma compensação o exercício recomeça do início
-                    State.compensationInCurrentRep = false;
-                    if (State.correctReps > 0)
-                    {
-                        State.correctReps--;
-                    }
-                    if (subState_index > 1 && n_targets > 0)
-                    {
-                        n_targets--;
-                    }
-                    else
-                    {
-                        n_targets = 0;
-                    }
+            if (State.compensationInCurrentRep && Instantiate_target.instance.cooldownTimer == 0)
+            {
+                State.compensationInCurrentRep = false;
+                Instantiate_target.instance.CooldownTimer(3);
+                if (State.correctReps > 0)
+                {
+                    State.correctReps--;
+                }
+                if (subState_index > 1 && n_targets > 0)
+                {
+                    n_targets--;
+                }
+                else
+                {
+                    n_targets = 0;
+                }
             }            
 
-            /*if (Instantiate_target.instance.mudouDeCor == true)
-            {
-                Instantiate_target.instance.mudouDeCor = false;
+            if (Instantiate_target.instance.mudouDeCor == true && Instantiate_target.instance.cooldownTimer == 0)
+            {                
                 State.tries++;
+                Instantiate_target.instance.mudouDeCor = false;
+                Instantiate_target.instance.CooldownTimer(2);
+                Object.Destroy(Instantiate_target.instance.ObInstance);
+                Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
 
                 if (subState_index > 1 && n_targets > 0)
                 {
@@ -218,61 +237,8 @@ public class State_Targets : IState
                 {
                     n_targets = 0;
                 }
-            }*/
-
-            // ------ Inserir aqui código dos timings das bolas, de verde a vermelho, sendo que muda o subEstado consoante o subEstado em que está e se a bola fica totalmente vermelha ------ //
-
-            /*
-                if (subState_index == 1)
-                {
-                    //Instantiate_target.instance.ColorChanger(new_target, 10f);
-                    if (new_target.GetComponent<Renderer>().sharedMaterial.color == Color.red)
-                    {
-                        Object.Destroy(new_target);
-                        Debug.Log(subState_index);
-                        n_targets = 0;
-                    }
-                }
-                if (subState_index == 2)
-                {
-                    //Instantiate_target.instance.ColorChanger(new_target, 6f);
-                    if (new_target.GetComponent<Renderer>().sharedMaterial.color == Color.red)
-                    {
-                        Object.Destroy(new_target);
-                    if (n_targets > 0)
-                    {
-                        n_targets--;
-                    }
-                        Debug.Log(subState_index);
-                    }
-                }
-                if (subState_index == 3)
-                {
-                    //Instantiate_target.instance.ColorChanger(new_target, 4f);
-                    if (new_target.GetComponent<Renderer>().sharedMaterial.color == Color.red)
-                    {
-                        Object.Destroy(new_target);
-                    if (n_targets > 0)
-                    {
-                        n_targets--;
-                    }
-                    Debug.Log(subState_index);
-                    }
-                }
-                if (subState_index == 4)
-                {
-                    //Instantiate_target.instance.ColorChanger(new_target, 2f);
-                    if (new_target.GetComponent<Renderer>().sharedMaterial.color == Color.red)
-                    {
-                        Object.Destroy(new_target);
-                    if (n_targets > 0)
-                    {
-                        n_targets--;
-                    }
-                    Debug.Log(subState_index);
-                    }
-                }   
-                */
+                
+            }            
         }
     }
     public void Exit()
