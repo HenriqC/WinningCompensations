@@ -133,6 +133,7 @@ public class State_Targets : IState
                         instantiateRadius = 0.1f;
                         CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_B = 15f;
+                        ColorChanger.instance.speed = 0.1f;
 
                         Instantiate_target.instance.easyArea.SetActive(true);
                         Instantiate_target.instance.mediumArea.SetActive(false);
@@ -148,6 +149,7 @@ public class State_Targets : IState
                         instantiateRadius = 0.2f;
                         CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_B = 10f;
+                        ColorChanger.instance.speed = 0.3f;
 
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 8f;
@@ -167,6 +169,7 @@ public class State_Targets : IState
                         instantiateRadius = 0.3f;
                         CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_B = 6f;
+                        ColorChanger.instance.speed = 0.5f;
 
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 6f;
@@ -185,6 +188,7 @@ public class State_Targets : IState
                         instantiateRadius = 0.4f;
                         CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_B = 5f;
+                        ColorChanger.instance.speed = 1f;
 
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 4f;
