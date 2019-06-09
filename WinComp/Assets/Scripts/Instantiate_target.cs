@@ -10,6 +10,7 @@ public class Instantiate_target : MonoBehaviour
     public static Instantiate_target instance = null;
     public GameObject ObInstance;
     public Transform parent;
+    public Text exName;
     public Text avgTime;
     public State_Targets radial_Data;
 
