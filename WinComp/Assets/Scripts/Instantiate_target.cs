@@ -13,6 +13,8 @@ public class Instantiate_target : MonoBehaviour
     public Text avgTime;
     public State_Targets radial_Data;
 
+    public ColorChanger changeSpeed;
+
     // -------- Variáveis de instanciação dos alvos cognitivos --------//
     public GameObject cognitTarget;                                    //
     public Transform cogPosition;                                      //

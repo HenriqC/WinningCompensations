@@ -2343,8 +2343,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   center: {fileID: 1012393706}
   radius: 0
+  ObInstance: {fileID: 0}
   parent: {fileID: 2074098267}
   avgTime: {fileID: 791509182}
+  changeSpeed: {fileID: -8000278067118710764, guid: 350a8186e5c018b4085a1f840c9e860d,
+    type: 3}
   cognitTarget: {fileID: 8785023540675293507, guid: 586c655d3ee8e8d409596fa0efc8833c,
     type: 3}
   cogPosition: {fileID: 1012393708}
@@ -13638,6 +13641,7 @@ MonoBehaviour:
     type: 3}
   parent: {fileID: 2074098267}
   stopSpawning: 0
+  timesUp: 0
   spawnStart_B: 0
   spawnRate_B: 0
   spawnStart_P: 0

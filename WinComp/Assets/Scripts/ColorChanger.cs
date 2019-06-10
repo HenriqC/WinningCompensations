@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ColorChanger : MonoBehaviour
 {
-    public static ColorChanger instance = null;
     // -------- Color change variables -------- //
     public GameObject Target;
     public float speed;
