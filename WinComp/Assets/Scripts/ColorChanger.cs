@@ -13,14 +13,12 @@ public class ColorChanger : MonoBehaviour
     // -------- Color change variables -------- //
 
     public bool mudou;
-
     void Start()
     {
         Instantiate_target.instance.mudouDeCor = false;
         startTime = Time.time;
     }
 
-    // Update is called once per frame
     void Update()
     {
         float t = (Time.time - startTime) * speed;

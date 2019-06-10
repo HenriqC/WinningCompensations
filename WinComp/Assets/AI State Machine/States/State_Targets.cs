@@ -44,8 +44,8 @@ public class State_Targets : IState
 
         n_targets = 0;
         subState_index = 1;
-        
 
+        Instantiate_target.instance.exName.text = "Target Reach";
         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
         Instantiate_target.instance.circularGrid.SetActive(true);
         Instantiate_target.instance.easyArea.SetActive(true);
@@ -136,6 +136,7 @@ public class State_Targets : IState
                         instantiateRadius = 0.1f;                        
                         CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_B = 15f;
+                        ColorChanger.instance.speed = 0.1f;
 
                         Instantiate_target.instance.changeSpeed.speed = 0.4f;
                         Instantiate_target.instance.easyArea.SetActive(true);
@@ -153,6 +154,7 @@ public class State_Targets : IState
                         Instantiate_target.instance.changeSpeed.speed = 0.5f;
                         CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_B = 10f;
+                        ColorChanger.instance.speed = 0.3f;
 
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 8f;
@@ -173,6 +175,7 @@ public class State_Targets : IState
                         Instantiate_target.instance.changeSpeed.speed = 0.8f;
                         CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_B = 6f;
+                        ColorChanger.instance.speed = 0.5f;
 
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 6f;
@@ -192,6 +195,7 @@ public class State_Targets : IState
                         Instantiate_target.instance.changeSpeed.speed = 1f;
                         CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_B = 5f;
+                        ColorChanger.instance.speed = 1f;
 
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 4f;

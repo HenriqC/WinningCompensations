@@ -6,6 +6,9 @@ public class CognitiveSphereSpawner : MonoBehaviour
 {
     public static CognitiveSphereSpawner instance = null;
 
+    public GameObject ObInstance_B;
+    public GameObject ObInstance_P;
+
     public GameObject toSpawn_B;
     public GameObject toSpawn_P;
     public Transform parent;
@@ -67,7 +70,7 @@ public class CognitiveSphereSpawner : MonoBehaviour
         
         Vector3 center = transform.position;
         Vector3 pos = RandomCircle(center);
-        Instantiate(toSpawn_B, pos, Quaternion.identity, parent);
+        ObInstance_B = Instantiate(toSpawn_B, pos, Quaternion.identity, parent);
         Instantiate_target.instance.CooldownTimer(4);
 
         if (stopSpawning)
@@ -81,7 +84,7 @@ public class CognitiveSphereSpawner : MonoBehaviour
 
         Vector3 center = transform.position;
         Vector3 pos = RandomCircle(center);
-        Instantiate(toSpawn_P, pos, Quaternion.identity, parent);
+        ObInstance_P = Instantiate(toSpawn_P, pos, Quaternion.identity, parent);
         Instantiate_target.instance.CooldownTimer(4);
 
         if (stopSpawning)
