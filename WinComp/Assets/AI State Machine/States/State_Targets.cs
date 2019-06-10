@@ -136,7 +136,6 @@ public class State_Targets : IState
                         instantiateRadius = 0.1f;                        
                         CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_B = 15f;
-                        ColorChanger.instance.speed = 0.1f;
 
                         Instantiate_target.instance.changeSpeed.speed = 0.4f;
                         Instantiate_target.instance.easyArea.SetActive(true);
@@ -152,9 +151,9 @@ public class State_Targets : IState
 
                         instantiateRadius = 0.3f;
                         Instantiate_target.instance.changeSpeed.speed = 0.5f;
+
                         CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_B = 10f;
-                        ColorChanger.instance.speed = 0.3f;
 
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 8f;
@@ -175,7 +174,6 @@ public class State_Targets : IState
                         Instantiate_target.instance.changeSpeed.speed = 0.8f;
                         CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_B = 6f;
-                        ColorChanger.instance.speed = 0.5f;
 
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 6f;
@@ -195,7 +193,6 @@ public class State_Targets : IState
                         Instantiate_target.instance.changeSpeed.speed = 1f;
                         CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_B = 5f;
-                        ColorChanger.instance.speed = 1f;
 
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 4f;
@@ -204,7 +201,7 @@ public class State_Targets : IState
                         Object.Destroy(hit.collider.gameObject);
                     }                    
                 }
-                if (n_targets >= State.maxReps && subState_index == 4)
+                if (State.correctReps == State.maxReps /*&& subState_index == 4*/)
                 {
                     Debug.Log(DDA_Exercise_Grid.instance.nShapes);
                     Debug.Log("Muda de estado");
@@ -256,7 +253,6 @@ public class State_Targets : IState
     {
         State.correctReps = 0;
         State.tries = 0;
-        CognitiveSphereSpawner.instance.stopSpawning = true;
         Instantiate_target.instance.DestroyObject(new_target);
         Instantiate_target.instance.circularGrid.SetActive(false);
         Instantiate_target.instance.easyArea.SetActive(false);

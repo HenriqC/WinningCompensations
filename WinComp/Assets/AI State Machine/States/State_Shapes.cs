@@ -44,12 +44,26 @@ public class State_Shapes : IState
 
     public void Enter()
     {
+        CognitiveSphereSpawner.instance.stopSpawning_B = true;
+        CognitiveSphereSpawner.instance.stopSpawning_P = true;
+
+        var blueSphere = GameObject.FindGameObjectsWithTag("CognitiveCollider_B");
+        var purpleSphere = GameObject.FindGameObjectsWithTag("CognitiveCollider_P");
+        foreach (GameObject target_b in blueSphere)
+        {
+            Object.Destroy(target_b);
+        }
+        foreach (GameObject target_p in purpleSphere)
+        {
+            Object.Destroy(target_p);
+        }
+
         DDA_Exercise_Grid.instance.nShapes = false;
         DDA_Exercise_Grid.instance.nTargets = false;
         Debug.Log("Entrou Shapes");
 
         subState_index = 1;
-        this.new_shape[0].SetActive(true);
+        new_shape[0].SetActive(true);
         currentShape = this.new_shape[0];
 
       //originPoint = ownerGameObject.transform.position;

@@ -13,7 +13,8 @@ public class CognitiveSphereSpawner : MonoBehaviour
     public GameObject toSpawn_P;
     public Transform parent;
     private float radius;
-    public bool stopSpawning = false;
+    public bool stopSpawning_B = false;
+    public bool stopSpawning_P = false;
     public bool timesUp = false;
     public float spawnStart_B;
     public float spawnRate_B;
@@ -73,7 +74,7 @@ public class CognitiveSphereSpawner : MonoBehaviour
         ObInstance_B = Instantiate(toSpawn_B, pos, Quaternion.identity, parent);
         Instantiate_target.instance.CooldownTimer(4);
 
-        if (stopSpawning)
+        if (stopSpawning_B == true)
         {
             CancelInvoke("SpawnObject_B");
         }
@@ -87,7 +88,7 @@ public class CognitiveSphereSpawner : MonoBehaviour
         ObInstance_P = Instantiate(toSpawn_P, pos, Quaternion.identity, parent);
         Instantiate_target.instance.CooldownTimer(4);
 
-        if (stopSpawning)
+        if (stopSpawning_P == true)
         {
             CancelInvoke("SpawnObject_P");
         }

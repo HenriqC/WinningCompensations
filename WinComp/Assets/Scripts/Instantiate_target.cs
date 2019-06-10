@@ -39,11 +39,7 @@ public class Instantiate_target : MonoBehaviour
     public GameObject mediumArea;                                                 //
     public GameObject hardArea;                                                   //
     public bool mudouDeCor;                                                       //
-    // -------------------------------------------------------------------------- //
-    private void Start()
-    {
-
-    }
+    // -------------------------------------------------------------------------- //   
     void Awake()
     {
         if (instance == null)
