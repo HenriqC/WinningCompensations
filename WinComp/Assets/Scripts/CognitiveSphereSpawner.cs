@@ -13,8 +13,8 @@ public class CognitiveSphereSpawner : MonoBehaviour
     public GameObject toSpawn_P;
     public Transform parent;
     private float radius;
-    public bool stopSpawning_B = false;
-    public bool stopSpawning_P = false;
+    public  bool stopSpawning_B;
+    public  bool stopSpawning_P;
     public bool timesUp = false;
     public float spawnStart_B;
     public float spawnRate_B;
@@ -40,6 +40,8 @@ public class CognitiveSphereSpawner : MonoBehaviour
         spawnStart_P = 1f;
         spawnRate_P = 10f;
 
+        stopSpawning_B = false;
+        stopSpawning_P = false;
         InvokeRepeating("SpawnObject_B", spawnStart_B, spawnRate_B);
         InvokeRepeating("SpawnObject_P", spawnStart_P, spawnRate_P);
     }
@@ -68,13 +70,14 @@ public class CognitiveSphereSpawner : MonoBehaviour
     public void SpawnObject_B()
     {
         Debug.Log(spawnRate_B);
-        
-        Vector3 center = transform.position;
-        Vector3 pos = RandomCircle(center);
-        ObInstance_B = Instantiate(toSpawn_B, pos, Quaternion.identity, parent);
-        Instantiate_target.instance.CooldownTimer(4);
-
-        if (stopSpawning_B == true)
+        if (stopSpawning_B == false)
+        {
+            Vector3 center = transform.position;
+            Vector3 pos = RandomCircle(center);
+            ObInstance_B = Instantiate(toSpawn_B, pos, Quaternion.identity, parent);
+            Instantiate_target.instance.CooldownTimer(4);
+        }
+        else
         {
             CancelInvoke("SpawnObject_B");
         }
@@ -82,13 +85,14 @@ public class CognitiveSphereSpawner : MonoBehaviour
     public void SpawnObject_P()
     {
         Debug.Log(spawnRate_P);
-
-        Vector3 center = transform.position;
-        Vector3 pos = RandomCircle(center);
-        ObInstance_P = Instantiate(toSpawn_P, pos, Quaternion.identity, parent);
-        Instantiate_target.instance.CooldownTimer(4);
-
-        if (stopSpawning_P == true)
+        if (stopSpawning_P == false)
+        {
+            Vector3 center = transform.position;
+            Vector3 pos = RandomCircle(center);
+            ObInstance_P = Instantiate(toSpawn_P, pos, Quaternion.identity, parent);
+            Instantiate_target.instance.CooldownTimer(4);
+        }
+        else
         {
             CancelInvoke("SpawnObject_P");
         }

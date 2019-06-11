@@ -46,9 +46,14 @@ public class State_Shapes : IState
     {
         CognitiveSphereSpawner.instance.stopSpawning_B = true;
         CognitiveSphereSpawner.instance.stopSpawning_P = true;
-
+        var remTargets = GameObject.FindGameObjectsWithTag("TargetCollider");
         var blueSphere = GameObject.FindGameObjectsWithTag("CognitiveCollider_B");
         var purpleSphere = GameObject.FindGameObjectsWithTag("CognitiveCollider_P");
+
+        foreach (GameObject rem in remTargets)
+        {
+            Object.Destroy(rem);
+        }
         foreach (GameObject target_b in blueSphere)
         {
             Object.Destroy(target_b);
