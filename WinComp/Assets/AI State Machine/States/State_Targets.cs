@@ -37,10 +37,11 @@ public class State_Targets : IState
     public void Enter()
     {
         DDA_Exercise_Grid.instance.nShapes = false;
-        DDA_Exercise_Grid.instance.nTargets = false;
+        DDA_Exercise_Grid.instance.nTargets = false;        
         Debug.Log("Entrou Targets");
         originPoint = ownerGameObject.transform.position;
         State.hasSecondaryCursor = true;
+        State.exerciseName = "Target Reach";
 
         n_targets = 0;
         subState_index = 1;

@@ -6,14 +6,14 @@ using System.Text;
 using UnityEngine;
 
 public class ReportGenerator {
-    private string delimiter = ",";
+    private string delimiter = ";";
 
     public void Savecsv() {
         string[] line;
         string filePath = @"./" + State.exerciseName + ".csv";
 
         if (!File.Exists(filePath)) {
-            line = new string[]{"Exercise", "Arm", "Session Time", "Tries", "Correct Repetitions", "Average Time per Repetition", "Rest count", "Out of path", "Left Shoulder Up", "Right Shoulder Up", "Leaned Left", "Leaned Right"};
+            line = new string[]{"Exercise", "Arm", "Session Time", "Tries", "Correct Repetitions", "Average Time per Repetition", "Rest count", "Left Shoulder Up", "Right Shoulder Up", "Leaned Left", "Leaned Right"};
             File.WriteAllText(filePath, generateStringWithDelimiter(line));
         }
 
@@ -44,7 +44,7 @@ public class ReportGenerator {
         String avgTimeRep = minutes.ToString("00") + ":" + seconds.ToString("00");
 
 
-        line = new string[]{State.exerciseName, arm, sessionTime, "" + State.tries, "" + State.correctReps, avgTimeRep, "" + State.restCount, "" + State.outOfPath, "" + State.leftShoulderUp, "" + State.rightShoulderUp, "" + State.leaningLeft, "" + State.leaningLeft};
+        line = new string[]{State.exerciseName, arm, sessionTime, "" + State.tries, "" + State.correctReps, avgTimeRep, "" + State.restCount, "" + State.leftShoulderUp, "" + State.rightShoulderUp, "" + State.leaningLeft, "" + State.leaningLeft};
         File.AppendAllText(filePath, generateStringWithDelimiter(line));
     }
 

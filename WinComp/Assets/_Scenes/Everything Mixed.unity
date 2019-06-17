@@ -2719,6 +2719,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 177442cb26bc7fa45bd336d95192f4b5,
         type: 3}
+    - target: {fileID: 1462702347460646, guid: e60fdc9cb68355c4a8fc259751e5b14f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e60fdc9cb68355c4a8fc259751e5b14f, type: 3}
 --- !u!1 &204539854
@@ -13643,7 +13647,8 @@ MonoBehaviour:
   toSpawn_P: {fileID: 8785023540675293507, guid: c8427c2e290c20a4aa5fd4b994c1f8e2,
     type: 3}
   parent: {fileID: 2074098267}
-  stopSpawning: 0
+  stopSpawning_B: 0
+  stopSpawning_P: 0
   timesUp: 0
   spawnStart_B: 0
   spawnRate_B: 0
