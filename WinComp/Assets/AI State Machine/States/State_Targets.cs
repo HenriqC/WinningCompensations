@@ -46,7 +46,7 @@ public class State_Targets : IState
         n_targets = 0;
         subState_index = 1;
 
-        Instantiate_target.instance.exName.text = "Target Reach";
+        //Instantiate_target.instance.exName.text = "Target Reach";
         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
         Instantiate_target.instance.circularGrid.SetActive(true);
         Instantiate_target.instance.easyArea.SetActive(true);
