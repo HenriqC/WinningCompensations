@@ -70,12 +70,13 @@ public class State_Targets : IState
             originPoint = ownerGameObject.transform.position;
             if (Physics.Raycast(landingRay, out hit) || Physics.Raycast(secondaryRay, out hit))
             {
-                if (hit.collider.tag == "CognitiveCollider_B")
+                /*if (hit.collider.tag == "CognitiveCollider_B")
                 {
                     Object.Destroy(hit.collider.gameObject);
                     State.correctReps++;
-                }
-                else if (hit.collider.tag == "CognitiveCollider_P")
+                }*/
+
+                if (hit.collider.tag == "CognitiveCollider_P")
                 {
                     Object.Destroy(hit.collider.gameObject);
                     if (State.correctReps > 0)
@@ -135,8 +136,8 @@ public class State_Targets : IState
                         Debug.LogError("Poor");
 
                         instantiateRadius = 0.1f;                        
-                        CognitiveSphereSpawner.instance.spawnStart_B = 1f;
-                        CognitiveSphereSpawner.instance.spawnRate_B = 15f;
+                        //CognitiveSphereSpawner.instance.spawnStart_B = 1f;
+                        //CognitiveSphereSpawner.instance.spawnRate_B = 15f;
 
                         Instantiate_target.instance.changeSpeed.speed = 0.4f;
                         Instantiate_target.instance.easyArea.SetActive(true);
@@ -153,8 +154,8 @@ public class State_Targets : IState
                         instantiateRadius = 0.3f;
                         Instantiate_target.instance.changeSpeed.speed = 0.5f;
 
-                        CognitiveSphereSpawner.instance.spawnStart_B = 1f;
-                        CognitiveSphereSpawner.instance.spawnRate_B = 10f;
+                        //CognitiveSphereSpawner.instance.spawnStart_B = 1f;
+                        //CognitiveSphereSpawner.instance.spawnRate_B = 10f;
 
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 8f;
@@ -173,8 +174,9 @@ public class State_Targets : IState
 
                         instantiateRadius = 0.4f;
                         Instantiate_target.instance.changeSpeed.speed = 0.8f;
-                        CognitiveSphereSpawner.instance.spawnStart_B = 1f;
-                        CognitiveSphereSpawner.instance.spawnRate_B = 6f;
+
+                        //CognitiveSphereSpawner.instance.spawnStart_B = 1f;
+                        //CognitiveSphereSpawner.instance.spawnRate_B = 6f;
 
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 6f;
@@ -192,8 +194,9 @@ public class State_Targets : IState
 
                         instantiateRadius = 0.45f;
                         Instantiate_target.instance.changeSpeed.speed = 1f;
-                        CognitiveSphereSpawner.instance.spawnStart_B = 1f;
-                        CognitiveSphereSpawner.instance.spawnRate_B = 5f;
+
+                        //CognitiveSphereSpawner.instance.spawnStart_B = 1f;
+                        //CognitiveSphereSpawner.instance.spawnRate_B = 5f;
 
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 4f;

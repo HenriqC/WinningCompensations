@@ -67,7 +67,7 @@ public class CognitiveSphereSpawner : MonoBehaviour
         return pos;
     }
 
-    public void SpawnObject_B()
+    /*public void SpawnObject_B()
     {
         Debug.Log(spawnRate_B);
         if (stopSpawning_B == false)
@@ -81,7 +81,7 @@ public class CognitiveSphereSpawner : MonoBehaviour
         {
             CancelInvoke("SpawnObject_B");
         }
-    }
+    }*/
     public void SpawnObject_P()
     {
         Debug.Log(spawnRate_P);
