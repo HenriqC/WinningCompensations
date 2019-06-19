@@ -48,7 +48,18 @@ public class State_Targets : IState
 
         //Instantiate_target.instance.exName.text = "Target Reach";
         Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
-        Instantiate_target.instance.circularGrid.SetActive(true);
+
+        if (State.leftArmSelected)
+        {
+            Instantiate_target.instance.circularGrid_Left.SetActive(true);
+            Instantiate_target.instance.circularGrid_Left.transform.position = Instantiate_target.instance.leftShoulder.transform.position;
+        }
+        else
+        {
+            Instantiate_target.instance.circularGrid_Right.SetActive(true);
+            Instantiate_target.instance.circularGrid_Right.transform.position = Instantiate_target.instance.rightShoulder.transform.position;
+        }
+
         Instantiate_target.instance.easyArea.SetActive(true);
 
         if (State.maxReps <= 0)
@@ -258,7 +269,8 @@ public class State_Targets : IState
         State.correctReps = 0;
         State.tries = 0;
         Instantiate_target.instance.DestroyObject(new_target);
-        Instantiate_target.instance.circularGrid.SetActive(false);
+        Instantiate_target.instance.circularGrid_Left.SetActive(false);
+        Instantiate_target.instance.circularGrid_Right.SetActive(false);
         Instantiate_target.instance.easyArea.SetActive(false);
         Instantiate_target.instance.mediumArea.SetActive(false);
         Instantiate_target.instance.hardArea.SetActive(false);

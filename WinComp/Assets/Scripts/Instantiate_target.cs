@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class Instantiate_target : MonoBehaviour
 {
-    public GameObject center;
-    public float radius;
     public static Instantiate_target instance = null;
+    public GameObject center;
     public GameObject ObInstance;
+    public GameObject rightShoulder;
+    public GameObject leftShoulder;
+    public float radius;    
+    
     public Transform parent;
     public Text exName;
     public Text avgTime;
@@ -34,7 +37,8 @@ public class Instantiate_target : MonoBehaviour
     public AudioSource Source;
 
     // -------- Grelha circular de amplitudes e diâmetros de dificuldade -------- //
-    public GameObject circularGrid;                                               //
+    public GameObject circularGrid_Left;                                          //
+    public GameObject circularGrid_Right;                                          //
     public GameObject easyArea;                                                   // 
     public GameObject mediumArea;                                                 //
     public GameObject hardArea;                                                   //

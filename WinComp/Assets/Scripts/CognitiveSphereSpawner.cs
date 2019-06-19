@@ -35,14 +35,14 @@ public class CognitiveSphereSpawner : MonoBehaviour
 
     void Start()
     {
-        spawnStart_B = 1f;
-        spawnRate_B = 15f;
+        //spawnStart_B = 1f;
+        //spawnRate_B = 15f;
         spawnStart_P = 1f;
         spawnRate_P = 10f;
 
         stopSpawning_B = false;
         stopSpawning_P = false;
-        InvokeRepeating("SpawnObject_B", spawnStart_B, spawnRate_B);
+        //InvokeRepeating("SpawnObject_B", spawnStart_B, spawnRate_B);
         InvokeRepeating("SpawnObject_P", spawnStart_P, spawnRate_P);
     }
 
