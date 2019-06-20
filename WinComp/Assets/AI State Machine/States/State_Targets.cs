@@ -52,12 +52,12 @@ public class State_Targets : IState
         if (State.leftArmSelected)
         {
             Instantiate_target.instance.circularGrid_Left.SetActive(true);
-            Instantiate_target.instance.circularGrid_Left.transform.position = Instantiate_target.instance.leftShoulder.transform.position;
+            //Instantiate_target.instance.circularGrid_Left.transform.position = Instantiate_target.instance.leftShoulder.transform.position;
         }
         else
         {
             Instantiate_target.instance.circularGrid_Right.SetActive(true);
-            Instantiate_target.instance.circularGrid_Right.transform.position = Instantiate_target.instance.rightShoulder.transform.position;
+            //Instantiate_target.instance.circularGrid_Right.transform.position = Instantiate_target.instance.rightShoulder.transform.position;
         }
 
         Instantiate_target.instance.easyArea.SetActive(true);
