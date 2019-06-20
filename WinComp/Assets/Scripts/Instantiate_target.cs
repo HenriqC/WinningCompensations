@@ -8,8 +8,6 @@ public class Instantiate_target : MonoBehaviour
     public static Instantiate_target instance = null;
     public GameObject center;
     public GameObject ObInstance;
-    public GameObject rightShoulder;
-    public GameObject leftShoulder;
     public float radius;    
     
     public Transform parent;

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5576748548856634708}
   - component: {fileID: 5576748548856634715}
   - component: {fileID: -8000278067118710764}
+  - component: {fileID: 772475064792712546}
   m_Layer: 8
   m_Name: Target
   m_TagString: TargetCollider
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5576748548856634713}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.5499495, y: 0.91466665, z: -9.291491}
-  m_LocalScale: {x: 0.114016056, y: 0.114016056, z: 0.114016056}
+  m_LocalScale: {x: 0.15940358, y: 0.15940358, z: 0.15940358}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -105,7 +106,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 5576748548856634713}
-  speed: 0.1
+  speed: 0.4
   startColor: {r: 0.2028302, g: 1, b: 0.33905938, a: 0}
   endColor: {r: 1, g: 0.1462264, b: 0.1462264, a: 0}
   mudou: 0
+--- !u!114 &772475064792712546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5576748548856634713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49e1ab42b2675e4b8fcf69a292b682f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
