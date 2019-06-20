@@ -74,12 +74,47 @@ public class Instantiate_target : MonoBehaviour
         pos.z = center.z;
         return pos;
     }
+
+    public Vector3 OrbitPosition (Vector3 centerPoint, float radius, float angle)
+    {
+        Vector3 tmp;
+        tmp.x = Mathf.Cos(angle * (Mathf.PI / 180)) * radius + centerPoint.x;
+        tmp.y = Mathf.Sin(angle * (Mathf.PI / 180)) * radius + centerPoint.y;
+        tmp.z = centerPoint.z;
+        return tmp;
+    }
     public void InstantiateObject (GameObject NewTarget, Vector3 position, Quaternion rotation)
     {
         Vector3 pos = RandomCircle(position);
         ObInstance = Instantiate(NewTarget, pos, rotation, parent);
     }
 
+    public GameObject InstantiateRandom (GameObject toInstantiate, Vector3 centerPoint)
+    {
+        // Calcular a posição para instanciação
+        if (State.leftArmSelected)
+        {
+            Vector3 newPosition = OrbitPosition(centerPoint, radius, Random.Range(90f, 270f));
+            // Instanciar uma nova instância do objeto
+            GameObject newInstance = Instantiate(toInstantiate,parent) as GameObject;
+            if (newInstance)
+            {
+                newInstance.transform.position = newPosition;
+            }
+            return newInstance;
+        }
+        else
+        {
+            Vector3 newPosition = OrbitPosition(centerPoint, radius, Random.Range(-90f, 90f));
+            // Instanciar uma nova instância do objeto
+            GameObject newInstance = Instantiate(toInstantiate,parent) as GameObject;
+            if (newInstance)
+            {
+                newInstance.transform.position = newPosition;
+            }
+            return newInstance;
+        }       
+    }
     public void DestroyObject(GameObject oldShape)
     {
         Destroy(oldShape);

@@ -47,7 +47,8 @@ public class State_Targets : IState
         subState_index = 1;
 
         //Instantiate_target.instance.exName.text = "Target Reach";
-        Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
+        //Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
+        Instantiate_target.instance.InstantiateRandom(new_target, originPoint);
 
         if (State.leftArmSelected)
         {
@@ -155,7 +156,9 @@ public class State_Targets : IState
                         Instantiate_target.instance.mediumArea.SetActive(false);
                         Instantiate_target.instance.hardArea.SetActive(false);
 
-                        Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
+                        //Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
+
+                        Instantiate_target.instance.InstantiateRandom(new_target, originPoint);
                         Object.Destroy(hit.collider.gameObject);
                     }
                     else if (n_targets < State.maxReps && subState_index == 2) //Med Sub-state ----------------------------------
@@ -175,7 +178,9 @@ public class State_Targets : IState
                         Instantiate_target.instance.mediumArea.SetActive(true);
                         Instantiate_target.instance.hardArea.SetActive(false);
 
-                        Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
+                        //Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
+
+                        Instantiate_target.instance.InstantiateRandom(new_target, originPoint);
                         Object.Destroy(hit.collider.gameObject);
 
                     }
@@ -196,7 +201,8 @@ public class State_Targets : IState
                         Instantiate_target.instance.mediumArea.SetActive(false);
                         Instantiate_target.instance.hardArea.SetActive(true);
 
-                        Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
+                        //Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
+                        Instantiate_target.instance.InstantiateRandom(new_target, originPoint);
                         Object.Destroy(hit.collider.gameObject);
                     }
                     else if (n_targets < State.maxReps && subState_index == 4) // Exc Sub-state -----------------------------------
@@ -212,7 +218,8 @@ public class State_Targets : IState
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 4f;
 
-                        Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
+                        //Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
+                        Instantiate_target.instance.InstantiateRandom(new_target, originPoint);
                         Object.Destroy(hit.collider.gameObject);
                     }                    
                 }
@@ -250,7 +257,8 @@ public class State_Targets : IState
                 Instantiate_target.instance.mudouDeCor = false;
                 Instantiate_target.instance.CooldownTimer(2);
                 Object.Destroy(Instantiate_target.instance.ObInstance);
-                Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
+                //Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
+                Instantiate_target.instance.InstantiateRandom(new_target, originPoint);
 
                 if (subState_index > 1 && n_targets > 0)
                 {
