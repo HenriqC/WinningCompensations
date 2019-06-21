@@ -96,23 +96,23 @@ public class Instantiate_target : MonoBehaviour
         {
             Vector3 newPosition = OrbitPosition(centerPoint, radius, Random.Range(90f, 270f));
             // Instanciar uma nova instância do objeto
-            GameObject newInstance = Instantiate(toInstantiate,parent) as GameObject;
-            if (newInstance)
+            ObInstance = Instantiate(toInstantiate,parent) as GameObject;
+            if (ObInstance)
             {
-                newInstance.transform.position = newPosition;
+                ObInstance.transform.position = newPosition;
             }
-            return newInstance;
+            return ObInstance;
         }
         else
         {
             Vector3 newPosition = OrbitPosition(centerPoint, radius, Random.Range(-90f, 90f));
             // Instanciar uma nova instância do objeto
-            GameObject newInstance = Instantiate(toInstantiate,parent) as GameObject;
-            if (newInstance)
+            ObInstance = Instantiate(toInstantiate,parent) as GameObject;
+            if (ObInstance)
             {
-                newInstance.transform.position = newPosition;
+                ObInstance.transform.position = newPosition;
             }
-            return newInstance;
+            return ObInstance;
         }       
     }
     public void DestroyObject(GameObject oldShape)
