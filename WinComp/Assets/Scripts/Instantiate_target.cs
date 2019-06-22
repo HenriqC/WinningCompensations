@@ -8,12 +8,27 @@ public class Instantiate_target : MonoBehaviour
     public static Instantiate_target instance = null;
     public GameObject center;
     public GameObject ObInstance;
-    public float radius;    
-    
+    public Toggle manualDiff;
+    public float subState;
+    public float radius;
+
+    // Primeiro range Esq
+    public float minRange_L1;
+    public float maxRange_L1;
+    // Segundo range Esq
+    public float minRange_L2;
+    public float maxRange_L2;
+    // Primeiro range Dir
+    public float minRange_R1;
+    public float maxRange_R1;
+    // Segundo range Dir
+    public float minRange_R2;
+    public float maxRange_R2;
+
     public Transform parent;
+    public Text levelDiff;
     public Text exName;
     public Text avgTime;
-    public State_Targets radial_Data;
 
     public ColorChanger changeSpeed;
 
@@ -36,10 +51,17 @@ public class Instantiate_target : MonoBehaviour
 
     // -------- Grelha circular de amplitudes e diâmetros de dificuldade -------- //
     public GameObject circularGrid_Left;                                          //
-    public GameObject circularGrid_Right;                                          //
-    public GameObject easyArea;                                                   // 
-    public GameObject mediumArea;                                                 //
-    public GameObject hardArea;                                                   //
+    public GameObject circularGrid_Right;                                         //
+    public GameObject R_Area_1;                                                   // 
+    public GameObject R_Area_2;                                                   //
+    public GameObject R_Area_3;                                                   //
+    public GameObject R_Area_4;                                                   //
+    public GameObject R_Area_5;                                                   //
+    public GameObject L_Area_1;                                                   //
+    public GameObject L_Area_2;                                                   //
+    public GameObject L_Area_3;                                                   //
+    public GameObject L_Area_4;                                                   //
+    public GameObject L_Area_5;                                                   //
     public bool mudouDeCor;                                                       //
     // -------------------------------------------------------------------------- //   
     void Awake()
@@ -65,7 +87,8 @@ public class Instantiate_target : MonoBehaviour
             cooldownTimer = 0;
         }
     }
-    Vector3 RandomCircle(Vector3 center)
+
+    /*Vector3 RandomCircle(Vector3 center)
     {
         float ang = Random.value * 360;
         Vector3 pos;
@@ -73,9 +96,14 @@ public class Instantiate_target : MonoBehaviour
         pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
         pos.z = center.z;
         return pos;
-    }
+    }    
+    public void InstantiateObject (GameObject NewTarget, Vector3 position, Quaternion rotation)
+    {
+        Vector3 pos = RandomCircle(position);
+        ObInstance = Instantiate(NewTarget, pos, rotation, parent);
+    }*/
 
-    public Vector3 OrbitPosition (Vector3 centerPoint, float radius, float angle)
+    public Vector3 OrbitPosition(Vector3 centerPoint, float radius, float angle)
     {
         Vector3 tmp;
         tmp.x = Mathf.Cos(angle * (Mathf.PI / 180)) * radius + centerPoint.x;
@@ -83,35 +111,56 @@ public class Instantiate_target : MonoBehaviour
         tmp.z = centerPoint.z;
         return tmp;
     }
-    public void InstantiateObject (GameObject NewTarget, Vector3 position, Quaternion rotation)
-    {
-        Vector3 pos = RandomCircle(position);
-        ObInstance = Instantiate(NewTarget, pos, rotation, parent);
-    }
 
     public GameObject InstantiateRandom (GameObject toInstantiate, Vector3 centerPoint)
     {
         // Calcular a posição para instanciação
         if (State.leftArmSelected)
         {
-            Vector3 newPosition = OrbitPosition(centerPoint, radius, Random.Range(90f, 270f));
+            Vector3 newPosition_1 = OrbitPosition(centerPoint, radius, Random.Range(minRange_L1, maxRange_L1));
+            Vector3 newPosition_2 = OrbitPosition(centerPoint, radius, Random.Range(minRange_L2, maxRange_L2));
+
             // Instanciar uma nova instância do objeto
             ObInstance = Instantiate(toInstantiate,parent) as GameObject;
-            if (ObInstance)
+            int toggle = Random.Range(0, 2);
+
+            if (ObInstance && toggle == 0)
             {
-                ObInstance.transform.position = newPosition;
+                ObInstance.transform.position = newPosition_1;
             }
+            else if (ObInstance && toggle == 1)
+            {
+                ObInstance.transform.position = newPosition_2;
+            }            
+            Debug.LogWarning(minRange_L1);
+            Debug.LogWarning(maxRange_L1);
+            Debug.LogWarning(minRange_L2);
+            Debug.LogWarning(maxRange_L2);
             return ObInstance;
+            
         }
         else
         {
-            Vector3 newPosition = OrbitPosition(centerPoint, radius, Random.Range(-90f, 90f));
+            Vector3 newPosition_1 = OrbitPosition(centerPoint, radius, Random.Range(minRange_R1, maxRange_R1));
+            Vector3 newPosition_2 = OrbitPosition(centerPoint, radius, Random.Range(minRange_R2, maxRange_R2));
             // Instanciar uma nova instância do objeto
             ObInstance = Instantiate(toInstantiate,parent) as GameObject;
-            if (ObInstance)
+            int toggle = Random.Range(0, 2);
+
+            if (ObInstance && toggle == 0)
             {
-                ObInstance.transform.position = newPosition;
+                ObInstance.transform.position = newPosition_1;
+                Debug.Log(toggle);
             }
+            else if (ObInstance && toggle == 1)
+            {
+                ObInstance.transform.position = newPosition_2;
+                Debug.Log(toggle);
+            }
+            Debug.LogWarning(minRange_R1);
+            Debug.LogWarning(maxRange_R1);
+            Debug.LogWarning(minRange_R2);
+            Debug.LogWarning(maxRange_R2);
             return ObInstance;
         }       
     }

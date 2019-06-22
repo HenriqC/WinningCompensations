@@ -6,7 +6,7 @@ public class State_Targets : IState
 {
     public int n_targets;
     public bool nShapes;
-    public int subState_index;    
+    public float subState_index;    
     private GameObject ownerGameObject;
     private GameObject new_target;
     public float instantiateRadius;
@@ -44,7 +44,7 @@ public class State_Targets : IState
         State.exerciseName = "Target Reach";
 
         n_targets = 0;
-        subState_index = 1;
+        Instantiate_target.instance.subState = 1;
 
         //Instantiate_target.instance.exName.text = "Target Reach";
         //Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
@@ -54,14 +54,14 @@ public class State_Targets : IState
         {
             Instantiate_target.instance.circularGrid_Left.SetActive(true);
             //Instantiate_target.instance.circularGrid_Left.transform.position = Instantiate_target.instance.leftShoulder.transform.position;
+            Instantiate_target.instance.L_Area_1.SetActive(true);
         }
         else
         {
             Instantiate_target.instance.circularGrid_Right.SetActive(true);
             //Instantiate_target.instance.circularGrid_Right.transform.position = Instantiate_target.instance.rightShoulder.transform.position;
+            Instantiate_target.instance.R_Area_1.SetActive(true);
         }
-
-        Instantiate_target.instance.easyArea.SetActive(true);
 
         if (State.maxReps <= 0)
         {
@@ -102,7 +102,7 @@ public class State_Targets : IState
                     //Debug.Log(new_target);
                     //Debug.Log(originPoint);
                     //Debug.LogError(subState_index);
-                    Debug.Log(n_targets);
+                    //Debug.Log(n_targets);
                     n_targets++;                    
                     State.correctReps++;
                     State.tries++;
@@ -124,82 +124,161 @@ public class State_Targets : IState
                     }
 
                     // ------------------- Sub índices dos sub niveis de dificuldade ------------------- //
-                    if (n_targets <= (State.maxReps/4))
+
+                    if (!Instantiate_target.instance.manualDiff.isOn)
                     {
-                        subState_index = 1; //Poor                        
+                        if (n_targets <= (State.maxReps / 3))
+                        {
+                            Instantiate_target.instance.subState = 1;
+                            subState_index = Instantiate_target.instance.subState; // Poor
+                        }
+                        else if (n_targets > (State.maxReps / 3) && n_targets <= 2 * (State.maxReps / 3))
+                        {
+                            Instantiate_target.instance.subState = 2;
+                            subState_index = Instantiate_target.instance.subState; // Avg
+                        }
+                        else if (n_targets > 2 * (State.maxReps / 3) && n_targets <= (State.maxReps))
+                        {
+                            Instantiate_target.instance.subState = 3;
+                            subState_index = Instantiate_target.instance.subState; // Avg
+                        }
                     }
-                    else if (n_targets > (State.maxReps / 4) && n_targets <= (State.maxReps / 2))
+                    else
                     {
-                        subState_index = 2; // Mediocre                        
+                        subState_index = Instantiate_target.instance.subState;
                     }
-                    else if (n_targets > (State.maxReps / 2) && n_targets <= 3*(State.maxReps / 4))
-                    {
-                        subState_index = 3; // Avg
-                    }
-                    else if (n_targets >= 3 * (State.maxReps / 4) && n_targets < State.maxReps)
-                    {
-                        subState_index = 4; // Exc
-                    }
+                    
 
                     // ------------------- ---------------------------------------- ---------------------------------- //
 
                     if (n_targets < State.maxReps && subState_index == 1) // Poor Sub-state -------------------------------------
                     {
-                        Debug.LogError("Poor");
+                        Debug.LogError("Basic");
+                        Instantiate_target.instance.levelDiff.text = "1";
 
-                        instantiateRadius = 0.1f;                        
+                        // Raio que representa a distância ao centro
+                        instantiateRadius = 0.5f;
+                        // Targets no lado esquerdo
+                        Instantiate_target.instance.minRange_L1 = 165f;
+                        Instantiate_target.instance.maxRange_L1 = 180f;
+                        Instantiate_target.instance.minRange_L2 = 180f;
+                        Instantiate_target.instance.maxRange_L2 = 195f;
+                        //Targets no lado direito
+                        Instantiate_target.instance.minRange_R1 = 0f;
+                        Instantiate_target.instance.maxRange_R1 = 15f;
+                        Instantiate_target.instance.minRange_R2 = 0f;
+                        Instantiate_target.instance.maxRange_R2 = -15f;
+                        // ---------------------------------------------- //
                         //CognitiveSphereSpawner.instance.spawnStart_B = 1f;
-                        //CognitiveSphereSpawner.instance.spawnRate_B = 15f;
+                        //CognitiveSphereSpawner.instance.spawnRate_B = 15f;                        
 
                         Instantiate_target.instance.changeSpeed.speed = 0.4f;
-                        Instantiate_target.instance.easyArea.SetActive(true);
-                        Instantiate_target.instance.mediumArea.SetActive(false);
-                        Instantiate_target.instance.hardArea.SetActive(false);
+                        if (State.leftArmSelected)
+                        {
+                            Instantiate_target.instance.L_Area_1.SetActive(true);
+                            Instantiate_target.instance.L_Area_2.SetActive(false);
+                            Instantiate_target.instance.L_Area_3.SetActive(false);
+                            Instantiate_target.instance.L_Area_4.SetActive(false);
+                            Instantiate_target.instance.L_Area_5.SetActive(false);
+                        }
+                        else
+                        {
+                            Instantiate_target.instance.R_Area_1.SetActive(true);
+                            Instantiate_target.instance.R_Area_2.SetActive(false);
+                            Instantiate_target.instance.R_Area_3.SetActive(false);
+                            Instantiate_target.instance.R_Area_4.SetActive(false);
+                            Instantiate_target.instance.R_Area_5.SetActive(false);
+                        }
 
                         //Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
-
                         Instantiate_target.instance.InstantiateRandom(new_target, originPoint);
                         Object.Destroy(hit.collider.gameObject);
                     }
                     else if (n_targets < State.maxReps && subState_index == 2) //Med Sub-state ----------------------------------
                     {
-                        Debug.LogError("Mediocre");
+                        Debug.LogError("Poor");
+                        Instantiate_target.instance.levelDiff.text = "2";
 
-                        instantiateRadius = 0.3f;
-                        Instantiate_target.instance.changeSpeed.speed = 0.5f;
-
+                        // Raio que representa a distância ao centro
+                        instantiateRadius = 0.5f;
+                        // Targets no lado esquerdo
+                        Instantiate_target.instance.minRange_L1 = 120f;
+                        Instantiate_target.instance.maxRange_L1 = 150f;
+                        Instantiate_target.instance.minRange_L2 = 210f;
+                        Instantiate_target.instance.maxRange_L2 = 240f;
+                        //Targets no lado direito
+                        Instantiate_target.instance.minRange_R1 = 30f;
+                        Instantiate_target.instance.maxRange_R1 = 45f;
+                        Instantiate_target.instance.minRange_R2 = -30f;
+                        Instantiate_target.instance.maxRange_R2 = -45f;
+                        // ---------------------------------------------- //
                         //CognitiveSphereSpawner.instance.spawnStart_B = 1f;
-                        //CognitiveSphereSpawner.instance.spawnRate_B = 10f;
-
+                        //CognitiveSphereSpawner.instance.spawnRate_B = 10f;                        
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 8f;
 
-                        Instantiate_target.instance.easyArea.SetActive(false);
-                        Instantiate_target.instance.mediumArea.SetActive(true);
-                        Instantiate_target.instance.hardArea.SetActive(false);
+                        Instantiate_target.instance.changeSpeed.speed = 0.5f;
+                        if (State.leftArmSelected)
+                        {
+                            Instantiate_target.instance.L_Area_1.SetActive(false);
+                            Instantiate_target.instance.L_Area_2.SetActive(true);
+                            Instantiate_target.instance.L_Area_3.SetActive(false);
+                            Instantiate_target.instance.L_Area_4.SetActive(false);
+                            Instantiate_target.instance.L_Area_5.SetActive(false);
+                        }
+                        else
+                        {
+                            Instantiate_target.instance.R_Area_1.SetActive(false);
+                            Instantiate_target.instance.R_Area_2.SetActive(true);
+                            Instantiate_target.instance.R_Area_3.SetActive(false);
+                            Instantiate_target.instance.R_Area_4.SetActive(false);
+                            Instantiate_target.instance.R_Area_5.SetActive(false);
+                        }
 
                         //Instantiate_target.instance.InstantiateObject (new_target, originPoint, Quaternion.identity);
-
                         Instantiate_target.instance.InstantiateRandom(new_target, originPoint);
                         Object.Destroy(hit.collider.gameObject);
-
                     }
                     else if (n_targets < State.maxReps && subState_index == 3) //Avg Sub-state -----------------------------------
                     {
                         Debug.LogError("Avg");
+                        Instantiate_target.instance.levelDiff.text = "3";
 
-                        instantiateRadius = 0.4f;
-                        Instantiate_target.instance.changeSpeed.speed = 0.8f;
-
+                        // Raio que representa a distância ao centro
+                        instantiateRadius = 0.5f;
+                        // Targets no lado esquerdo
+                        Instantiate_target.instance.minRange_L1 = 90f;
+                        Instantiate_target.instance.maxRange_L1 = 120f;
+                        Instantiate_target.instance.minRange_L2 = 240f;
+                        Instantiate_target.instance.maxRange_L2 = 270f;
+                        //Targets no lado direito
+                        Instantiate_target.instance.minRange_R1 = 60f;
+                        Instantiate_target.instance.maxRange_R1 = 90f;
+                        Instantiate_target.instance.minRange_R2 = -60f;
+                        Instantiate_target.instance.maxRange_R2 = -90f;
+                        // ---------------------------------------------- //
                         //CognitiveSphereSpawner.instance.spawnStart_B = 1f;
-                        //CognitiveSphereSpawner.instance.spawnRate_B = 6f;
-
+                        //CognitiveSphereSpawner.instance.spawnRate_B = 6f;                       
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 6f;
 
-                        Instantiate_target.instance.easyArea.SetActive(false);
-                        Instantiate_target.instance.mediumArea.SetActive(false);
-                        Instantiate_target.instance.hardArea.SetActive(true);
+                        Instantiate_target.instance.changeSpeed.speed = 0.8f;
+                        if (State.leftArmSelected)
+                        {
+                            Instantiate_target.instance.L_Area_1.SetActive(false);
+                            Instantiate_target.instance.L_Area_2.SetActive(false);
+                            Instantiate_target.instance.L_Area_3.SetActive(true);
+                            Instantiate_target.instance.L_Area_4.SetActive(false);
+                            Instantiate_target.instance.L_Area_5.SetActive(false);
+                        }
+                        else
+                        {
+                            Instantiate_target.instance.R_Area_1.SetActive(false);
+                            Instantiate_target.instance.R_Area_2.SetActive(false);
+                            Instantiate_target.instance.R_Area_3.SetActive(true);
+                            Instantiate_target.instance.R_Area_4.SetActive(false);
+                            Instantiate_target.instance.R_Area_5.SetActive(false);
+                        }                       
 
                         //Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
                         Instantiate_target.instance.InstantiateRandom(new_target, originPoint);
@@ -208,13 +287,29 @@ public class State_Targets : IState
                     else if (n_targets < State.maxReps && subState_index == 4) // Exc Sub-state -----------------------------------
                     {
                         Debug.LogError("Exc");
+                        Instantiate_target.instance.levelDiff.text = "4";
 
-                        instantiateRadius = 0.45f;
-                        Instantiate_target.instance.changeSpeed.speed = 1f;
-
+                        instantiateRadius = 0.5f;
                         //CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         //CognitiveSphereSpawner.instance.spawnRate_B = 5f;
 
+                        Instantiate_target.instance.changeSpeed.speed = 1f;
+                        if (State.leftArmSelected)
+                        {
+                            Instantiate_target.instance.L_Area_1.SetActive(false);
+                            Instantiate_target.instance.L_Area_2.SetActive(false);
+                            Instantiate_target.instance.L_Area_3.SetActive(false);
+                            Instantiate_target.instance.L_Area_4.SetActive(true);
+                            Instantiate_target.instance.L_Area_5.SetActive(false);
+                        }
+                        else
+                        {
+                            Instantiate_target.instance.R_Area_1.SetActive(false);
+                            Instantiate_target.instance.R_Area_2.SetActive(false);
+                            Instantiate_target.instance.R_Area_3.SetActive(false);
+                            Instantiate_target.instance.R_Area_4.SetActive(true);
+                            Instantiate_target.instance.R_Area_5.SetActive(false);
+                        }
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 4f;
 
@@ -279,9 +374,21 @@ public class State_Targets : IState
         Instantiate_target.instance.DestroyObject(new_target);
         Instantiate_target.instance.circularGrid_Left.SetActive(false);
         Instantiate_target.instance.circularGrid_Right.SetActive(false);
-        Instantiate_target.instance.easyArea.SetActive(false);
-        Instantiate_target.instance.mediumArea.SetActive(false);
-        Instantiate_target.instance.hardArea.SetActive(false);
+
+        // Desativação dos semiperímetros de dificuldade
+        Instantiate_target.instance.L_Area_1.SetActive(false);
+        Instantiate_target.instance.L_Area_2.SetActive(false);
+        Instantiate_target.instance.L_Area_3.SetActive(false);
+        Instantiate_target.instance.L_Area_4.SetActive(false);
+        Instantiate_target.instance.L_Area_5.SetActive(false);
+
+        Instantiate_target.instance.R_Area_1.SetActive(false);
+        Instantiate_target.instance.R_Area_2.SetActive(false);
+        Instantiate_target.instance.R_Area_3.SetActive(false);
+        Instantiate_target.instance.R_Area_4.SetActive(false);
+        Instantiate_target.instance.R_Area_5.SetActive(false);
+
+        // Variáveis de mudança de exercício
         DDA_Exercise_Grid.instance.nTargets = false;
         DDA_Exercise_Grid.instance.nShapes = true;
     }    
