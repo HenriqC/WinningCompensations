@@ -9,6 +9,14 @@ public class RangeAdjustment : MonoBehaviour
     {
         Instantiate_target.instance.subState = range;
     }
+    public void SetRadius(float Radius)
+    {
+        Instantiate_target.instance.manualRadius = Radius;
+    }
+    public void SetSpeed (float Speed)
+    {
+        Instantiate_target.instance.manualSpeed = Speed;
+    }
 
     public void ManualOnOff(bool isToggled)
     {
@@ -21,4 +29,6 @@ public class RangeAdjustment : MonoBehaviour
             Instantiate_target.instance.manualDiff.isOn = false;
         }
     }
+
+    
 }

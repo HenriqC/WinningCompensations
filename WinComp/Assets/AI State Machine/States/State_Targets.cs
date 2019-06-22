@@ -131,21 +131,29 @@ public class State_Targets : IState
                         {
                             Instantiate_target.instance.subState = 1;
                             subState_index = Instantiate_target.instance.subState; // Poor
+                            instantiateRadius = 0.2f;
+                            Instantiate_target.instance.changeSpeed.speed = 0.4f;
                         }
                         else if (n_targets > (State.maxReps / 3) && n_targets <= 2 * (State.maxReps / 3))
                         {
                             Instantiate_target.instance.subState = 2;
                             subState_index = Instantiate_target.instance.subState; // Avg
+                            instantiateRadius = 0.3f;
+                            Instantiate_target.instance.changeSpeed.speed = 0.5f;
                         }
                         else if (n_targets > 2 * (State.maxReps / 3) && n_targets <= (State.maxReps))
                         {
                             Instantiate_target.instance.subState = 3;
                             subState_index = Instantiate_target.instance.subState; // Avg
+                            instantiateRadius = 0.5f;
+                            Instantiate_target.instance.changeSpeed.speed = 0.7f;
                         }
                     }
                     else
                     {
                         subState_index = Instantiate_target.instance.subState;
+                        instantiateRadius = Instantiate_target.instance.manualRadius;
+                        Instantiate_target.instance.changeSpeed.speed = Instantiate_target.instance.manualSpeed;
                     }
                     
 
@@ -155,9 +163,7 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Basic");
                         Instantiate_target.instance.levelDiff.text = "1";
-
-                        // Raio que representa a distância ao centro
-                        instantiateRadius = 0.5f;
+                        
                         // Targets no lado esquerdo
                         Instantiate_target.instance.minRange_L1 = 165f;
                         Instantiate_target.instance.maxRange_L1 = 180f;
@@ -171,8 +177,6 @@ public class State_Targets : IState
                         // ---------------------------------------------- //
                         //CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         //CognitiveSphereSpawner.instance.spawnRate_B = 15f;                        
-
-                        Instantiate_target.instance.changeSpeed.speed = 0.4f;
                         if (State.leftArmSelected)
                         {
                             Instantiate_target.instance.L_Area_1.SetActive(true);
@@ -199,8 +203,6 @@ public class State_Targets : IState
                         Debug.LogError("Poor");
                         Instantiate_target.instance.levelDiff.text = "2";
 
-                        // Raio que representa a distância ao centro
-                        instantiateRadius = 0.5f;
                         // Targets no lado esquerdo
                         Instantiate_target.instance.minRange_L1 = 120f;
                         Instantiate_target.instance.maxRange_L1 = 150f;
@@ -216,8 +218,6 @@ public class State_Targets : IState
                         //CognitiveSphereSpawner.instance.spawnRate_B = 10f;                        
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
                         CognitiveSphereSpawner.instance.spawnRate_P = 8f;
-
-                        Instantiate_target.instance.changeSpeed.speed = 0.5f;
                         if (State.leftArmSelected)
                         {
                             Instantiate_target.instance.L_Area_1.SetActive(false);
@@ -244,8 +244,6 @@ public class State_Targets : IState
                         Debug.LogError("Avg");
                         Instantiate_target.instance.levelDiff.text = "3";
 
-                        // Raio que representa a distância ao centro
-                        instantiateRadius = 0.5f;
                         // Targets no lado esquerdo
                         Instantiate_target.instance.minRange_L1 = 90f;
                         Instantiate_target.instance.maxRange_L1 = 120f;
@@ -289,11 +287,8 @@ public class State_Targets : IState
                         Debug.LogError("Exc");
                         Instantiate_target.instance.levelDiff.text = "4";
 
-                        instantiateRadius = 0.5f;
                         //CognitiveSphereSpawner.instance.spawnStart_B = 1f;
-                        //CognitiveSphereSpawner.instance.spawnRate_B = 5f;
-
-                        Instantiate_target.instance.changeSpeed.speed = 1f;
+                        //CognitiveSphereSpawner.instance.spawnRate_B = 5f;                       
                         if (State.leftArmSelected)
                         {
                             Instantiate_target.instance.L_Area_1.SetActive(false);

@@ -10,6 +10,8 @@ public class Instantiate_target : MonoBehaviour
     public GameObject ObInstance;
     public Toggle manualDiff;
     public float subState;
+    public float manualRadius;
+    public float manualSpeed;
     public float radius;
 
     // Primeiro range Esq
