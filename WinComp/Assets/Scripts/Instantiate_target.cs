@@ -6,13 +6,15 @@ using UnityEngine.UI;
 public class Instantiate_target : MonoBehaviour
 {
     public static Instantiate_target instance = null;
-    public GameObject center;
+    public Vector3 cogCenter;
     public GameObject ObInstance;
     public Toggle manualDiff;
     public float subState;
     public float manualRadius;
     public float manualSpeed;
     public float radius;
+
+    public Vector3 targetScale = new Vector3 (0.125f, 0.125f, 0.125f);
 
     // Primeiro range Esq
     public float minRange_L1;
@@ -34,14 +36,6 @@ public class Instantiate_target : MonoBehaviour
 
     public ColorChanger changeSpeed;
 
-    // -------- Variáveis de instanciação dos alvos cognitivos --------//
-    public GameObject cognitTarget;                                    //
-    public Transform cogPosition;                                      //
-    public bool stopSpawning = false;                                  //
-    public float spawnStart;                                           //
-    public float spawnRate;                                            //
-    // --------------------------------------------------------------- //
-
     // -------- Variáveis das barras radiais --------//
     public float completion;                         //
     public float correctness;                        //
@@ -51,7 +45,7 @@ public class Instantiate_target : MonoBehaviour
 
     public AudioSource Source;
 
-    // -------- Grelha circular de amplitudes e diâmetros de dificuldade -------- //
+    // -------- Grelha circular de amplitudes e raios de dificuldade -------- //
     public GameObject circularGrid_Left;                                          //
     public GameObject circularGrid_Right;                                         //
     public GameObject R_Area_1;                                                   // 
@@ -124,6 +118,7 @@ public class Instantiate_target : MonoBehaviour
 
             // Instanciar uma nova instância do objeto
             ObInstance = Instantiate(toInstantiate,parent) as GameObject;
+            ObInstance.transform.localScale = targetScale;
             int toggle = Random.Range(0, 2);
 
             if (ObInstance && toggle == 0)
@@ -133,11 +128,7 @@ public class Instantiate_target : MonoBehaviour
             else if (ObInstance && toggle == 1)
             {
                 ObInstance.transform.position = newPosition_2;
-            }            
-            Debug.LogWarning(minRange_L1);
-            Debug.LogWarning(maxRange_L1);
-            Debug.LogWarning(minRange_L2);
-            Debug.LogWarning(maxRange_L2);
+            }
             return ObInstance;
             
         }
@@ -147,6 +138,7 @@ public class Instantiate_target : MonoBehaviour
             Vector3 newPosition_2 = OrbitPosition(centerPoint, radius, Random.Range(minRange_R2, maxRange_R2));
             // Instanciar uma nova instância do objeto
             ObInstance = Instantiate(toInstantiate,parent) as GameObject;
+            ObInstance.transform.localScale = targetScale;
             int toggle = Random.Range(0, 2);
 
             if (ObInstance && toggle == 0)
@@ -159,10 +151,6 @@ public class Instantiate_target : MonoBehaviour
                 ObInstance.transform.position = newPosition_2;
                 Debug.Log(toggle);
             }
-            Debug.LogWarning(minRange_R1);
-            Debug.LogWarning(maxRange_R1);
-            Debug.LogWarning(minRange_R2);
-            Debug.LogWarning(maxRange_R2);
             return ObInstance;
         }       
     }

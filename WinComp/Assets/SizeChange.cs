@@ -9,9 +9,5 @@ public class SizeChange : MonoBehaviour
     {
         
     }
-    public void AdjustSize (Slider S)
-    {
-        Instantiate_target.instance.ObInstance.transform.localScale = new Vector3(S.value, S.value, S.value);
-        Debug.Log("funcionou");
-    }
+    
 }

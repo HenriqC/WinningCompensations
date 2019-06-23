@@ -44,7 +44,7 @@ public class State_Shapes : IState
 
     public void Enter()
     {
-        State.exerciseName = "Shape fill";
+        State.exerciseName = "Shape Fill";
         //CognitiveSphereSpawner.instance.stopSpawning_B = true;
         CognitiveSphereSpawner.instance.stopSpawning_P = true;
         var remTargets = GameObject.FindGameObjectsWithTag("TargetCollider");
