@@ -81,8 +81,7 @@ public class State_Shapes : IState
         {
             State.maxReps = 20;
         }
-        //spawnRadius = 30;
-        //personal_space = 2;
+        
     }
 
     public void Execute()
@@ -92,17 +91,23 @@ public class State_Shapes : IState
         //originPoint = ownerGameObject.transform.position;
         
         if (State.isTherapyOnGoing)
-        {             
+        {
+            TargetOrderSet.instance.SetOrder();
             if (Physics.Raycast(landingRay, out hit))
             {                
-                if (hit.collider.tag == this.tagToLookFor)
+                if (hit.collider.tag == this.tagToLookFor && hit.collider.gameObject.GetComponent<Renderer>().material.color == Color.blue)
                 {
 
                     //Debug.Log("colidiu");
                     //Debug.Log(new_shape);
                     //Debug.Log(originPoint);
                     //Debug.LogError(subState_index);                   
-                    hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.green;                }
+                    hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.green;
+                    if(TargetOrderSet.instance.orderFlag < TargetOrderSet.instance.targetChildren.Length-1)
+                    {
+                        TargetOrderSet.instance.orderFlag++;
+                    }                        
+                }
                 
                 if (hit.collider.tag == "ExerciseCollider_0")
                 {           
