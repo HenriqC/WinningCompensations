@@ -73,9 +73,8 @@ public class State_Shapes : IState
         subState_index = 1;
         new_shape[0].SetActive(true);
         currentShape = this.new_shape[0];
-
-      //originPoint = ownerGameObject.transform.position;
-      //Instantiate_target.instance.InstantiateObject(new_shape[0], originPoint, Quaternion.identity);
+        TargetOrderSet.instance.CreateArray(currentShape);
+        TargetOrderSet.instance.SetOrder();
 
         if (State.maxReps <= 0)
         {
@@ -92,12 +91,10 @@ public class State_Shapes : IState
         
         if (State.isTherapyOnGoing)
         {
-            TargetOrderSet.instance.SetOrder();
             if (Physics.Raycast(landingRay, out hit))
             {                
                 if (hit.collider.tag == this.tagToLookFor && hit.collider.gameObject.GetComponent<Renderer>().material.color == Color.blue)
                 {
-
                     //Debug.Log("colidiu");
                     //Debug.Log(new_shape);
                     //Debug.Log(originPoint);
@@ -106,14 +103,16 @@ public class State_Shapes : IState
                     if(TargetOrderSet.instance.orderFlag < TargetOrderSet.instance.targetChildren.Length-1)
                     {
                         TargetOrderSet.instance.orderFlag++;
+                        TargetOrderSet.instance.SetOrder();
                     }                        
                 }
                 
-                if (hit.collider.tag == "ExerciseCollider_0")
-                {           
+                if (hit.collider.tag == "ExerciseCollider_0" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                {
                     shapeComplete = true;
                     subState_index += 1;
                     this.new_shape[0].SetActive(false);
+
                     if (subState_index == 1) //Poor Sub-state
                     {
                         this.new_shape[0].SetActive(true);
@@ -142,7 +141,7 @@ public class State_Shapes : IState
                     else if (subState_index == 6) //Exc Sub-state
                     {
                         this.new_shape[5].SetActive(true);
-                        currentShape = this.new_shape[4];
+                        currentShape = this.new_shape[5];
                     }
 
                     //this.new_shape[subState_index - 1].SetActive(true);
@@ -150,7 +149,7 @@ public class State_Shapes : IState
                     //Debug.Log(subState_index);
                     //Debug.Log(shapeComplete);                    
                 }
-                else if (hit.collider.tag == "ExerciseCollider_1")
+                else if (hit.collider.tag == "ExerciseCollider_1" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
                     shapeComplete = true;
                     subState_index += 1;
@@ -191,11 +190,11 @@ public class State_Shapes : IState
                     //Debug.Log(subState_index);
                     //Debug.Log(shapeComplete);                    
                 }
-                else if (hit.collider.tag == "ExerciseCollider_2")
+                else if (hit.collider.tag == "ExerciseCollider_2" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
                     shapeComplete = true;
                     subState_index += 1;
-                    
+
                     this.new_shape[2].SetActive(false);
                     if (subState_index == 1) //Poor Sub-state
                     {
@@ -232,11 +231,11 @@ public class State_Shapes : IState
                     //Debug.Log(subState_index);
                     //Debug.Log(shapeComplete);                    
                 }
-                else if (hit.collider.tag == "ExerciseCollider_3")
+                else if (hit.collider.tag == "ExerciseCollider_3" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
                     shapeComplete = true;
                     subState_index += 1;
-                    
+
                     this.new_shape[3].SetActive(false);
                     if (subState_index == 1) //Poor Sub-state
                     {
@@ -273,11 +272,11 @@ public class State_Shapes : IState
                     //Debug.Log(subState_index);
                     //Debug.Log(shapeComplete);  
                 }
-                else if (hit.collider.tag == "ExerciseCollider_4" )
+                else if (hit.collider.tag == "ExerciseCollider_4" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
                     shapeComplete = true;
                     subState_index += 1;
-                    
+
                     this.new_shape[4].SetActive(false);
                     if (subState_index == 1) //Poor Sub-state
                     {
@@ -314,7 +313,7 @@ public class State_Shapes : IState
                     //Debug.Log(subState_index);
                     //Debug.Log(shapeComplete);
                 }
-                else if (hit.collider.tag == "ExerciseCollider_5")
+                else if (hit.collider.tag == "ExerciseCollider_5" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length -1)
                 {
                     subState_index += 1;
                     currentShape.SetActive(false);
@@ -327,6 +326,8 @@ public class State_Shapes : IState
             }
             if (shapeComplete == true)
             {
+                TargetOrderSet.instance.CreateArray(currentShape);
+                TargetOrderSet.instance.SetOrder();
                 Instantiate_target.instance.PlayClip();
                 State.correctReps+=1;
                 State.tries+=1;
@@ -368,35 +369,48 @@ public class State_Shapes : IState
                     subState_index -= 1;
                     currentShape.SetActive(false);
 
+
                     if (subState_index == 1)
                     {
                         this.new_shape[0].SetActive(true);
                         currentShape = this.new_shape[0];
+                        TargetOrderSet.instance.CreateArray(currentShape);
+                        TargetOrderSet.instance.SetOrder();
                     }
                     else if (subState_index == 2)
                     {
                         this.new_shape[1].SetActive(true);
                         currentShape = this.new_shape[1];
+                        TargetOrderSet.instance.CreateArray(currentShape);
+                        TargetOrderSet.instance.SetOrder();
                     }
                     else if (subState_index == 3)
                     {
                         this.new_shape[2].SetActive(true);
                         currentShape = this.new_shape[2];
+                        TargetOrderSet.instance.CreateArray(currentShape);
+                        TargetOrderSet.instance.SetOrder();
                     }
                     else if (subState_index == 4)
                     {
                         this.new_shape[3].SetActive(true);
                         currentShape = this.new_shape[3];
+                        TargetOrderSet.instance.CreateArray(currentShape);
+                        TargetOrderSet.instance.SetOrder();
                     }
                     else if (subState_index == 5)
                     {
                         this.new_shape[4].SetActive(true);
                         currentShape = this.new_shape[4];
+                        TargetOrderSet.instance.CreateArray(currentShape);
+                        TargetOrderSet.instance.SetOrder();
                     }
                     else if (subState_index == 6)
                     {
                         this.new_shape[5].SetActive(true);
                         currentShape = this.new_shape[5];
+                        TargetOrderSet.instance.CreateArray(currentShape);
+                        TargetOrderSet.instance.SetOrder();
                     }
                 }
                 if (State.correctReps > 0)

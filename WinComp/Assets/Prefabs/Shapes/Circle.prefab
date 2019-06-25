@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4074880378122831222}
+  - component: {fileID: 4265662820758192850}
+  - component: {fileID: 5058593372311781522}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -47,6 +49,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4265662820758192850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2759212139052523852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2fceb709fb88f44959d22d2b87a523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetChildren: []
+  orderFlag: 0
+--- !u!114 &5058593372311781522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2759212139052523852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c6f8f622574d1e4499b0752cc60b3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 2759212139052523852}
 --- !u!1001 &1100641948218641254
 PrefabInstance:
   m_ObjectHideFlags: 0

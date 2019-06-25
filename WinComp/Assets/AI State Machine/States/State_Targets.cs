@@ -370,7 +370,7 @@ public class State_Targets : IState
     {
         State.correctReps = 0;
         State.tries = 0;
-        Instantiate_target.instance.DestroyObject(new_target);
+        Instantiate_target.instance.DestroyObject(Instantiate_target.instance.ObInstance);
         Instantiate_target.instance.circularGrid_Left.SetActive(false);
         Instantiate_target.instance.circularGrid_Right.SetActive(false);
 
