@@ -326,6 +326,7 @@ public class State_Shapes : IState
             }
             if (shapeComplete == true)
             {
+                poor_count = 0;
                 TargetOrderSet.instance.CreateArray(currentShape);
                 TargetOrderSet.instance.SetOrder();
                 Instantiate_target.instance.PlayClip();
@@ -351,68 +352,76 @@ public class State_Shapes : IState
             }
             // Caso seja detetada uma compensação o nível é reduzido de novo
             if (State.compensationInCurrentRep && Instantiate_target.instance.cooldownTimer == 0)
-            {                
-                if (currentShape == this.new_shape[0])
+            {
+                State.compensationInCurrentRep = false;
+                poor_count += 1;
+                Instantiate_target.instance.CooldownTimer(5);
+                Debug.Log(poor_count);
+
+                if (poor_count == 3)
                 {
-                    poor_count += 1;
-                    if (poor_count == 3)
+                    if (currentShape == this.new_shape[0])
                     {
+                        poor_count = 0;
                         desce = true;
                         Exit();
                     }
-                }
-                
-                State.compensationInCurrentRep = false;
-                Instantiate_target.instance.CooldownTimer(5);
-                if (subState_index > 1)
-                {
-                    subState_index -= 1;
-                    currentShape.SetActive(false);
+                    else if (subState_index > 1)
+                    {
+                        subState_index -= 1;
+                        currentShape.SetActive(false);
+                        if (subState_index == 1)
+                        {
+                            this.new_shape[0].SetActive(true);
+                            currentShape = this.new_shape[0];
+                            TargetOrderSet.instance.CreateArray(currentShape);
+                            TargetOrderSet.instance.SetOrder();
+                            poor_count = 0;
+                        }
+                        else if (subState_index == 2)
+                        {
+                            this.new_shape[1].SetActive(true);
+                            currentShape = this.new_shape[1];
+                            TargetOrderSet.instance.CreateArray(currentShape);
+                            TargetOrderSet.instance.SetOrder();
+                            poor_count = 0;
+                        }
+                        else if (subState_index == 3)
+                        {
+                            this.new_shape[2].SetActive(true);
+                            currentShape = this.new_shape[2];
+                            TargetOrderSet.instance.CreateArray(currentShape);
+                            TargetOrderSet.instance.SetOrder();
+                            poor_count = 0;
+                        }
+                        else if (subState_index == 4)
+                        {
+                            this.new_shape[3].SetActive(true);
+                            currentShape = this.new_shape[3];
+                            TargetOrderSet.instance.CreateArray(currentShape);
+                            TargetOrderSet.instance.SetOrder();
+                            poor_count = 0;
+                        }
+                        else if (subState_index == 5)
+                        {
+                            this.new_shape[4].SetActive(true);
+                            currentShape = this.new_shape[4];
+                            TargetOrderSet.instance.CreateArray(currentShape);
+                            TargetOrderSet.instance.SetOrder();
+                            poor_count = 0;
+                        }
+                        else if (subState_index == 6)
+                        {
+                            this.new_shape[5].SetActive(true);
+                            currentShape = this.new_shape[5];
+                            TargetOrderSet.instance.CreateArray(currentShape);
+                            TargetOrderSet.instance.SetOrder();
+                            poor_count = 0;
 
-
-                    if (subState_index == 1)
-                    {
-                        this.new_shape[0].SetActive(true);
-                        currentShape = this.new_shape[0];
-                        TargetOrderSet.instance.CreateArray(currentShape);
-                        TargetOrderSet.instance.SetOrder();
-                    }
-                    else if (subState_index == 2)
-                    {
-                        this.new_shape[1].SetActive(true);
-                        currentShape = this.new_shape[1];
-                        TargetOrderSet.instance.CreateArray(currentShape);
-                        TargetOrderSet.instance.SetOrder();
-                    }
-                    else if (subState_index == 3)
-                    {
-                        this.new_shape[2].SetActive(true);
-                        currentShape = this.new_shape[2];
-                        TargetOrderSet.instance.CreateArray(currentShape);
-                        TargetOrderSet.instance.SetOrder();
-                    }
-                    else if (subState_index == 4)
-                    {
-                        this.new_shape[3].SetActive(true);
-                        currentShape = this.new_shape[3];
-                        TargetOrderSet.instance.CreateArray(currentShape);
-                        TargetOrderSet.instance.SetOrder();
-                    }
-                    else if (subState_index == 5)
-                    {
-                        this.new_shape[4].SetActive(true);
-                        currentShape = this.new_shape[4];
-                        TargetOrderSet.instance.CreateArray(currentShape);
-                        TargetOrderSet.instance.SetOrder();
-                    }
-                    else if (subState_index == 6)
-                    {
-                        this.new_shape[5].SetActive(true);
-                        currentShape = this.new_shape[5];
-                        TargetOrderSet.instance.CreateArray(currentShape);
-                        TargetOrderSet.instance.SetOrder();
+                        }
                     }
                 }
+
                 if (State.correctReps > 0)
                 {
                     State.correctReps -= 1;
