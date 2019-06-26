@@ -8,7 +8,9 @@ public class Instantiate_target : MonoBehaviour
     public static Instantiate_target instance = null;
     public Vector3 cogCenter;
     public GameObject ObInstance;
-    public Toggle manualDiff;
+    public Toggle manualDiff;    
+    public Toggle manualDiff_Shapes;
+    public float compCount;
     public float subState;
     public float manualRadius;
     public float manualSpeed;
