@@ -21,7 +21,8 @@ public class State_Shapes : IState
     private bool shapeComplete;
     private GameObject currentShape;
     private float timer = 5f;
-    private int poor_count;
+    private float poor_count;
+    private float poor_countMax;
     private bool sobe;
     private bool desce;
 
@@ -75,6 +76,7 @@ public class State_Shapes : IState
         currentShape = this.new_shape[0];
         TargetOrderSet.instance.CreateArray(currentShape);
         TargetOrderSet.instance.SetOrder();
+        poor_countMax = 4;
 
         if (State.maxReps <= 0)
         {
@@ -104,7 +106,16 @@ public class State_Shapes : IState
                     {
                         TargetOrderSet.instance.orderFlag++;
                         TargetOrderSet.instance.SetOrder();
-                    }                        
+                    }
+                    if (Instantiate_target.instance.manualDiff_Shapes.isOn)
+                    {                        
+                        poor_countMax = Instantiate_target.instance.maxComp;
+                    }
+                    else
+                    {
+                        poor_countMax = 4f;
+                    }
+                    poor_count = Instantiate_target.instance.compCount; // Se der merda, é por causa desta substituição. Reverter.
                 }
                 
                 if (hit.collider.tag == "ExerciseCollider_0" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
@@ -326,6 +337,8 @@ public class State_Shapes : IState
             }
             if (shapeComplete == true)
             {
+                Instantiate_target.instance.compCount = 0;
+                Debug.LogWarning(poor_count);
                 TargetOrderSet.instance.CreateArray(currentShape);
                 TargetOrderSet.instance.SetOrder();
                 Instantiate_target.instance.PlayClip();
@@ -351,68 +364,74 @@ public class State_Shapes : IState
             }
             // Caso seja detetada uma compensação o nível é reduzido de novo
             if (State.compensationInCurrentRep && Instantiate_target.instance.cooldownTimer == 0)
-            {                
-                if (currentShape == this.new_shape[0])
-                {
-                    poor_count += 1;
-                    if (poor_count == 3)
+            {
+                Debug.LogWarning(poor_count);
+                Instantiate_target.instance.compCount += 1;
+                Debug.LogWarning(poor_count);
+                State.compensationInCurrentRep = false;                
+                Instantiate_target.instance.CooldownTimer(5);
+                
+                if (Instantiate_target.instance.compCount == poor_countMax)
+                {                    
+                    if (currentShape == this.new_shape[0])
                     {
+                        Instantiate_target.instance.compCount = 0;
                         desce = true;
                         Exit();
                     }
+                    else
+                    {
+                        if (subState_index > 1)
+                        {
+                            Instantiate_target.instance.compCount = 0;
+                            subState_index -= 1;
+                            currentShape.SetActive(false);
+                            if (subState_index == 1)
+                            {
+                                this.new_shape[0].SetActive(true);
+                                currentShape = this.new_shape[0];
+                                TargetOrderSet.instance.CreateArray(currentShape);
+                                TargetOrderSet.instance.SetOrder();
+                            }
+                            else if (subState_index == 2)
+                            {
+                                this.new_shape[1].SetActive(true);
+                                currentShape = this.new_shape[1];
+                                TargetOrderSet.instance.CreateArray(currentShape);
+                                TargetOrderSet.instance.SetOrder();
+                            }
+                            else if (subState_index == 3)
+                            {
+                                this.new_shape[2].SetActive(true);
+                                currentShape = this.new_shape[2];
+                                TargetOrderSet.instance.CreateArray(currentShape);
+                                TargetOrderSet.instance.SetOrder();
+                            }
+                            else if (subState_index == 4)
+                            {
+                                this.new_shape[3].SetActive(true);
+                                currentShape = this.new_shape[3];
+                                TargetOrderSet.instance.CreateArray(currentShape);
+                                TargetOrderSet.instance.SetOrder();
+                            }
+                            else if (subState_index == 5)
+                            {
+                                this.new_shape[4].SetActive(true);
+                                currentShape = this.new_shape[4];
+                                TargetOrderSet.instance.CreateArray(currentShape);
+                                TargetOrderSet.instance.SetOrder();
+                            }
+                            else if (subState_index == 6)
+                            {
+                                this.new_shape[5].SetActive(true);
+                                currentShape = this.new_shape[5];
+                                TargetOrderSet.instance.CreateArray(currentShape);
+                                TargetOrderSet.instance.SetOrder();
+                            }
+                        }
+                    }
                 }
                 
-                State.compensationInCurrentRep = false;
-                Instantiate_target.instance.CooldownTimer(5);
-                if (subState_index > 1)
-                {
-                    subState_index -= 1;
-                    currentShape.SetActive(false);
-
-
-                    if (subState_index == 1)
-                    {
-                        this.new_shape[0].SetActive(true);
-                        currentShape = this.new_shape[0];
-                        TargetOrderSet.instance.CreateArray(currentShape);
-                        TargetOrderSet.instance.SetOrder();
-                    }
-                    else if (subState_index == 2)
-                    {
-                        this.new_shape[1].SetActive(true);
-                        currentShape = this.new_shape[1];
-                        TargetOrderSet.instance.CreateArray(currentShape);
-                        TargetOrderSet.instance.SetOrder();
-                    }
-                    else if (subState_index == 3)
-                    {
-                        this.new_shape[2].SetActive(true);
-                        currentShape = this.new_shape[2];
-                        TargetOrderSet.instance.CreateArray(currentShape);
-                        TargetOrderSet.instance.SetOrder();
-                    }
-                    else if (subState_index == 4)
-                    {
-                        this.new_shape[3].SetActive(true);
-                        currentShape = this.new_shape[3];
-                        TargetOrderSet.instance.CreateArray(currentShape);
-                        TargetOrderSet.instance.SetOrder();
-                    }
-                    else if (subState_index == 5)
-                    {
-                        this.new_shape[4].SetActive(true);
-                        currentShape = this.new_shape[4];
-                        TargetOrderSet.instance.CreateArray(currentShape);
-                        TargetOrderSet.instance.SetOrder();
-                    }
-                    else if (subState_index == 6)
-                    {
-                        this.new_shape[5].SetActive(true);
-                        currentShape = this.new_shape[5];
-                        TargetOrderSet.instance.CreateArray(currentShape);
-                        TargetOrderSet.instance.SetOrder();
-                    }
-                }
                 if (State.correctReps > 0)
                 {
                     State.correctReps -= 1;
