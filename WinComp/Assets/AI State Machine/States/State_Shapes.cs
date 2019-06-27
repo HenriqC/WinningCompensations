@@ -21,7 +21,6 @@ public class State_Shapes : IState
     private bool shapeComplete;
     private GameObject currentShape;
     private float timer = 5f;
-    private float poor_count;
     private float poor_countMax;
     private bool sobe;
     private bool desce;
@@ -45,6 +44,7 @@ public class State_Shapes : IState
 
     public void Enter()
     {
+
         State.exerciseName = "Shape Fill";
         //CognitiveSphereSpawner.instance.stopSpawning_B = true;
         CognitiveSphereSpawner.instance.stopSpawning_P = true;
@@ -77,22 +77,13 @@ public class State_Shapes : IState
         TargetOrderSet.instance.CreateArray(currentShape);
         TargetOrderSet.instance.SetOrder();
         poor_countMax = 4;
-
-        if (!Instantiate_target.instance.manualDiff_Shapes.isOn)
-        {
-            poorCount_max = 3;
-        }
-        else
-        {
-            poorCount_max = Instantiate_target.instance.compCount;
-        }
-        poor_count = 0;
+        Instantiate_target.instance.compCount = 0;
 
         if (State.maxReps <= 0)
         {
             State.maxReps = 20;
         }
-        
+        Debug.Log(Instantiate_target.instance.maxComp);
     }
 
     public void Execute()
@@ -103,44 +94,11 @@ public class State_Shapes : IState
         
         if (State.isTherapyOnGoing)
         {
-            if (!Instantiate_target.instance.manualDiff_Shapes.isOn)
-            {
-                poorCount_max = 3;
-            }
-            else
-            {
-                poorCount_max = Instantiate_target.instance.compCount;
-            }
-
-            if (currentShape = this.new_shape[0])
-            {
-                Instantiate_target.instance.levelDiff.text = "1";
-            }
-            else if (currentShape = this.new_shape[1])
-            {
-                Instantiate_target.instance.levelDiff.text = "2";
-            }
-            else if (currentShape = this.new_shape[2])
-            {
-                Instantiate_target.instance.levelDiff.text = "3";
-            }
-            else if (currentShape = this.new_shape[3])
-            {
-                Instantiate_target.instance.levelDiff.text = "4";
-            }
-            else if (currentShape = this.new_shape[4])
-            {
-                Instantiate_target.instance.levelDiff.text = "5";
-            }
-            else if (currentShape = this.new_shape[5])
-            {
-                Instantiate_target.instance.levelDiff.text = "6";
-            }
-
             if (Physics.Raycast(landingRay, out hit))
             {                
                 if (hit.collider.tag == this.tagToLookFor && hit.collider.gameObject.GetComponent<Renderer>().material.color == Color.blue)
-                {
+                {                    
+                    Debug.Log(Instantiate_target.instance.compCount);
                     //Debug.Log("colidiu");
                     //Debug.Log(new_shape);
                     //Debug.Log(originPoint);
@@ -151,6 +109,7 @@ public class State_Shapes : IState
                         TargetOrderSet.instance.orderFlag++;
                         TargetOrderSet.instance.SetOrder();
                     }
+
                     if (Instantiate_target.instance.manualDiff_Shapes.isOn)
                     {                        
                         poor_countMax = Instantiate_target.instance.maxComp;
@@ -159,7 +118,31 @@ public class State_Shapes : IState
                     {
                         poor_countMax = 4f;
                     }
-                    poor_count = Instantiate_target.instance.compCount; // Se der merda, é por causa desta substituição. Reverter.
+
+                    if (currentShape = this.new_shape[0])
+                    {
+                        Instantiate_target.instance.levelDiff.text = "1";
+                    }
+                    else if (currentShape = this.new_shape[1])
+                    {
+                        Instantiate_target.instance.levelDiff.text = "2";
+                    }
+                    else if (currentShape = this.new_shape[2])
+                    {
+                        Instantiate_target.instance.levelDiff.text = "3";
+                    }
+                    else if (currentShape = this.new_shape[3])
+                    {
+                        Instantiate_target.instance.levelDiff.text = "4";
+                    }
+                    else if (currentShape = this.new_shape[4])
+                    {
+                        Instantiate_target.instance.levelDiff.text = "5";
+                    }
+                    else if (currentShape = this.new_shape[5])
+                    {
+                        Instantiate_target.instance.levelDiff.text = "6";
+                    }
                 }
                 
                 if (hit.collider.tag == "ExerciseCollider_0" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
@@ -382,7 +365,6 @@ public class State_Shapes : IState
             if (shapeComplete == true)
             {
                 Instantiate_target.instance.compCount = 0;
-                Debug.LogWarning(poor_count);
                 TargetOrderSet.instance.CreateArray(currentShape);
                 TargetOrderSet.instance.SetOrder();
                 Instantiate_target.instance.PlayClip();
@@ -409,14 +391,13 @@ public class State_Shapes : IState
             // Caso seja detetada uma compensação o nível é reduzido de novo
             if (State.compensationInCurrentRep && Instantiate_target.instance.cooldownTimer == 0)
             {
-                Debug.LogWarning(poor_count);
                 Instantiate_target.instance.compCount += 1;
-                Debug.LogWarning(poor_count);
                 State.compensationInCurrentRep = false;                
-                Instantiate_target.instance.CooldownTimer(5);
-                
+                Instantiate_target.instance.CooldownTimer(5);                
+
                 if (Instantiate_target.instance.compCount == poor_countMax)
-                {                    
+                {          
+                    
                     if (currentShape == this.new_shape[0])
                     {
                         Instantiate_target.instance.compCount = 0;
@@ -427,8 +408,8 @@ public class State_Shapes : IState
                     {
                         if (subState_index > 1)
                         {
-                            Instantiate_target.instance.compCount = 0;
                             subState_index -= 1;
+                            Instantiate_target.instance.compCount = 0;
                             currentShape.SetActive(false);
                             if (subState_index == 1)
                             {
@@ -472,44 +453,13 @@ public class State_Shapes : IState
                                 TargetOrderSet.instance.CreateArray(currentShape);
                                 TargetOrderSet.instance.SetOrder();
                             }
-                        }
+                        }                        
                     }
                 }
-                
+
                 if (State.correctReps > 0)
                 {
-                    this.new_shape[1].SetActive(true);
-                    currentShape = this.new_shape[1];
-                    TargetOrderSet.instance.CreateArray(currentShape);
-                    TargetOrderSet.instance.SetOrder();
-                }
-                else if (subState_index == 3)
-                {
-                    this.new_shape[2].SetActive(true);
-                    currentShape = this.new_shape[2];
-                    TargetOrderSet.instance.CreateArray(currentShape);
-                    TargetOrderSet.instance.SetOrder();
-                }
-                else if (subState_index == 4)
-                {
-                    this.new_shape[3].SetActive(true);
-                    currentShape = this.new_shape[3];
-                    TargetOrderSet.instance.CreateArray(currentShape);
-                    TargetOrderSet.instance.SetOrder();
-                }
-                else if (subState_index == 5)
-                {
-                    this.new_shape[4].SetActive(true);
-                    currentShape = this.new_shape[4];
-                    TargetOrderSet.instance.CreateArray(currentShape);
-                    TargetOrderSet.instance.SetOrder();
-                }
-                else if (subState_index == 6)
-                {
-                    this.new_shape[5].SetActive(true);
-                    currentShape = this.new_shape[5];
-                    TargetOrderSet.instance.CreateArray(currentShape);
-                    TargetOrderSet.instance.SetOrder();
+                    State.correctReps -= 1;
                 }
             }
         }
