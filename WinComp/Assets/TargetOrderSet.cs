@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TargetOrderSet : MonoBehaviour
 {
     public static TargetOrderSet instance = null;
     public GameObject[] targetChildren;
-    public int orderFlag = 0;
+    public int orderFlag = 0;    
 
     private void Awake()
     {
@@ -33,5 +34,5 @@ public class TargetOrderSet : MonoBehaviour
     public void SetOrder()
     {        
         targetChildren[orderFlag].GetComponent<Renderer>().material.color = Color.blue;
-    }
+    }    
 }
