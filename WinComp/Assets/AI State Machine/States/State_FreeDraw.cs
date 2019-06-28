@@ -108,6 +108,8 @@ public class State_FreeDraw : IState
         {
             State.maxReps = 20;
         }
+        State.correctReps = 0;
+        State.tries = 0;
     }
 
     public void Execute()
@@ -148,7 +150,6 @@ public class State_FreeDraw : IState
                     if (hit.collider.tag == "ExerciseCollider_V2R" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
                         shapeComplete = true;
-                        subState_index_V += 1;
                         currentShape_fd.SetActive(false);
 
                         if (subState_index_V == 1) //Poor Sub-state
@@ -170,7 +171,6 @@ public class State_FreeDraw : IState
                     if (hit.collider.tag == "ExerciseCollider_V3R" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
                         shapeComplete = true;
-                        subState_index_V += 1;
                         currentShape_fd.SetActive(false);
 
                         if (subState_index_V == 1) //Poor Sub-state
@@ -205,7 +205,6 @@ public class State_FreeDraw : IState
                     if (hit.collider.tag == "ExerciseCollider_V2L" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
                         shapeComplete = true;
-                        subState_index_V += 1;
                         currentShape_fd.SetActive(false);
 
                         if (subState_index_V == 1) //Poor Sub-state
@@ -227,7 +226,6 @@ public class State_FreeDraw : IState
                     if (hit.collider.tag == "ExerciseCollider_V3L" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
                         shapeComplete = true;
-                        subState_index_V += 1;
                         currentShape_fd.SetActive(false);
 
                         if (subState_index_V == 1) //Poor Sub-state
@@ -256,15 +254,15 @@ public class State_FreeDraw : IState
                     }
                     // -------------------------------------- Fim Verticais Esquerda ----------------------------------------------- //
                 }
-                else if (Instantiate_target.instance.horizontalFD)
+
+                if (Instantiate_target.instance.horizontalFD)
                 {
                     // -------------------------------------- Horizontais ----------------------------------------------- //
                     if (hit.collider.tag == "ExerciseCollider_Hlow" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
                         shapeComplete = true;
-                        subState_index_H += 1;
                         currentShape_fd.SetActive(false);
-
+                        Debug.LogWarning("colidiu");
                         if (subState_index_H == 1) //Poor Sub-state
                         {
                             this.new_shapeHoriz_fd[2].SetActive(true);
@@ -283,8 +281,7 @@ public class State_FreeDraw : IState
                     }
                     if (hit.collider.tag == "ExerciseCollider_Hmid" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
-                        shapeComplete = true;
-                        subState_index_H += 1;
+                        shapeComplete = true;                        
                         currentShape_fd.SetActive(false);
 
                         if (subState_index_H == 1) //Poor Sub-state
@@ -337,6 +334,15 @@ public class State_FreeDraw : IState
                 TargetOrderSet.instance.SetOrder();
                 Instantiate_target.instance.PlayClip();
 
+                if (Instantiate_target.instance.verticalFD.isOn == true)
+                {
+                    subState_index_V += 1;
+                }
+                else if (Instantiate_target.instance.horizontalFD.isOn == true)
+                {
+                    subState_index_H += 1;
+                }
+
                 State.correctReps += 1;
                 if (State.correctReps == State.maxReps)
                 {
@@ -372,6 +378,8 @@ public class State_FreeDraw : IState
                 Instantiate_target.instance.compCount += 1;
                 State.compensationInCurrentRep = false;
                 Instantiate_target.instance.CooldownTimer(5);
+                Debug.LogWarning(poor_countMaxFD);
+                Debug.LogWarning(Instantiate_target.instance.compCount);
 
                 if (Instantiate_target.instance.compCount == poor_countMaxFD)
                 {
@@ -383,35 +391,35 @@ public class State_FreeDraw : IState
                     }
                     else
                     {
+                        currentShape_fd.SetActive(false);
                         if (Instantiate_target.instance.horizontalFD.isOn == true)
                         {
                             if (subState_index_H > 1)
                             {
                                 subState_index_H -= 1;
                                 Instantiate_target.instance.compCount = 0;
-                                currentShape_fd.SetActive(false);
-                                if (subState_index_H == 1)
-                                {
-                                    this.new_shapeHoriz_fd[0].SetActive(true);
-                                    currentShape_fd = this.new_shapeHoriz_fd[0];
-                                    TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                    TargetOrderSet.instance.SetOrder();
-                                }
-                                else if (subState_index_H == 2)
-                                {
-                                    this.new_shapeHoriz_fd[1].SetActive(true);
-                                    currentShape_fd = this.new_shapeHoriz_fd[1];
-                                    TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                    TargetOrderSet.instance.SetOrder();
-                                }
-                                else if (subState_index_H == 3)
-                                {
-                                    this.new_shapeHoriz_fd[2].SetActive(true);
-                                    currentShape_fd = this.new_shapeHoriz_fd[2];
-                                    TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                    TargetOrderSet.instance.SetOrder();
-                                }
-                            }                            
+                            }
+                            if (subState_index_H == 1)
+                            {
+                                this.new_shapeHoriz_fd[0].SetActive(true);
+                                currentShape_fd = this.new_shapeHoriz_fd[0];
+                                TargetOrderSet.instance.CreateArray(currentShape_fd);
+                                TargetOrderSet.instance.SetOrder();
+                            }
+                            else if (subState_index_H == 2)
+                            {
+                                this.new_shapeHoriz_fd[1].SetActive(true);
+                                currentShape_fd = this.new_shapeHoriz_fd[1];
+                                TargetOrderSet.instance.CreateArray(currentShape_fd);
+                                TargetOrderSet.instance.SetOrder();
+                            }
+                            else if (subState_index_H == 3)
+                            {
+                                this.new_shapeHoriz_fd[2].SetActive(true);
+                                currentShape_fd = this.new_shapeHoriz_fd[2];
+                                TargetOrderSet.instance.CreateArray(currentShape_fd);
+                                TargetOrderSet.instance.SetOrder();
+                            }                      
                         }
                         else if (Instantiate_target.instance.verticalFD.isOn == true)
                         {
@@ -421,29 +429,28 @@ public class State_FreeDraw : IState
                                 {
                                     subState_index_V -= 1;
                                     Instantiate_target.instance.compCount = 0;
-                                    currentShape_fd.SetActive(false);
+                                }
 
-                                    if (subState_index_V == 1)
-                                    {
-                                        this.new_shapeVert_fd[2].SetActive(true);
-                                        currentShape_fd = this.new_shapeVert_fd[2];
-                                        TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                        TargetOrderSet.instance.SetOrder();
-                                    }
-                                    else if (subState_index_V == 2)
-                                    {
-                                        this.new_shapeVert_fd[1].SetActive(true);
-                                        currentShape_fd = this.new_shapeVert_fd[1];
-                                        TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                        TargetOrderSet.instance.SetOrder();
-                                    }
-                                    else if (subState_index_V == 3)
-                                    {
-                                        this.new_shapeVert_fd[0].SetActive(true);
-                                        currentShape_fd = this.new_shapeVert_fd[0];
-                                        TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                        TargetOrderSet.instance.SetOrder();
-                                    }
+                                if (subState_index_V == 1)
+                                {
+                                    this.new_shapeVert_fd[2].SetActive(true);
+                                    currentShape_fd = this.new_shapeVert_fd[2];
+                                    TargetOrderSet.instance.CreateArray(currentShape_fd);
+                                    TargetOrderSet.instance.SetOrder();
+                                }
+                                else if (subState_index_V == 2)
+                                {
+                                    this.new_shapeVert_fd[1].SetActive(true);
+                                    currentShape_fd = this.new_shapeVert_fd[1];
+                                    TargetOrderSet.instance.CreateArray(currentShape_fd);
+                                    TargetOrderSet.instance.SetOrder();
+                                }
+                                else if (subState_index_V == 3)
+                                {
+                                    this.new_shapeVert_fd[0].SetActive(true);
+                                    currentShape_fd = this.new_shapeVert_fd[0];
+                                    TargetOrderSet.instance.CreateArray(currentShape_fd);
+                                    TargetOrderSet.instance.SetOrder();
                                 }
                             }
                             else if (State.leftArmSelected)
@@ -452,29 +459,27 @@ public class State_FreeDraw : IState
                                 {
                                     subState_index_V -= 1;
                                     Instantiate_target.instance.compCount = 0;
-                                    currentShape_fd.SetActive(false);
-
-                                    if (subState_index_V == 1)
-                                    {
-                                        this.new_shapeVert_fd[5].SetActive(true);
-                                        currentShape_fd = this.new_shapeVert_fd[5];
-                                        TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                        TargetOrderSet.instance.SetOrder();
-                                    }
-                                    else if (subState_index_V == 2)
-                                    {
-                                        this.new_shapeVert_fd[4].SetActive(true);
-                                        currentShape_fd = this.new_shapeVert_fd[4];
-                                        TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                        TargetOrderSet.instance.SetOrder();
-                                    }
-                                    else if (subState_index_V == 3)
-                                    {
-                                        this.new_shapeVert_fd[3].SetActive(true);
-                                        currentShape_fd = this.new_shapeVert_fd[3];
-                                        TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                        TargetOrderSet.instance.SetOrder();
-                                    }
+                                }
+                                if (subState_index_V == 1)
+                                {
+                                    this.new_shapeVert_fd[5].SetActive(true);
+                                    currentShape_fd = this.new_shapeVert_fd[5];
+                                    TargetOrderSet.instance.CreateArray(currentShape_fd);
+                                    TargetOrderSet.instance.SetOrder();
+                                }
+                                else if (subState_index_V == 2)
+                                {
+                                    this.new_shapeVert_fd[4].SetActive(true);
+                                    currentShape_fd = this.new_shapeVert_fd[4];
+                                    TargetOrderSet.instance.CreateArray(currentShape_fd);
+                                    TargetOrderSet.instance.SetOrder();
+                                }
+                                else if (subState_index_V == 3)
+                                {
+                                    this.new_shapeVert_fd[3].SetActive(true);
+                                    currentShape_fd = this.new_shapeVert_fd[3];
+                                    TargetOrderSet.instance.CreateArray(currentShape_fd);
+                                    TargetOrderSet.instance.SetOrder();
                                 }
                             }
                         }                                                                          

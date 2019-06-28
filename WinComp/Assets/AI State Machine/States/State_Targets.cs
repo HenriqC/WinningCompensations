@@ -69,6 +69,8 @@ public class State_Targets : IState
         {
             State.maxReps = 10;
         }
+        State.correctReps = 0;
+        State.tries = 0;
     }
 
     public void Execute()
@@ -393,7 +395,7 @@ public class State_Targets : IState
         DDA_Exercise_Grid.instance.nTargets = false;
         DDA_Exercise_Grid.instance.nShapes = false;
         DDA_Exercise_Grid.instance.nFreeDraw = true;
-        Instantiate_target.instance.verticalFD.isOn = true;
+        Instantiate_target.instance.horizontalFD.isOn = true;
     }    
 }
 

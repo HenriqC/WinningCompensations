@@ -58,7 +58,8 @@ public class State_Shapes : IState
         {
             State.maxReps = 20;
         }
-        Debug.Log(Instantiate_target.instance.maxComp);
+        State.correctReps = 0;
+        State.tries = 0;
     }
 
     public void Execute()
