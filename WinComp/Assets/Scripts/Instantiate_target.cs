@@ -10,6 +10,8 @@ public class Instantiate_target : MonoBehaviour
     public GameObject ObInstance;
     public Toggle manualDiff;
     public Toggle manualDiff_Shapes;
+    public Toggle verticalFD;
+    public Toggle horizontalFD;
     public float maxComp;
     public float compCount;
     public float subState;

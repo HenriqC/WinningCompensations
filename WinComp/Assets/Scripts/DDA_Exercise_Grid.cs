@@ -6,6 +6,7 @@ public class DDA_Exercise_Grid : MonoBehaviour
 {
     private StateMachine stateMachine = new StateMachine();
 
+    // ----------------- Final da descriminação das variáveis privadas de cada estado ----------------- //
 
     // Primeiro estado da máquina, exercício dos targets
 
@@ -26,9 +27,25 @@ public class DDA_Exercise_Grid : MonoBehaviour
     [SerializeField]
     private Transform scPosition_t;
 
+    // Segundo estado da máquina, exercício FreeDraw
+    public bool nFreeDraw;
 
-    // Segundo estado da máquina, exercício das formas
+    [SerializeField]
+    private Transform cPosition_fd;
+    [SerializeField]
+    private GameObject[] new_shapeVert_fd;
+    [SerializeField]
+    private GameObject[] new_shapeHoriz_fd;
+    [SerializeField]
+    private string Targets_Tag_fd;
+    [SerializeField]
+    private Color color_fd;
+
+
+
+    // Terceiro estado da máquina, exercício das formas
     public bool nShapes;
+
     [SerializeField]
     private Transform cPosition_sp;
     [SerializeField]
@@ -37,6 +54,8 @@ public class DDA_Exercise_Grid : MonoBehaviour
     private string Targets_Tag_sp;
     [SerializeField]
     private Color color;
+
+    // ----------------- Final da descriminação das variáveis privadas de cada estado ----------------- //
 
     public GameObject cursor;
     public GameObject secondaryCursor;
@@ -54,6 +73,8 @@ public class DDA_Exercise_Grid : MonoBehaviour
     {
         nTargets = true;
         nShapes = false;
+        nFreeDraw = false;
+
         if (instance == null)
         {
             instance = this;
@@ -100,6 +121,11 @@ public class DDA_Exercise_Grid : MonoBehaviour
         {
             nTargets = false;
             this.stateMachine.ChangeState(new State_Targets(this.originPoint_t, this.cPosition_t, this.scPosition_t, this.new_target_t, this.owner_target_t, this.radius, this.Targets_Tag_t));
+        }
+        else if (nFreeDraw == true)
+        {
+            nFreeDraw = false;
+            this.stateMachine.ChangeState(new State_FreeDraw(this.cPosition_fd, this.new_shapeVert_fd, this.new_shapeHoriz_fd, this.Targets_Tag_fd, this.color_fd));
         }
         /*else if (nFreeDraw == true)
         {

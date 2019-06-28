@@ -21,4 +21,26 @@ public class ShapeAdjustments : MonoBehaviour
             Instantiate_target.instance.manualDiff_Shapes.isOn = false;
         }
     }
+    public void VerticalFD (bool isToggled)
+    {
+        if (isToggled)
+        {
+            Instantiate_target.instance.verticalFD.isOn = true;
+        }
+        else
+        {
+            Instantiate_target.instance.verticalFD.isOn = false;
+        }
+    }
+    public void HorizontalFD(bool isToggled)
+    {
+        if (isToggled)
+        {
+            Instantiate_target.instance.horizontalFD.isOn = true;
+        }
+        else
+        {
+            Instantiate_target.instance.horizontalFD.isOn = false;
+        }
+    }
 }

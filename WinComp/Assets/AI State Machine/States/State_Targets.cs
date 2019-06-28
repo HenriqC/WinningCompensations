@@ -37,7 +37,9 @@ public class State_Targets : IState
     public void Enter()
     {
         DDA_Exercise_Grid.instance.nShapes = false;
-        DDA_Exercise_Grid.instance.nTargets = false;        
+        DDA_Exercise_Grid.instance.nTargets = false;
+        DDA_Exercise_Grid.instance.nFreeDraw = false;
+
         Debug.Log("Entrou Targets");
         originPoint = ownerGameObject.transform.position;
         State.hasSecondaryCursor = true;
@@ -389,7 +391,9 @@ public class State_Targets : IState
 
         // Variáveis de mudança de exercício
         DDA_Exercise_Grid.instance.nTargets = false;
-        DDA_Exercise_Grid.instance.nShapes = true;
+        DDA_Exercise_Grid.instance.nShapes = false;
+        DDA_Exercise_Grid.instance.nFreeDraw = true;
+        Instantiate_target.instance.verticalFD.isOn = true;
     }    
 }
 

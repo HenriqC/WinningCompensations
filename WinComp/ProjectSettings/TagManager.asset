@@ -25,6 +25,15 @@ TagManager:
   - ExerciseCollider_5
   - CognitiveCollider_B
   - CognitiveCollider_P
+  - ExerciseCollider_V4L
+  - ExerciseCollider_V3L
+  - ExerciseCollider_V2L
+  - ExerciseCollider_V4R
+  - ExerciseCollider_V3R
+  - ExerciseCollider_V2R
+  - ExerciseCollider_Hhigh
+  - ExerciseCollider_Hmid
+  - ExerciseCollider_Hlow
   layers:
   - Default
   - TransparentFX

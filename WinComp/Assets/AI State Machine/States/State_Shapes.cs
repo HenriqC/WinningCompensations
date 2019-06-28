@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class State_Shapes : IState
 {
-    //private int n_shapes;
-
-    //private Vector3 originPoint;
+    // ------------------------------ Variáveis serializadas ------------------------------ //
     private Transform cursor;
     private GameObject[] new_shape;
-    //private GameObject ownerGameObject;
     private string tagToLookFor;
     private Color color;
+    // ------------------------------ Variáveis serializadas ------------------------------ //
 
-    //public int poor_count;
-    //public int exc_count;
     private int subState_index;
     private AudioClip beep;
-    private DDA_Exercise_Grid Objects;
     private bool shapeComplete;
     private GameObject currentShape;
     private float timer = 5f;
@@ -25,14 +20,10 @@ public class State_Shapes : IState
     private bool sobe;
     private bool desce;
 
-    public State_Shapes(/*Vector3 originPoint,*/ Transform cursor, GameObject[] new_shape, /*GameObject ownerGameObject,*/ string tagToLookFor, Color color)
+    public State_Shapes(Transform cursor, GameObject[] new_shape, string tagToLookFor, Color color)
     {
-        
-        //this.originPoint = originPoint;
         this.cursor = cursor;
         this.new_shape = new_shape;
-        //this.ownerGameObject = ownerGameObject;
-        //this.instantiateRadius = instantiateRadius;
         this.tagToLookFor = tagToLookFor;
         this.color = color;
     }
@@ -44,39 +35,23 @@ public class State_Shapes : IState
 
     public void Enter()
     {
-
         State.exerciseName = "Shape Fill";
         //CognitiveSphereSpawner.instance.stopSpawning_B = true;
-        CognitiveSphereSpawner.instance.stopSpawning_P = true;
-        var remTargets = GameObject.FindGameObjectsWithTag("TargetCollider");
-        //var blueSphere = GameObject.FindGameObjectsWithTag("CognitiveCollider_B");
-        var purpleSphere = GameObject.FindGameObjectsWithTag("CognitiveCollider_P");
-
-        foreach (GameObject rem in remTargets)
-        {
-            Object.Destroy(rem);
-        }
-
-        /*foreach (GameObject target_b in blueSphere)
-        {
-            Object.Destroy(target_b);
-        }*/
-
-        foreach (GameObject target_p in purpleSphere)
-        {
-            Object.Destroy(target_p);
-        }
+        CognitiveSphereSpawner.instance.stopSpawning_P = true;        
 
         DDA_Exercise_Grid.instance.nShapes = false;
         DDA_Exercise_Grid.instance.nTargets = false;
+        DDA_Exercise_Grid.instance.nFreeDraw = false;
         Debug.Log ("Entrou Shapes");
 
         subState_index = 1;
+        poor_countMax = 4;
         new_shape[0].SetActive(true);
         currentShape = this.new_shape[0];
+        
         TargetOrderSet.instance.CreateArray(currentShape);
         TargetOrderSet.instance.SetOrder();
-        poor_countMax = 4;
+        
         Instantiate_target.instance.compCount = 0;
 
         if (State.maxReps <= 0)
@@ -90,19 +65,38 @@ public class State_Shapes : IState
     {
         RaycastHit hit;
         Ray landingRay = new Ray(cursor.position, Vector3.back);
-        //originPoint = ownerGameObject.transform.position;
         
         if (State.isTherapyOnGoing)
         {
+            if (currentShape = this.new_shape[0])
+            {
+                Instantiate_target.instance.levelDiff.text = "1";
+            }
+            else if (currentShape = this.new_shape[1])
+            {
+                Instantiate_target.instance.levelDiff.text = "2";
+            }
+            else if (currentShape = this.new_shape[2])
+            {
+                Instantiate_target.instance.levelDiff.text = "3";
+            }
+            else if (currentShape = this.new_shape[3])
+            {
+                Instantiate_target.instance.levelDiff.text = "4";
+            }
+            else if (currentShape = this.new_shape[4])
+            {
+                Instantiate_target.instance.levelDiff.text = "5";
+            }
+            else if (currentShape = this.new_shape[5])
+            {
+                Instantiate_target.instance.levelDiff.text = "6";
+            }
             if (Physics.Raycast(landingRay, out hit))
             {                
                 if (hit.collider.tag == this.tagToLookFor && hit.collider.gameObject.GetComponent<Renderer>().material.color == Color.blue)
                 {                    
-                    Debug.Log(Instantiate_target.instance.compCount);
-                    //Debug.Log("colidiu");
-                    //Debug.Log(new_shape);
-                    //Debug.Log(originPoint);
-                    //Debug.LogError(subState_index);                   
+                    Debug.Log(Instantiate_target.instance.compCount);  
                     hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.green;
                     if(TargetOrderSet.instance.orderFlag < TargetOrderSet.instance.targetChildren.Length-1)
                     {
@@ -110,39 +104,14 @@ public class State_Shapes : IState
                         TargetOrderSet.instance.SetOrder();
                     }
 
-                    if (Instantiate_target.instance.manualDiff_Shapes.isOn)
+                    if (Instantiate_target.instance.manualDiff_Shapes.isOn == true)
                     {                        
                         poor_countMax = Instantiate_target.instance.maxComp;
                     }
                     else
                     {
                         poor_countMax = 4f;
-                    }
-
-                    if (currentShape = this.new_shape[0])
-                    {
-                        Instantiate_target.instance.levelDiff.text = "1";
-                    }
-                    else if (currentShape = this.new_shape[1])
-                    {
-                        Instantiate_target.instance.levelDiff.text = "2";
-                    }
-                    else if (currentShape = this.new_shape[2])
-                    {
-                        Instantiate_target.instance.levelDiff.text = "3";
-                    }
-                    else if (currentShape = this.new_shape[3])
-                    {
-                        Instantiate_target.instance.levelDiff.text = "4";
-                    }
-                    else if (currentShape = this.new_shape[4])
-                    {
-                        Instantiate_target.instance.levelDiff.text = "5";
-                    }
-                    else if (currentShape = this.new_shape[5])
-                    {
-                        Instantiate_target.instance.levelDiff.text = "6";
-                    }
+                    }                    
                 }
                 
                 if (hit.collider.tag == "ExerciseCollider_0" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
@@ -180,12 +149,8 @@ public class State_Shapes : IState
                     {
                         this.new_shape[5].SetActive(true);
                         currentShape = this.new_shape[5];
-                    }
+                    }             
 
-                    //this.new_shape[subState_index - 1].SetActive(true);
-                    //Debug.Log("Acabou quadrado");
-                    //Debug.Log(subState_index);
-                    //Debug.Log(shapeComplete);                    
                 }
                 else if (hit.collider.tag == "ExerciseCollider_1" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
@@ -223,10 +188,7 @@ public class State_Shapes : IState
                         this.new_shape[5].SetActive(true);
                         currentShape = this.new_shape[5];
                     }
-                    //this.new_shape[subState_index - 1].SetActive(true);
-                    //Debug.Log("Acabou triangulo");
-                    //Debug.Log(subState_index);
-                    //Debug.Log(shapeComplete);                    
+                    
                 }
                 else if (hit.collider.tag == "ExerciseCollider_2" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
@@ -264,10 +226,7 @@ public class State_Shapes : IState
                         this.new_shape[5].SetActive(true);
                         currentShape = this.new_shape[5];
                     }
-                    //this.new_shape[subState_index - 1].SetActive(true);
-                    //Debug.Log("Acabou círculo");
-                    //Debug.Log(subState_index);
-                    //Debug.Log(shapeComplete);                    
+                    
                 }
                 else if (hit.collider.tag == "ExerciseCollider_3" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
@@ -305,10 +264,7 @@ public class State_Shapes : IState
                         this.new_shape[5].SetActive(true);
                         currentShape = this.new_shape[5];
                     }
-                    //this.new_shape[subState_index - 1].SetActive(true);
-                    //Debug.Log("Acabou losango");
-                    //Debug.Log(subState_index);
-                    //Debug.Log(shapeComplete);  
+
                 }
                 else if (hit.collider.tag == "ExerciseCollider_4" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
@@ -346,17 +302,13 @@ public class State_Shapes : IState
                         this.new_shape[5].SetActive(true);
                         currentShape = this.new_shape[5];
                     }
-                    //this.new_shape[subState_index - 1].SetActive(true);
-                    //Debug.Log("Acabou Trapézio");
-                    //Debug.Log(subState_index);
-                    //Debug.Log(shapeComplete);
+
                 }
                 else if (hit.collider.tag == "ExerciseCollider_5" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length -1)
                 {
                     subState_index += 1;
                     currentShape.SetActive(false);
-                    //sobe = true;
-                    desce = true;
+                    sobe = true;
                     Exit();
                     Debug.Log("Acabou Estrela");
                     Debug.Log("muda de estado");                    
@@ -388,6 +340,7 @@ public class State_Shapes : IState
 
                 shapeComplete = false;
             }
+
             // Caso seja detetada uma compensação o nível é reduzido de novo
             if (State.compensationInCurrentRep && Instantiate_target.instance.cooldownTimer == 0)
             {
@@ -411,6 +364,7 @@ public class State_Shapes : IState
                             subState_index -= 1;
                             Instantiate_target.instance.compCount = 0;
                             currentShape.SetActive(false);
+
                             if (subState_index == 1)
                             {
                                 this.new_shape[0].SetActive(true);
@@ -467,15 +421,18 @@ public class State_Shapes : IState
 
     public void Exit()
     {
-        currentShape.SetActive(false);
-        /*if (sobe)
+        if (sobe == true)
         {
-            DDA_Exercise_Grid.instance.nFreeDraw = true;
-        }*/
-        if (desce)
-        {
+            currentShape.SetActive(false);
             DDA_Exercise_Grid.instance.nShapes = false;
             DDA_Exercise_Grid.instance.nTargets = true;
         }
+        else if (desce == true)
+        {
+            currentShape.SetActive(false);
+            DDA_Exercise_Grid.instance.nShapes = false;
+            DDA_Exercise_Grid.instance.nFreeDraw = true;
+        }
+        
     }
 }
