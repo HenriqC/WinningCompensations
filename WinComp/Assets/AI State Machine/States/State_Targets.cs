@@ -159,9 +159,9 @@ public class State_Targets : IState
                     }
                     else
                     {
-                        Instantiate_target.instance.changeSpeed.speed = Instantiate_target.instance.manualSpeed;
                         subState_index = Instantiate_target.instance.subState;
                         instantiateRadius = Instantiate_target.instance.manualRadius;
+                        Instantiate_target.instance.changeSpeed.speed = Instantiate_target.instance.manualSpeed;                                                
                     }
                     
 

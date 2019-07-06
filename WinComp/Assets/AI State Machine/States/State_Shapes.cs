@@ -366,7 +366,7 @@ public class State_Shapes : IState
             {
                 Instantiate_target.instance.compCount += 1;
                 State.compensationInCurrentRep = false;                
-                Instantiate_target.instance.CooldownTimer(5);                
+                Instantiate_target.instance.CooldownTimer(3);                
 
                 if (Instantiate_target.instance.compCount == poor_countMax)
                 {          
