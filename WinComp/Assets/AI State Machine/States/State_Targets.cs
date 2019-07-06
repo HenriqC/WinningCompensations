@@ -161,7 +161,7 @@ public class State_Targets : IState
                     {
                         Instantiate_target.instance.changeSpeed.speed = Instantiate_target.instance.manualSpeed;
                         subState_index = Instantiate_target.instance.subState;
-                        instantiateRadius = Instantiate_target.instance.manualRadius;                        
+                        instantiateRadius = Instantiate_target.instance.manualRadius;
                     }
                     
 
@@ -323,7 +323,6 @@ public class State_Targets : IState
                 }
                 if (State.correctReps == State.maxReps /*&& subState_index == 4*/)
                 {
-                    Debug.Log(DDA_Exercise_Grid.instance.nShapes);
                     Debug.Log("Muda de estado");
                     Object.Destroy(hit.collider.gameObject);
                     Exit();
@@ -395,7 +394,7 @@ public class State_Targets : IState
         DDA_Exercise_Grid.instance.nTargets = false;
         DDA_Exercise_Grid.instance.nShapes = false;
         DDA_Exercise_Grid.instance.nFreeDraw = true;
-        Instantiate_target.instance.horizontalFD.isOn = true;
+        //Instantiate_target.instance.horizontalFD.isOn = true;
     }    
 }
 

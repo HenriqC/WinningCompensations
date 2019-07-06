@@ -19,6 +19,7 @@ public class State_Shapes : IState
     private float poor_countMax;
     private bool sobe;
     private bool desce;
+    private bool terminou;
 
     public State_Shapes(Transform cursor, GameObject[] new_shape, string tagToLookFor, Color color)
     {
@@ -35,6 +36,7 @@ public class State_Shapes : IState
 
     public void Enter()
     {
+        Instantiate_target.instance.levelDiff.text = "1";
         State.exerciseName = "Shape Fill";
         //CognitiveSphereSpawner.instance.stopSpawning_B = true;
         CognitiveSphereSpawner.instance.stopSpawning_P = true;        
@@ -68,31 +70,7 @@ public class State_Shapes : IState
         Ray landingRay = new Ray(cursor.position, Vector3.back);
         
         if (State.isTherapyOnGoing)
-        {
-            if (currentShape = this.new_shape[0])
-            {
-                Instantiate_target.instance.levelDiff.text = "1";
-            }
-            else if (currentShape = this.new_shape[1])
-            {
-                Instantiate_target.instance.levelDiff.text = "2";
-            }
-            else if (currentShape = this.new_shape[2])
-            {
-                Instantiate_target.instance.levelDiff.text = "3";
-            }
-            else if (currentShape = this.new_shape[3])
-            {
-                Instantiate_target.instance.levelDiff.text = "4";
-            }
-            else if (currentShape = this.new_shape[4])
-            {
-                Instantiate_target.instance.levelDiff.text = "5";
-            }
-            else if (currentShape = this.new_shape[5])
-            {
-                Instantiate_target.instance.levelDiff.text = "6";
-            }
+        { 
             if (Physics.Raycast(landingRay, out hit))
             {                
                 if (hit.collider.tag == this.tagToLookFor && hit.collider.gameObject.GetComponent<Renderer>().material.color == Color.blue)
@@ -118,8 +96,8 @@ public class State_Shapes : IState
                 if (hit.collider.tag == "ExerciseCollider_0" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {                   
                     shapeComplete = true;
-                    subState_index += 1;
                     this.new_shape[0].SetActive(false);
+                    Instantiate_target.instance.levelDiff.text = "2";
 
                     if (subState_index == 1) //Poor Sub-state
                     {
@@ -155,9 +133,9 @@ public class State_Shapes : IState
                 }
                 else if (hit.collider.tag == "ExerciseCollider_1" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
-                    shapeComplete = true;
-                    subState_index += 1;                    
+                    shapeComplete = true;               
                     this.new_shape[1].SetActive(false);
+                    Instantiate_target.instance.levelDiff.text = "3";
 
                     if (subState_index == 1) //Poor Sub-state
                     {
@@ -194,8 +172,8 @@ public class State_Shapes : IState
                 else if (hit.collider.tag == "ExerciseCollider_2" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
                     shapeComplete = true;
-                    subState_index += 1;
                     this.new_shape[2].SetActive(false);
+                    Instantiate_target.instance.levelDiff.text = "4";
 
                     if (subState_index == 1) //Poor Sub-state
                     {
@@ -232,8 +210,8 @@ public class State_Shapes : IState
                 else if (hit.collider.tag == "ExerciseCollider_3" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
                     shapeComplete = true;
-                    subState_index += 1;
                     this.new_shape[3].SetActive(false);
+                    Instantiate_target.instance.levelDiff.text = "5";
 
                     if (subState_index == 1) //Poor Sub-state
                     {
@@ -269,9 +247,9 @@ public class State_Shapes : IState
                 }
                 else if (hit.collider.tag == "ExerciseCollider_4" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
-                    shapeComplete = true;
-                    subState_index += 1;
+                    shapeComplete = true;                    
                     this.new_shape[4].SetActive(false);
+                    Instantiate_target.instance.levelDiff.text = "6";
 
                     if (subState_index == 1) //Poor Sub-state
                     {
@@ -307,12 +285,52 @@ public class State_Shapes : IState
                 }
                 else if (hit.collider.tag == "ExerciseCollider_5" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length -1)
                 {
-                    subState_index += 1;
+                    shapeComplete = true;
+                    //this.new_shape[5].SetActive(false);
                     currentShape.SetActive(false);
-                    sobe = true;
-                    Exit();
-                    Debug.Log("Acabou Estrela");
-                    Debug.Log("muda de estado");                    
+
+                    if (State.correctReps == State.maxReps)
+                    {
+                        terminou = true;
+                        Exit();
+                        Debug.Log("Acabou Estrela");
+                        Debug.Log("muda de estado");
+                    }
+                    else
+                    {
+                        subState_index -= 3;
+                        if (subState_index == 1) //Poor Sub-state
+                        {
+                            this.new_shape[0].SetActive(true);
+                            currentShape = this.new_shape[0];
+                        }
+                        else if (subState_index == 2) //Avg Sub-state
+                        {
+                            this.new_shape[1].SetActive(true);
+                            currentShape = this.new_shape[1];
+                        }
+                        else if (subState_index == 3) //Exc Sub-state
+                        {
+                            this.new_shape[2].SetActive(true);
+                            currentShape = this.new_shape[2];
+                        }
+                        else if (subState_index == 4) //Exc Sub-state
+                        {
+                            this.new_shape[3].SetActive(true);
+                            currentShape = this.new_shape[3];
+                        }
+                        else if (subState_index == 5) //Exc Sub-state
+                        {
+                            this.new_shape[4].SetActive(true);
+                            currentShape = this.new_shape[4];
+                        }
+                        else if (subState_index == 6) //Exc Sub-state
+                        {
+                            this.new_shape[5].SetActive(true);
+                            currentShape = this.new_shape[5];
+                        }
+                    }
+                                        
                 }                
             }
             if (shapeComplete == true)
@@ -322,6 +340,7 @@ public class State_Shapes : IState
                 TargetOrderSet.instance.SetOrder();
                 Instantiate_target.instance.PlayClip();
                 State.correctReps+=1;
+                subState_index += 1;
                 State.tries+=1;
                 float complete = State.correctReps;
                 int minutes = (State.sessionTimeInt / State.correctReps) / 60;
@@ -433,6 +452,12 @@ public class State_Shapes : IState
             currentShape.SetActive(false);
             DDA_Exercise_Grid.instance.nShapes = false;
             DDA_Exercise_Grid.instance.nFreeDraw = true;
+        }
+        else if (terminou == true)
+        {
+            currentShape.SetActive(false);
+            DDA_Exercise_Grid.instance.nShapes = false;
+            DDA_Exercise_Grid.instance.nTargets = true;
         }
         
     }

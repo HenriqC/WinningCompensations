@@ -8871,7 +8871,7 @@ MonoBehaviour:
   m_MinValue: 0.4
   m_MaxValue: 0.7
   m_WholeNumbers: 0
-  m_Value: 0.4
+  m_Value: 0.55
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -9438,7 +9438,7 @@ MonoBehaviour:
   m_MinValue: 1
   m_MaxValue: 3
   m_WholeNumbers: 1
-  m_Value: 1
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -23466,17 +23466,17 @@ PrefabInstance:
     - target: {fileID: 2668317632217933441, guid: 3102dac941931884f8ed464b3134b7e3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.9692
+      value: 0.7109
       objectReference: {fileID: 0}
     - target: {fileID: 2668317632217933441, guid: 3102dac941931884f8ed464b3134b7e3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1366
+      value: -2.6467
       objectReference: {fileID: 0}
     - target: {fileID: 2668317632217933441, guid: 3102dac941931884f8ed464b3134b7e3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.592
+      value: -6.7547
       objectReference: {fileID: 0}
     - target: {fileID: 2668317632217933441, guid: 3102dac941931884f8ed464b3134b7e3,
         type: 3}
@@ -23521,17 +23521,17 @@ PrefabInstance:
     - target: {fileID: 2668317632217933441, guid: 3102dac941931884f8ed464b3134b7e3,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 10.80576
+      value: 8.490176
       objectReference: {fileID: 0}
     - target: {fileID: 2668317632217933441, guid: 3102dac941931884f8ed464b3134b7e3,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 10.80576
+      value: 8.490176
       objectReference: {fileID: 0}
     - target: {fileID: 2668317632217933441, guid: 3102dac941931884f8ed464b3134b7e3,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 10.80576
+      value: 8.490176
       objectReference: {fileID: 0}
     - target: {fileID: 627497761287843006, guid: 3102dac941931884f8ed464b3134b7e3,
         type: 3}
@@ -35773,7 +35773,7 @@ MonoBehaviour:
   m_MinValue: 0.2
   m_MaxValue: 0.5
   m_WholeNumbers: 0
-  m_Value: 0.2
+  m_Value: 0.35
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
