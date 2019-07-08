@@ -333,15 +333,57 @@ public class State_Shapes : IState
                                         
                 }                
             }
+
+            if (Instantiate_target.instance.maxTimer == 0)
+            {
+                subState_index -= 1;
+                currentShape.SetActive(false);
+                if (subState_index == 1) //Poor Sub-state
+                {
+                    this.new_shape[0].SetActive(true);
+                    currentShape = this.new_shape[0];
+                }
+                else if (subState_index == 2) //Avg Sub-state
+                {
+                    this.new_shape[1].SetActive(true);
+                    currentShape = this.new_shape[1];
+                }
+                else if (subState_index == 3) //Exc Sub-state
+                {
+                    this.new_shape[2].SetActive(true);
+                    currentShape = this.new_shape[2];
+                }
+                else if (subState_index == 4) //Exc Sub-state
+                {
+                    this.new_shape[3].SetActive(true);
+                    currentShape = this.new_shape[3];
+                }
+                else if (subState_index == 5) //Exc Sub-state
+                {
+                    this.new_shape[4].SetActive(true);
+                    currentShape = this.new_shape[4];
+                }
+                else if (subState_index == 6) //Exc Sub-state
+                {
+                    this.new_shape[5].SetActive(true);
+                    currentShape = this.new_shape[5];
+                }
+            }
+
             if (shapeComplete == true)
             {
+                subState_index += 1;
+                Instantiate_target.instance.MaxRepTimer(10);
+                Instantiate_target.instance.PlayClip();
                 Instantiate_target.instance.compCount = 0;
+
                 TargetOrderSet.instance.CreateArray(currentShape);
                 TargetOrderSet.instance.SetOrder();
-                Instantiate_target.instance.PlayClip();
+
+                State.tries += 1;
                 State.correctReps+=1;
-                subState_index += 1;
-                State.tries+=1;
+                
+                
                 float complete = State.correctReps;
                 int minutes = (State.sessionTimeInt / State.correctReps) / 60;
                 int seconds = (State.sessionTimeInt / State.correctReps) % 60;

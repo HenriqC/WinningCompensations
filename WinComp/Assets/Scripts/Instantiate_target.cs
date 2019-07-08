@@ -48,6 +48,7 @@ public class Instantiate_target : MonoBehaviour
     public float cooldownTimer;                      //
     // ----------------------------------------------//
 
+    public float maxTimer;
     public AudioSource Source;
 
     // -------- Grelha circular de amplitudes e raios de dificuldade -------- //
@@ -79,11 +80,20 @@ public class Instantiate_target : MonoBehaviour
 
     public void Update()
     {
+        if (maxTimer > 0)
+        {
+            maxTimer -= Time.deltaTime;
+        }
+        else if(maxTimer < 0)
+        {
+            maxTimer = 0;
+        }
+
         if (cooldownTimer > 0)
         {
             cooldownTimer -= Time.deltaTime;
         }
-        if (cooldownTimer < 0)
+        else if (cooldownTimer < 0)
         {
             cooldownTimer = 0;
         }
@@ -169,6 +179,10 @@ public class Instantiate_target : MonoBehaviour
         cooldownTimer = timer;
     }
 
+    public void MaxRepTimer (float maxTime)
+    {
+        maxTimer = maxTime;
+    }
     public void PlayClip()
     {
         Source.Play();
