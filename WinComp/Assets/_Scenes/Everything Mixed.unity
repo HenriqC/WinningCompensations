@@ -3077,6 +3077,7 @@ MonoBehaviour:
   correctness: 0
   icorrectness: 0
   cooldownTimer: 0
+  maxTimer: 0
   Source: {fileID: 1012393707}
   circularGrid_Left: {fileID: 1293599134}
   circularGrid_Right: {fileID: 806846147}

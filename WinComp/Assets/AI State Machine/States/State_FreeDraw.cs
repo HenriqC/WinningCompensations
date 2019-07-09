@@ -88,8 +88,8 @@ public class State_FreeDraw : IState
         {
             if (State.leftArmSelected)
             {
-                new_shapeVert_fd[3].SetActive(true);
-                currentShape_fd = this.new_shapeVert_fd[3];
+                new_shapeVert_fd[5].SetActive(true);
+                currentShape_fd = this.new_shapeVert_fd[5];
                 TargetOrderSet.instance.CreateArray(currentShape_fd);
                 TargetOrderSet.instance.SetOrder();
             }
@@ -328,97 +328,108 @@ public class State_FreeDraw : IState
                 }
                         // -------------------------------------- Fim Horizontais ----------------------------------------------- //
             }
-            if (currentShape_fd != this.new_shapeVert_fd[2] || currentShape_fd != this.new_shapeVert_fd[5] || currentShape_fd != this.new_shapeHoriz_fd[0])
+            if (Instantiate_target.instance.maxTimer == 0)
             {
-                if (Instantiate_target.instance.maxTimer == 0)
-                {
-                    Instantiate_target.instance.MaxRepTimer(10);
+                Instantiate_target.instance.MaxRepTimer(10);
 
-                    if (Instantiate_target.instance.horizontalFD)
+                if (Instantiate_target.instance.horizontalFD.isOn == true)
+                {
+                    if (subState_index_H > 1)
                     {
                         subState_index_H -= 1;
-                        currentShape_fd.SetActive(false);
-                        if (subState_index_H == 1) //Poor Sub-state
-                        {
-                            this.new_shapeHoriz_fd[0].SetActive(true);
-                            currentShape_fd = this.new_shapeHoriz_fd[0];
-                            TargetOrderSet.instance.CreateArray(currentShape_fd);
-                            TargetOrderSet.instance.SetOrder();
-                        }
-                        else if (subState_index_H == 2) //Avg Sub-state
-                        {
-                            this.new_shapeHoriz_fd[1].SetActive(true);
-                            currentShape_fd = this.new_shapeHoriz_fd[1];
-                            TargetOrderSet.instance.CreateArray(currentShape_fd);
-                            TargetOrderSet.instance.SetOrder();
-                        }
-                        else if (subState_index_H == 3) //Exc Sub-state
-                        {
-                            this.new_shapeHoriz_fd[2].SetActive(true);
-                            currentShape_fd = this.new_shapeHoriz_fd[2];
-                            TargetOrderSet.instance.CreateArray(currentShape_fd);
-                            TargetOrderSet.instance.SetOrder();
-                        }
-
                     }
-                    else if (Instantiate_target.instance.verticalFD)
+                    else
                     {
-                        if (!State.leftArmSelected)
+                        subState_index_H = 1;
+                    }
+
+                    currentShape_fd.SetActive(false);
+                    if (subState_index_H == 1) //Poor Sub-state
+                    {
+                        this.new_shapeHoriz_fd[0].SetActive(true);
+                        currentShape_fd = this.new_shapeHoriz_fd[0];
+                        TargetOrderSet.instance.CreateArray(currentShape_fd);
+                        TargetOrderSet.instance.SetOrder();
+                    }
+                    else if (subState_index_H == 2) //Avg Sub-state
+                    {
+                        this.new_shapeHoriz_fd[1].SetActive(true);
+                        currentShape_fd = this.new_shapeHoriz_fd[1];
+                        TargetOrderSet.instance.CreateArray(currentShape_fd);
+                        TargetOrderSet.instance.SetOrder();
+                    }
+                    else if (subState_index_H == 3) //Exc Sub-state
+                    {
+                        this.new_shapeHoriz_fd[2].SetActive(true);
+                        currentShape_fd = this.new_shapeHoriz_fd[2];
+                        TargetOrderSet.instance.CreateArray(currentShape_fd);
+                        TargetOrderSet.instance.SetOrder();
+                    }
+
+                }
+                else if (Instantiate_target.instance.verticalFD.isOn == true)
+                {
+
+                    if (subState_index_V > 1)
+                    {
+                        subState_index_V -= 1;
+                    }
+                    else
+                    {
+                        subState_index_V = 1;
+                    }
+                    if (!State.leftArmSelected)
+                    {
+                        currentShape_fd.SetActive(false);
+                        if (subState_index_V == 1) //Poor Sub-state
                         {
-                            subState_index_V -= 1;
-                            currentShape_fd.SetActive(false);
-                            if (subState_index_V == 1) //Poor Sub-state
-                            {
-                                this.new_shapeVert_fd[2].SetActive(true);
-                                currentShape_fd = this.new_shapeVert_fd[2];
-                                TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                TargetOrderSet.instance.SetOrder();
-                            }
-                            else if (subState_index_V == 2) //Avg Sub-state
-                            {
-                                this.new_shapeVert_fd[1].SetActive(true);
-                                currentShape_fd = this.new_shapeVert_fd[1];
-                                TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                TargetOrderSet.instance.SetOrder();
-                            }
-                            else if (subState_index_V == 3) //Exc Sub-state
-                            {
-                                this.new_shapeVert_fd[0].SetActive(true);
-                                currentShape_fd = this.new_shapeVert_fd[0];
-                                TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                TargetOrderSet.instance.SetOrder();
-                            }
+                            this.new_shapeVert_fd[2].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[2];
+                            TargetOrderSet.instance.CreateArray(currentShape_fd);
+                            TargetOrderSet.instance.SetOrder();
                         }
-                        else if (State.leftArmSelected)
+                        else if (subState_index_V == 2) //Avg Sub-state
                         {
-                            subState_index_V -= 1;
-                            currentShape_fd.SetActive(false);
-                            if (subState_index_V == 1) //Poor Sub-state
-                            {
-                                this.new_shapeVert_fd[5].SetActive(true);
-                                currentShape_fd = this.new_shapeVert_fd[5];
-                                TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                TargetOrderSet.instance.SetOrder();
-                            }
-                            else if (subState_index_V == 2) //Avg Sub-state
-                            {
-                                this.new_shapeVert_fd[4].SetActive(true);
-                                currentShape_fd = this.new_shapeVert_fd[4];
-                                TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                TargetOrderSet.instance.SetOrder();
-                            }
-                            else if (subState_index_V == 3) //Exc Sub-state
-                            {
-                                this.new_shapeVert_fd[3].SetActive(true);
-                                currentShape_fd = this.new_shapeVert_fd[3];
-                                TargetOrderSet.instance.CreateArray(currentShape_fd);
-                                TargetOrderSet.instance.SetOrder();
-                            }
+                            this.new_shapeVert_fd[1].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[1];
+                            TargetOrderSet.instance.CreateArray(currentShape_fd);
+                            TargetOrderSet.instance.SetOrder();
+                        }
+                        else if (subState_index_V == 3) //Exc Sub-state
+                        {
+                            this.new_shapeVert_fd[0].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[0];
+                            TargetOrderSet.instance.CreateArray(currentShape_fd);
+                            TargetOrderSet.instance.SetOrder();
+                        }
+                    }
+                    else if (State.leftArmSelected)
+                    {
+                        currentShape_fd.SetActive(false);
+                        if (subState_index_V == 1) //Poor Sub-state
+                        {
+                            this.new_shapeVert_fd[5].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[5];
+                            TargetOrderSet.instance.CreateArray(currentShape_fd);
+                            TargetOrderSet.instance.SetOrder();
+                        }
+                        else if (subState_index_V == 2) //Avg Sub-state
+                        {
+                            this.new_shapeVert_fd[4].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[4];
+                            TargetOrderSet.instance.CreateArray(currentShape_fd);
+                            TargetOrderSet.instance.SetOrder();
+                        }
+                        else if (subState_index_V == 3) //Exc Sub-state
+                        {
+                            this.new_shapeVert_fd[3].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[3];
+                            TargetOrderSet.instance.CreateArray(currentShape_fd);
+                            TargetOrderSet.instance.SetOrder();
                         }
                     }
                 }
-            }
-                
+            }                
 
             if (shapeComplete == true)
             {
