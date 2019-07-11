@@ -16,7 +16,7 @@ using Windows.Kinect;
 /// <summary>
 /// Interaction logic for MainWindow
 /// </summary>
-public class KinectData {
+public class KinectData: MonoBehaviour {
 
     /// <summary>
     /// Constant for clamping Z values of camera space points from being negative
