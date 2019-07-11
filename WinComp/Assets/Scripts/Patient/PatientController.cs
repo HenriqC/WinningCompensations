@@ -9,6 +9,7 @@ public class PatientController : MonoBehaviour {
     public Text setTimePatient;
     public Text restTimePatient;
     public Text startCounterPatient;
+    public Text countdownSubtitle;
 
     public Text sessionTimeTherapist;
     public Text correctRepetitionsTherapist;
@@ -43,11 +44,13 @@ public class PatientController : MonoBehaviour {
     }
 
     private void countDown() {
+        countdownSubtitle.transform.gameObject.SetActive(true);
         startCounterPatient.transform.gameObject.SetActive(true);
         if (startCounterInt <= 0) {
             initSessionTime();
             initSetTimer();
             startCounterPatient.transform.gameObject.SetActive(false);
+            countdownSubtitle.transform.gameObject.SetActive(false);
             State.isTherapyOnGoing = true;
             CancelInvoke("countDown");
         }

@@ -27,7 +27,6 @@ public class ColorChanger : MonoBehaviour
         if (Target.GetComponent<Renderer>().sharedMaterial.color == endColor)
         {
             Instantiate_target.instance.mudouDeCor = true;
-            //Debug.Log("mudou de cor");
         }
     }
 }

@@ -51,7 +51,7 @@ public class Instantiate_target : MonoBehaviour
     public float maxTimer;
     public AudioSource Source;
 
-    // -------- Grelha circular de amplitudes e raios de dificuldade -------- //
+    // -------- Grelha circular de amplitudes e raios de dificuldade -------------//
     public GameObject circularGrid_Left;                                          //
     public GameObject circularGrid_Right;                                         //
     public GameObject R_Area_1;                                                   // 
@@ -65,7 +65,14 @@ public class Instantiate_target : MonoBehaviour
     public GameObject L_Area_4;                                                   //
     public GameObject L_Area_5;                                                   //
     public bool mudouDeCor;                                                       //
-    // -------------------------------------------------------------------------- //   
+   // ----------------------------------------------------------------------------//
+
+    // -------- Listas de parâmetros ajustáveis -------- //
+    public GameObject radialTarget_param;                //
+    public GameObject linearDraw_param;                  //
+    public GameObject shapes_param;                      //
+    // ------------------------------------------------- //
+
     void Awake()
     {
         if (instance == null)
@@ -98,21 +105,6 @@ public class Instantiate_target : MonoBehaviour
             cooldownTimer = 0;
         }
     }
-
-    /*Vector3 RandomCircle(Vector3 center)
-    {
-        float ang = Random.value * 360;
-        Vector3 pos;
-        pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
-        pos.z = center.z;
-        return pos;
-    }    
-    public void InstantiateObject (GameObject NewTarget, Vector3 position, Quaternion rotation)
-    {
-        Vector3 pos = RandomCircle(position);
-        ObInstance = Instantiate(NewTarget, pos, rotation, parent);
-    }*/
 
     public Vector3 OrbitPosition(Vector3 centerPoint, float radius, float angle)
     {

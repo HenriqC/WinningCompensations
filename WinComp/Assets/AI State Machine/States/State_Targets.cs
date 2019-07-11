@@ -18,8 +18,7 @@ public class State_Targets : IState
     private AudioClip beep;
 
     public State_Targets(Vector3 originPoint, Transform cursor, Transform secondaryCursor, GameObject new_target, GameObject ownerGameObject, float instantiateRadius, string tagToLookFor)
-    {
-        
+    {        
         this.originPoint = originPoint;
         this.cursor = cursor;
         this.secondaryCursor = secondaryCursor;
@@ -51,6 +50,10 @@ public class State_Targets : IState
         //Instantiate_target.instance.exName.text = "Target Reach";
         //Instantiate_target.instance.InstantiateObject(new_target, originPoint, Quaternion.identity);
         Instantiate_target.instance.InstantiateRandom(new_target, originPoint);
+        Instantiate_target.instance.radialTarget_param.SetActive(true);
+        Instantiate_target.instance.linearDraw_param.SetActive(false);
+        Instantiate_target.instance.shapes_param.SetActive(false);
+
 
         if (State.leftArmSelected)
         {
@@ -87,11 +90,6 @@ public class State_Targets : IState
             Instantiate_target.instance.cogCenter = originPoint;
             if (Physics.Raycast(landingRay, out hit) || Physics.Raycast(secondaryRay, out hit))
             {
-                /*if (hit.collider.tag == "CognitiveCollider_B")
-                {
-                    Object.Destroy(hit.collider.gameObject);
-                    State.correctReps++;
-                }*/
 
                 if (hit.collider.tag == "CognitiveCollider_P")
                 {
@@ -104,10 +102,6 @@ public class State_Targets : IState
 
                 if (hit.collider.tag == tagToLookFor)
                 {
-                    //Debug.Log(new_target);
-                    //Debug.Log(originPoint);
-                    //Debug.LogError(subState_index);
-                    //Debug.Log(n_targets);
                     n_targets++;                    
                     State.correctReps++;
                     State.tries++;
@@ -125,7 +119,6 @@ public class State_Targets : IState
                     {
                         DDA_Exercise_Grid.instance.correctness = complete / State.tries * 100f;
                         DDA_Exercise_Grid.instance.icorrectness = (int)DDA_Exercise_Grid.instance.correctness;
-                        //Debug.LogError(icorrectness);
                     }
 
                     // ------------------- Sub índices dos sub niveis de dificuldade ------------------- //

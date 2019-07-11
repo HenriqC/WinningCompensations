@@ -36,6 +36,10 @@ public class State_Shapes : IState
 
     public void Enter()
     {
+        Instantiate_target.instance.radialTarget_param.SetActive(false);
+        Instantiate_target.instance.linearDraw_param.SetActive(false);
+        Instantiate_target.instance.shapes_param.SetActive(true);
+
         Instantiate_target.instance.MaxRepTimer(30);
         Instantiate_target.instance.levelDiff.text = "1";
         State.exerciseName = "Shape Fill";
@@ -131,8 +135,6 @@ public class State_Shapes : IState
                     {
                         terminou = true;
                         Exit();
-                        Debug.Log("Acabou Estrela");
-                        Debug.Log("muda de estado");
                     }
                     else
                     {
@@ -144,7 +146,7 @@ public class State_Shapes : IState
 
             if (Instantiate_target.instance.maxTimer == 0)
             {
-                Instantiate_target.instance.MaxRepTimer(10);
+                Instantiate_target.instance.MaxRepTimer(15);
                 if (subState_index > 1)
                 {
                     subState_index -= 1;

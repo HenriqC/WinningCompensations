@@ -10,7 +10,7 @@ public class RadialCompletionBar : MonoBehaviour
     public Exercise_Flexion amount_flexion;
     public DDA_Exercise_Grid amount_grid;
 
-    [Range (0,100)]
+    [Range(0, 100)]
     public float Amount;
 
     // Start is called before the first frame update
@@ -21,6 +21,7 @@ public class RadialCompletionBar : MonoBehaviour
 
     public void OnValidate()
     {
+
     }
 
     // Update is called once per frame
@@ -31,14 +32,14 @@ public class RadialCompletionBar : MonoBehaviour
             Amount = amount_flexion.completion;
             completion.fillAmount = (Amount / 100);
 
-            percentage.text = string.Format("{0} %", Amount);
+            percentage.text = string.Format("{0} %", (int)Amount);
         }
         else if (amount_grid.isActiveAndEnabled)
         {
             Amount = amount_grid.completion;
             completion.fillAmount = (Amount / 100);
 
-            percentage.text = string.Format("{0} %", Amount);
+            percentage.text = string.Format("{0} %", (int)Amount);
         }
 
     }
