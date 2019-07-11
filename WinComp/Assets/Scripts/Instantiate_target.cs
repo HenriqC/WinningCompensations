@@ -18,6 +18,7 @@ public class Instantiate_target : MonoBehaviour
     public float manualRadius;
     public float manualSpeed;
     public float radius;
+    public int nTargets;
 
     public Vector3 targetScale = new Vector3 (0.125f, 0.125f, 0.125f);
 

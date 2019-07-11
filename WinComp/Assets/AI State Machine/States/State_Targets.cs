@@ -44,7 +44,7 @@ public class State_Targets : IState
         State.hasSecondaryCursor = true;
         State.exerciseName = "Target Reach";
 
-        n_targets = 0;
+        Instantiate_target.instance.nTargets = 0;
         Instantiate_target.instance.subState = 1;
 
         //Instantiate_target.instance.exName.text = "Target Reach";
@@ -79,7 +79,7 @@ public class State_Targets : IState
     public void Execute()
     {
         Instantiate_target.instance.radius = instantiateRadius;
-
+        n_targets = Instantiate_target.instance.nTargets;
         RaycastHit hit;
         Ray landingRay = new Ray (cursor.position, Vector3.back);
         Ray secondaryRay = new Ray (secondaryCursor.position, Vector3.back);
@@ -102,7 +102,7 @@ public class State_Targets : IState
 
                 if (hit.collider.tag == tagToLookFor)
                 {
-                    n_targets++;                    
+                    Instantiate_target.instance.nTargets++;                    
                     State.correctReps++;
                     State.tries++;
 
@@ -333,11 +333,11 @@ public class State_Targets : IState
                 }
                 if (subState_index > 1 && n_targets > 0)
                 {
-                    n_targets--;
+                    Instantiate_target.instance.nTargets--;
                 }
                 else
                 {
-                    n_targets = 0;
+                    Instantiate_target.instance.nTargets = 0;
                 }
             }            
 
@@ -352,11 +352,11 @@ public class State_Targets : IState
 
                 if (subState_index > 1 && n_targets > 0)
                 {
-                    n_targets--;
+                    Instantiate_target.instance.nTargets--;
                 }
                 else
                 {
-                    n_targets = 0;
+                    Instantiate_target.instance.nTargets = 0;
                 }
                 
             }            
