@@ -21,6 +21,7 @@ public class RadialCorrectnessBar : MonoBehaviour
 
     public void OnValidate()
     {
+
     }
 
     // Update is called once per frame
@@ -30,16 +31,13 @@ public class RadialCorrectnessBar : MonoBehaviour
         {
             Correct = amount_flexion.icorrectness;
             correctness.fillAmount = (Correct / 100);
-
             percentage.text = string.Format("{0} %", Correct);
         }
         else if (amount_grid.isActiveAndEnabled)
         {
             Correct = amount_grid.icorrectness;
             correctness.fillAmount = (Correct / 100);
-
             percentage.text = string.Format("{0} %", Correct);
-        }
-        
+        }        
     }
 }

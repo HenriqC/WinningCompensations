@@ -61,7 +61,7 @@ public class State_FreeDraw : IState
         }
 
         CognitiveSphereSpawner.instance.stopSpawning_P = true;
-        State.exerciseName = "Free Draw";
+        State.exerciseName = "Line Draw";
         DDA_Exercise_Grid.instance.nShapes = false;
         DDA_Exercise_Grid.instance.nTargets = false;
         DDA_Exercise_Grid.instance.nFreeDraw = false;
@@ -196,16 +196,19 @@ public class State_FreeDraw : IState
                         {
                             this.new_shapeVert_fd[2].SetActive(true);
                             currentShape_fd = this.new_shapeVert_fd[2];
+                            Instantiate_target.instance.levelDiff.text = "1";
                         }
                         else if (subState_index_V == 2) //Avg Sub-state
                         {
                             this.new_shapeVert_fd[1].SetActive(true);
                             currentShape_fd = this.new_shapeVert_fd[1];
+                            Instantiate_target.instance.levelDiff.text = "2";
                         }
                         else if (subState_index_V == 3) //Exc Sub-state
                         {
                             this.new_shapeVert_fd[0].SetActive(true);
                             currentShape_fd = this.new_shapeVert_fd[0];
+                            Instantiate_target.instance.levelDiff.text = "3";
                         }
                     }
                     if (hit.collider.tag == "ExerciseCollider_V3R" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
@@ -217,16 +220,19 @@ public class State_FreeDraw : IState
                         {
                             this.new_shapeVert_fd[2].SetActive(true);
                             currentShape_fd = this.new_shapeVert_fd[2];
+                            Instantiate_target.instance.levelDiff.text = "1";
                         }
                         else if (subState_index_V == 2) //Avg Sub-state
                         {
                             this.new_shapeVert_fd[1].SetActive(true);
                             currentShape_fd = this.new_shapeVert_fd[1];
+                            Instantiate_target.instance.levelDiff.text = "2";
                         }
                         else if (subState_index_V == 3) //Exc Sub-state
                         {
                             this.new_shapeVert_fd[0].SetActive(true);
                             currentShape_fd = this.new_shapeVert_fd[0];
+                            Instantiate_target.instance.levelDiff.text = "3";
                         }
                     }
                     if (hit.collider.tag == "ExerciseCollider_V4R" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
@@ -236,6 +242,7 @@ public class State_FreeDraw : IState
                         currentShape_fd.SetActive(false);
                         new_shapeVert_fd[2].SetActive(true);
                         currentShape_fd = new_shapeVert_fd[2];
+                        Instantiate_target.instance.levelDiff.text = "1";
                     }
                 }
                 // -------------------------------------- Fim Verticais Direita ----------------------------------------------- //
@@ -251,16 +258,19 @@ public class State_FreeDraw : IState
                         {
                             this.new_shapeVert_fd[5].SetActive(true);
                             currentShape_fd = this.new_shapeVert_fd[5];
+                            Instantiate_target.instance.levelDiff.text = "1";
                         }
                         else if (subState_index_V == 2) //Avg Sub-state
                         {
                             this.new_shapeVert_fd[4].SetActive(true);
                             currentShape_fd = this.new_shapeVert_fd[4];
+                            Instantiate_target.instance.levelDiff.text = "2";
                         }
                         else if (subState_index_V == 3) //Exc Sub-state
                         {
                             this.new_shapeVert_fd[3].SetActive(true);
                             currentShape_fd = this.new_shapeVert_fd[3];
+                            Instantiate_target.instance.levelDiff.text = "3";
                         }
                     }
                     if (hit.collider.tag == "ExerciseCollider_V3L" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
@@ -272,16 +282,19 @@ public class State_FreeDraw : IState
                         {
                             this.new_shapeVert_fd[5].SetActive(true);
                             currentShape_fd = this.new_shapeVert_fd[5];
+                            Instantiate_target.instance.levelDiff.text = "1";
                         }
                         else if (subState_index_V == 2) //Avg Sub-state
                         {
                             this.new_shapeVert_fd[4].SetActive(true);
                             currentShape_fd = this.new_shapeVert_fd[4];
+                            Instantiate_target.instance.levelDiff.text = "2";
                         }
                         else if (subState_index_V == 3) //Exc Sub-state
                         {
                             this.new_shapeVert_fd[3].SetActive(true);
                             currentShape_fd = this.new_shapeVert_fd[3];
+                            Instantiate_target.instance.levelDiff.text = "3";
                         }
                     }
                     if (hit.collider.tag == "ExerciseCollider_V4L" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
@@ -291,6 +304,7 @@ public class State_FreeDraw : IState
                         currentShape_fd.SetActive(false);
                         new_shapeVert_fd[5].SetActive(true);
                         currentShape_fd = new_shapeVert_fd[5];
+                        Instantiate_target.instance.levelDiff.text = "1";
                     }
                     // -------------------------------------- Fim Verticais Esquerda ----------------------------------------------- //
                 }
@@ -309,16 +323,19 @@ public class State_FreeDraw : IState
                     {
                         this.new_shapeHoriz_fd[0].SetActive(true);
                         currentShape_fd = this.new_shapeHoriz_fd[0];
+                        Instantiate_target.instance.levelDiff.text = "1";
                     }
                     else if (subState_index_H == 2) //Avg Sub-state
                     {
                         this.new_shapeHoriz_fd[1].SetActive(true);
                         currentShape_fd = this.new_shapeHoriz_fd[1];
+                        Instantiate_target.instance.levelDiff.text = "2";
                     }
                     else if (subState_index_H == 3) //Exc Sub-state
                     {
                         this.new_shapeHoriz_fd[2].SetActive(true);
                         currentShape_fd = this.new_shapeHoriz_fd[2];
+                        Instantiate_target.instance.levelDiff.text = "3";
                     }
                 }
                 if (hit.collider.tag == "ExerciseCollider_Hmid" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
@@ -330,16 +347,19 @@ public class State_FreeDraw : IState
                     {
                         this.new_shapeHoriz_fd[0].SetActive(true);
                         currentShape_fd = this.new_shapeHoriz_fd[0];
+                        Instantiate_target.instance.levelDiff.text = "1";
                     }
                     else if (subState_index_H == 2) //Avg Sub-state
                     {
                         this.new_shapeHoriz_fd[1].SetActive(true);
                         currentShape_fd = this.new_shapeHoriz_fd[1];
+                        Instantiate_target.instance.levelDiff.text = "2";
                     }
                     else if (subState_index_H == 3) //Exc Sub-state
                     {
                         this.new_shapeHoriz_fd[2].SetActive(true);
                         currentShape_fd = this.new_shapeHoriz_fd[2];
+                        Instantiate_target.instance.levelDiff.text = "3";
                     }
                 }
                 if (hit.collider.tag == "ExerciseCollider_Hhigh" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
@@ -349,6 +369,7 @@ public class State_FreeDraw : IState
                     subState_index_H = 1;
                     this.new_shapeHoriz_fd[0].SetActive(true);
                     currentShape_fd = this.new_shapeHoriz_fd[0];
+                    Instantiate_target.instance.levelDiff.text = "1";
                 }
             }
             // -------------------------------------- Fim Horizontais ----------------------------------------------- //
@@ -629,10 +650,10 @@ public class State_FreeDraw : IState
                     }
                 }
 
-                if (State.correctReps > 0)
+                /*if (State.correctReps > 0)
                 {
                     State.correctReps -= 1;
-                }
+                }*/
             }
         }
     }

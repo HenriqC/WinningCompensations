@@ -41,7 +41,6 @@ public class RadialCompletionBar : MonoBehaviour
 
             percentage.text = string.Format("{0} %", (int)Amount);
         }
-
     }
 
 }

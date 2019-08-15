@@ -327,10 +327,10 @@ public class State_Targets : IState
             {
                 State.compensationInCurrentRep = false;
                 Instantiate_target.instance.CooldownTimer(3);
-                if (State.correctReps > 0)
+                /*if (State.correctReps > 0)
                 {
                     State.correctReps--;
-                }
+                }*/
                 if (subState_index > 1 && n_targets > 0)
                 {
                     Instantiate_target.instance.nTargets--;
