@@ -46,6 +46,20 @@ public class TargetAdjustments : MonoBehaviour
         }
     }
 
+    public void CognitiveOnOff (bool isToggled)
+    {
+        if (isToggled)
+        {
+            CognitiveSphereSpawner.instance.stopSpawning_P = true;
+
+            var purpleSphere = GameObject.FindGameObjectsWithTag("CognitiveCollider_P");
+            foreach (GameObject target_p in purpleSphere)
+            {
+                Object.Destroy(target_p);
+            }
+        }
+    }
+
     public void ResetParams()
     {
         var purpleSphere = GameObject.FindGameObjectsWithTag("CognitiveCollider_P");
