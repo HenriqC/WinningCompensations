@@ -3088,6 +3088,8 @@ MonoBehaviour:
   manualDiff_Shapes: {fileID: 1684938843}
   verticalFD: {fileID: 1490823574}
   horizontalFD: {fileID: 1649814255}
+  shoulderLiftOffset: {fileID: 1641118012}
+  hipLeanOffset: {fileID: 457171457}
   maxComp: 0
   compCount: 0
   subState: 0

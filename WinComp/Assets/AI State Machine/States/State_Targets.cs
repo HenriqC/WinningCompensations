@@ -164,7 +164,10 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Basic");
                         Instantiate_target.instance.levelDiff.text = "1";
-                        
+
+                        Instantiate_target.instance.shoulderLiftOffset.value = 0.06f;
+                        Instantiate_target.instance.hipLeanOffset.value = 0.06f;
+
                         // Targets no lado esquerdo
                         Instantiate_target.instance.minRange_L1 = 175f;
                         Instantiate_target.instance.maxRange_L1 = 180f;
@@ -203,6 +206,9 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Poor");
                         Instantiate_target.instance.levelDiff.text = "2";
+
+                        Instantiate_target.instance.shoulderLiftOffset.value = 0.04f;
+                        Instantiate_target.instance.hipLeanOffset.value = 0.04f;
 
                         // Targets no lado esquerdo
                         Instantiate_target.instance.minRange_L1 = 135f;
@@ -244,6 +250,9 @@ public class State_Targets : IState
                     {
                         Debug.LogError("Avg");
                         Instantiate_target.instance.levelDiff.text = "3";
+
+                        Instantiate_target.instance.shoulderLiftOffset.value = 0.11f;
+                        Instantiate_target.instance.hipLeanOffset.value = 0.11f;
 
                         // Targets no lado esquerdo
                         Instantiate_target.instance.minRange_L1 = 100f;
