@@ -121,12 +121,15 @@ public class State_FreeDraw : IState
             {
                 horiz = true;
                 vert = false;
+                State.correctReps = 0;
+                State.tries = 0;
                 Instantiate_target.instance.verticalFD.isOn = false;
                 Instantiate_target.instance.horizontalFD.isOn = false;
                 if (currentShape_fd != null)
                 {
                     currentShape_fd.SetActive(false);
                 }
+
                 new_shapeHoriz_fd[0].SetActive(true);
                 currentShape_fd = this.new_shapeHoriz_fd[0];
                 TargetOrderSet.instance.CreateArray(currentShape_fd);
@@ -136,6 +139,8 @@ public class State_FreeDraw : IState
             {
                 vert = true;
                 horiz = false;
+                State.correctReps = 0;
+                State.tries = 0;
                 Instantiate_target.instance.horizontalFD.isOn = false;
                 Instantiate_target.instance.verticalFD.isOn = false;
                 if (currentShape_fd != null)
@@ -189,8 +194,9 @@ public class State_FreeDraw : IState
                     // -------------------------------------- Verticais Direita ----------------------------------------------- //
                     if (hit.collider.tag == "ExerciseCollider_V2R" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
+                        
                         shapeComplete = true;
-                        currentShape_fd.SetActive(false);
+                        currentShape_fd.SetActive(false);                        
 
                         if (subState_index_V == 1) //Poor Sub-state
                         {
@@ -214,7 +220,7 @@ public class State_FreeDraw : IState
                     if (hit.collider.tag == "ExerciseCollider_V3R" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
                         shapeComplete = true;
-                        currentShape_fd.SetActive(false);
+                        currentShape_fd.SetActive(false);                        
 
                         if (subState_index_V == 1) //Poor Sub-state
                         {
@@ -240,6 +246,7 @@ public class State_FreeDraw : IState
                         shapeComplete = true;
                         subState_index_V = 1;
                         currentShape_fd.SetActive(false);
+                        
                         new_shapeVert_fd[2].SetActive(true);
                         currentShape_fd = new_shapeVert_fd[2];
                         Instantiate_target.instance.levelDiff.text = "1";
@@ -252,7 +259,7 @@ public class State_FreeDraw : IState
                     if (hit.collider.tag == "ExerciseCollider_V2L" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
                         shapeComplete = true;
-                        currentShape_fd.SetActive(false);
+                        currentShape_fd.SetActive(false);                        
 
                         if (subState_index_V == 1) //Poor Sub-state
                         {
@@ -276,7 +283,7 @@ public class State_FreeDraw : IState
                     if (hit.collider.tag == "ExerciseCollider_V3L" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
                         shapeComplete = true;
-                        currentShape_fd.SetActive(false);
+                        currentShape_fd.SetActive(false);                        
 
                         if (subState_index_V == 1) //Poor Sub-state
                         {
@@ -301,7 +308,8 @@ public class State_FreeDraw : IState
                     {
                         shapeComplete = true;
                         subState_index_V = 1;
-                        currentShape_fd.SetActive(false);
+                        currentShape_fd.SetActive(false); 
+                        
                         new_shapeVert_fd[5].SetActive(true);
                         currentShape_fd = new_shapeVert_fd[5];
                         Instantiate_target.instance.levelDiff.text = "1";
@@ -318,7 +326,8 @@ public class State_FreeDraw : IState
                 {
                     shapeComplete = true;
                     currentShape_fd.SetActive(false);
-                    Debug.LogWarning("colidiu");
+                    Debug.LogWarning("colidiu");                    
+
                     if (subState_index_H == 1) //Poor Sub-state
                     {
                         this.new_shapeHoriz_fd[0].SetActive(true);
@@ -341,7 +350,7 @@ public class State_FreeDraw : IState
                 if (hit.collider.tag == "ExerciseCollider_Hmid" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
                     shapeComplete = true;
-                    currentShape_fd.SetActive(false);
+                    currentShape_fd.SetActive(false);                    
 
                     if (subState_index_H == 1) //Poor Sub-state
                     {
@@ -365,8 +374,9 @@ public class State_FreeDraw : IState
                 if (hit.collider.tag == "ExerciseCollider_Hhigh" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
                     shapeComplete = true;
-                    currentShape_fd.SetActive(false);
+                    currentShape_fd.SetActive(false);                    
                     subState_index_H = 1;
+
                     this.new_shapeHoriz_fd[0].SetActive(true);
                     currentShape_fd = this.new_shapeHoriz_fd[0];
                     Instantiate_target.instance.levelDiff.text = "1";
