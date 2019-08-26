@@ -471,7 +471,7 @@ public class State_FreeDraw : IState
             if (Instantiate_target.instance.maxTimer == 0)
             {
                 // Aqui é onde o FT vai poder definir o tempo que cada forma fica no ecrã --------------------------- //
-                Instantiate_target.instance.MaxRepTimer(10);
+                Instantiate_target.instance.MaxRepTimer(Instantiate_target.instance.lineDrawTimer);
 
                 if (horiz == true)
                 {
