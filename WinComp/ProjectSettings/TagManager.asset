@@ -34,6 +34,15 @@ TagManager:
   - ExerciseCollider_Hhigh
   - ExerciseCollider_Hmid
   - ExerciseCollider_Hlow
+  - ExerciseCollider_V4L_Inv
+  - ExerciseCollider_V3L_Inv
+  - ExerciseCollider_V2L_Inv
+  - ExerciseCollider_V4R_Inv
+  - ExerciseCollider_V3R_Inv
+  - ExerciseCollider_V2R_Inv
+  - ExerciseCollider_Hhigh_Inv
+  - ExerciseCollider_Hmid_Inv
+  - ExerciseCollider_Hlow_Inv
   layers:
   - Default
   - TransparentFX

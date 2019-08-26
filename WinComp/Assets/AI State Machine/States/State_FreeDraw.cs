@@ -150,15 +150,15 @@ public class State_FreeDraw : IState
 
                 if (State.leftArmSelected)
                 {
-                    new_shapeVert_fd[5].SetActive(true);
-                    currentShape_fd = this.new_shapeVert_fd[5];
+                    new_shapeVert_fd[10].SetActive(true);
+                    currentShape_fd = this.new_shapeVert_fd[10];
                     TargetOrderSet.instance.CreateArray(currentShape_fd);
                     TargetOrderSet.instance.SetOrder();
                 }
                 else if (!State.leftArmSelected)
                 {
-                    new_shapeVert_fd[2].SetActive(true);
-                    currentShape_fd = this.new_shapeVert_fd[2];
+                    new_shapeVert_fd[4].SetActive(true);
+                    currentShape_fd = this.new_shapeVert_fd[4];
                     TargetOrderSet.instance.CreateArray(currentShape_fd);
                     TargetOrderSet.instance.SetOrder();
                 }
@@ -194,20 +194,48 @@ public class State_FreeDraw : IState
                     // -------------------------------------- Verticais Direita ----------------------------------------------- //
                     if (hit.collider.tag == "ExerciseCollider_V2R" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
+                        currentShape_fd.SetActive(false);
+                        this.new_shapeVert_fd[5].SetActive(true);
+                        currentShape_fd = this.new_shapeVert_fd[5];
+                        TargetOrderSet.instance.CreateArray(currentShape_fd);
+                        TargetOrderSet.instance.SetOrder();
+                        Instantiate_target.instance.PlayClip();
+                    }
+                    if (hit.collider.tag == "ExerciseCollider_V3R" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                    {
+                        currentShape_fd.SetActive(false);
+                        this.new_shapeVert_fd[3].SetActive(true);
+                        currentShape_fd = this.new_shapeVert_fd[3];
+                        TargetOrderSet.instance.CreateArray(currentShape_fd);
+                        TargetOrderSet.instance.SetOrder();
+                        Instantiate_target.instance.PlayClip();
+                    }
+                    if (hit.collider.tag == "ExerciseCollider_V4R" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                    {
+                        currentShape_fd.SetActive(false);
+                        this.new_shapeVert_fd[1].SetActive(true);
+                        currentShape_fd = this.new_shapeVert_fd[1];
+                        TargetOrderSet.instance.CreateArray(currentShape_fd);
+                        TargetOrderSet.instance.SetOrder();
+                        Instantiate_target.instance.PlayClip();
+                    }
+
+                    if (hit.collider.tag == "ExerciseCollider_V2R_Inv" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                    {
                         
                         shapeComplete = true;
                         currentShape_fd.SetActive(false);                        
 
                         if (subState_index_V == 1) //Poor Sub-state
                         {
-                            this.new_shapeVert_fd[2].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[2];
+                            this.new_shapeVert_fd[4].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[4];
                             Instantiate_target.instance.levelDiff.text = "1";
                         }
                         else if (subState_index_V == 2) //Avg Sub-state
                         {
-                            this.new_shapeVert_fd[1].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[1];
+                            this.new_shapeVert_fd[2].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[2];
                             Instantiate_target.instance.levelDiff.text = "2";
                         }
                         else if (subState_index_V == 3) //Exc Sub-state
@@ -217,21 +245,21 @@ public class State_FreeDraw : IState
                             Instantiate_target.instance.levelDiff.text = "3";
                         }
                     }
-                    if (hit.collider.tag == "ExerciseCollider_V3R" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                    if (hit.collider.tag == "ExerciseCollider_V3R_Inv" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
                         shapeComplete = true;
                         currentShape_fd.SetActive(false);                        
 
                         if (subState_index_V == 1) //Poor Sub-state
                         {
-                            this.new_shapeVert_fd[2].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[2];
+                            this.new_shapeVert_fd[4].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[4];
                             Instantiate_target.instance.levelDiff.text = "1";
                         }
                         else if (subState_index_V == 2) //Avg Sub-state
                         {
-                            this.new_shapeVert_fd[1].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[1];
+                            this.new_shapeVert_fd[2].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[2];
                             Instantiate_target.instance.levelDiff.text = "2";
                         }
                         else if (subState_index_V == 3) //Exc Sub-state
@@ -241,14 +269,14 @@ public class State_FreeDraw : IState
                             Instantiate_target.instance.levelDiff.text = "3";
                         }
                     }
-                    if (hit.collider.tag == "ExerciseCollider_V4R" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                    if (hit.collider.tag == "ExerciseCollider_V4R_Inv" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
                         shapeComplete = true;
                         subState_index_V = 1;
                         currentShape_fd.SetActive(false);
                         
-                        new_shapeVert_fd[2].SetActive(true);
-                        currentShape_fd = new_shapeVert_fd[2];
+                        new_shapeVert_fd[4].SetActive(true);
+                        currentShape_fd = new_shapeVert_fd[4];
                         Instantiate_target.instance.levelDiff.text = "1";
                     }
                 }
@@ -258,60 +286,89 @@ public class State_FreeDraw : IState
                     // -------------------------------------- Verticais Esquerda ----------------------------------------------- //
                     if (hit.collider.tag == "ExerciseCollider_V2L" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
-                        shapeComplete = true;
-                        currentShape_fd.SetActive(false);                        
-
-                        if (subState_index_V == 1) //Poor Sub-state
-                        {
-                            this.new_shapeVert_fd[5].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[5];
-                            Instantiate_target.instance.levelDiff.text = "1";
-                        }
-                        else if (subState_index_V == 2) //Avg Sub-state
-                        {
-                            this.new_shapeVert_fd[4].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[4];
-                            Instantiate_target.instance.levelDiff.text = "2";
-                        }
-                        else if (subState_index_V == 3) //Exc Sub-state
-                        {
-                            this.new_shapeVert_fd[3].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[3];
-                            Instantiate_target.instance.levelDiff.text = "3";
-                        }
+                        Debug.LogWarning("acertou");
+                        currentShape_fd.SetActive(false);
+                        this.new_shapeVert_fd[11].SetActive(true);
+                        currentShape_fd = this.new_shapeVert_fd[11];
+                        TargetOrderSet.instance.CreateArray(currentShape_fd);
+                        TargetOrderSet.instance.SetOrder();
+                        Instantiate_target.instance.PlayClip();
                     }
                     if (hit.collider.tag == "ExerciseCollider_V3L" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                    {
+                        currentShape_fd.SetActive(false);
+                        this.new_shapeVert_fd[9].SetActive(true);
+                        currentShape_fd = this.new_shapeVert_fd[9];
+                        TargetOrderSet.instance.CreateArray(currentShape_fd);
+                        TargetOrderSet.instance.SetOrder();
+                        Instantiate_target.instance.PlayClip();
+                    }
+
+                    if (hit.collider.tag == "ExerciseCollider_V4L" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                    {
+                        currentShape_fd.SetActive(false);
+                        this.new_shapeVert_fd[7].SetActive(true);
+                        currentShape_fd = this.new_shapeVert_fd[7];
+                        TargetOrderSet.instance.CreateArray(currentShape_fd);
+                        TargetOrderSet.instance.SetOrder();
+                        Instantiate_target.instance.PlayClip();
+                    }
+                    if (hit.collider.tag == "ExerciseCollider_V2L_Inv" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
                         shapeComplete = true;
                         currentShape_fd.SetActive(false);                        
 
                         if (subState_index_V == 1) //Poor Sub-state
                         {
-                            this.new_shapeVert_fd[5].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[5];
+                            this.new_shapeVert_fd[10].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[10];
                             Instantiate_target.instance.levelDiff.text = "1";
                         }
                         else if (subState_index_V == 2) //Avg Sub-state
                         {
-                            this.new_shapeVert_fd[4].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[4];
+                            this.new_shapeVert_fd[8].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[8];
                             Instantiate_target.instance.levelDiff.text = "2";
                         }
                         else if (subState_index_V == 3) //Exc Sub-state
                         {
-                            this.new_shapeVert_fd[3].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[3];
+                            this.new_shapeVert_fd[6].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[6];
                             Instantiate_target.instance.levelDiff.text = "3";
                         }
                     }
-                    if (hit.collider.tag == "ExerciseCollider_V4L" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                    if (hit.collider.tag == "ExerciseCollider_V3L_Inv" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                    {
+                        shapeComplete = true;
+                        currentShape_fd.SetActive(false);                        
+
+                        if (subState_index_V == 1) //Poor Sub-state
+                        {
+                            this.new_shapeVert_fd[10].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[10];
+                            Instantiate_target.instance.levelDiff.text = "1";
+                        }
+                        else if (subState_index_V == 2) //Avg Sub-state
+                        {
+                            this.new_shapeVert_fd[8].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[8];
+                            Instantiate_target.instance.levelDiff.text = "2";
+                        }
+                        else if (subState_index_V == 3) //Exc Sub-state
+                        {
+                            this.new_shapeVert_fd[6].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[6];
+                            Instantiate_target.instance.levelDiff.text = "3";
+                        }
+                    }
+                    if (hit.collider.tag == "ExerciseCollider_V4L_Inv" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                     {
                         shapeComplete = true;
                         subState_index_V = 1;
                         currentShape_fd.SetActive(false); 
                         
-                        new_shapeVert_fd[5].SetActive(true);
-                        currentShape_fd = new_shapeVert_fd[5];
+                        new_shapeVert_fd[10].SetActive(true);
+                        currentShape_fd = new_shapeVert_fd[10];
                         Instantiate_target.instance.levelDiff.text = "1";
                     }
                     // -------------------------------------- Fim Verticais Esquerda ----------------------------------------------- //
@@ -323,6 +380,34 @@ public class State_FreeDraw : IState
 
                 // -------------------------------------- Horizontais ----------------------------------------------- //
                 if (hit.collider.tag == "ExerciseCollider_Hlow" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                {
+                    currentShape_fd.SetActive(false);
+                    this.new_shapeHoriz_fd[1].SetActive(true);
+                    currentShape_fd = this.new_shapeHoriz_fd[1];
+                    TargetOrderSet.instance.CreateArray(currentShape_fd);
+                    TargetOrderSet.instance.SetOrder();
+                    Instantiate_target.instance.PlayClip();
+                }
+                if (hit.collider.tag == "ExerciseCollider_Hmid" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                {
+                    currentShape_fd.SetActive(false);
+                    this.new_shapeHoriz_fd[3].SetActive(true);
+                    currentShape_fd = this.new_shapeHoriz_fd[3];
+                    TargetOrderSet.instance.CreateArray(currentShape_fd);
+                    TargetOrderSet.instance.SetOrder();
+                    Instantiate_target.instance.PlayClip();
+                }
+
+                if (hit.collider.tag == "ExerciseCollider_Hhigh" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                {
+                    currentShape_fd.SetActive(false);
+                    this.new_shapeHoriz_fd[5].SetActive(true);
+                    currentShape_fd = this.new_shapeHoriz_fd[5];
+                    TargetOrderSet.instance.CreateArray(currentShape_fd);
+                    TargetOrderSet.instance.SetOrder();
+                    Instantiate_target.instance.PlayClip();
+                }
+                if (hit.collider.tag == "ExerciseCollider_Hlow_Inv" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
                     shapeComplete = true;
                     currentShape_fd.SetActive(false);
@@ -336,18 +421,18 @@ public class State_FreeDraw : IState
                     }
                     else if (subState_index_H == 2) //Avg Sub-state
                     {
-                        this.new_shapeHoriz_fd[1].SetActive(true);
-                        currentShape_fd = this.new_shapeHoriz_fd[1];
+                        this.new_shapeHoriz_fd[2].SetActive(true);
+                        currentShape_fd = this.new_shapeHoriz_fd[2];
                         Instantiate_target.instance.levelDiff.text = "2";
                     }
                     else if (subState_index_H == 3) //Exc Sub-state
                     {
-                        this.new_shapeHoriz_fd[2].SetActive(true);
-                        currentShape_fd = this.new_shapeHoriz_fd[2];
+                        this.new_shapeHoriz_fd[4].SetActive(true);
+                        currentShape_fd = this.new_shapeHoriz_fd[4];
                         Instantiate_target.instance.levelDiff.text = "3";
                     }
                 }
-                if (hit.collider.tag == "ExerciseCollider_Hmid" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                if (hit.collider.tag == "ExerciseCollider_Hmid_Inv" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
                     shapeComplete = true;
                     currentShape_fd.SetActive(false);                    
@@ -360,18 +445,18 @@ public class State_FreeDraw : IState
                     }
                     else if (subState_index_H == 2) //Avg Sub-state
                     {
-                        this.new_shapeHoriz_fd[1].SetActive(true);
-                        currentShape_fd = this.new_shapeHoriz_fd[1];
+                        this.new_shapeHoriz_fd[2].SetActive(true);
+                        currentShape_fd = this.new_shapeHoriz_fd[2];
                         Instantiate_target.instance.levelDiff.text = "2";
                     }
                     else if (subState_index_H == 3) //Exc Sub-state
                     {
-                        this.new_shapeHoriz_fd[2].SetActive(true);
-                        currentShape_fd = this.new_shapeHoriz_fd[2];
+                        this.new_shapeHoriz_fd[4].SetActive(true);
+                        currentShape_fd = this.new_shapeHoriz_fd[4];
                         Instantiate_target.instance.levelDiff.text = "3";
                     }
                 }
-                if (hit.collider.tag == "ExerciseCollider_Hhigh" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
+                if (hit.collider.tag == "ExerciseCollider_Hhigh_Inv" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length - 1)
                 {
                     shapeComplete = true;
                     currentShape_fd.SetActive(false);                    
@@ -385,6 +470,7 @@ public class State_FreeDraw : IState
             // -------------------------------------- Fim Horizontais ----------------------------------------------- //
             if (Instantiate_target.instance.maxTimer == 0)
             {
+                // Aqui é onde o FT vai poder definir o tempo que cada forma fica no ecrã --------------------------- //
                 Instantiate_target.instance.MaxRepTimer(10);
 
                 if (horiz == true)
@@ -408,15 +494,15 @@ public class State_FreeDraw : IState
                     }
                     else if (subState_index_H == 2) //Avg Sub-state
                     {
-                        this.new_shapeHoriz_fd[1].SetActive(true);
-                        currentShape_fd = this.new_shapeHoriz_fd[1];
+                        this.new_shapeHoriz_fd[2].SetActive(true);
+                        currentShape_fd = this.new_shapeHoriz_fd[2];
                         TargetOrderSet.instance.CreateArray(currentShape_fd);
                         TargetOrderSet.instance.SetOrder();
                     }
                     else if (subState_index_H == 3) //Exc Sub-state
                     {
-                        this.new_shapeHoriz_fd[2].SetActive(true);
-                        currentShape_fd = this.new_shapeHoriz_fd[2];
+                        this.new_shapeHoriz_fd[4].SetActive(true);
+                        currentShape_fd = this.new_shapeHoriz_fd[4];
                         TargetOrderSet.instance.CreateArray(currentShape_fd);
                         TargetOrderSet.instance.SetOrder();
                     }
@@ -438,15 +524,15 @@ public class State_FreeDraw : IState
                         currentShape_fd.SetActive(false);
                         if (subState_index_V == 1) //Poor Sub-state
                         {
-                            this.new_shapeVert_fd[2].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[2];
+                            this.new_shapeVert_fd[4].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[4];
                             TargetOrderSet.instance.CreateArray(currentShape_fd);
                             TargetOrderSet.instance.SetOrder();
                         }
                         else if (subState_index_V == 2) //Avg Sub-state
                         {
-                            this.new_shapeVert_fd[1].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[1];
+                            this.new_shapeVert_fd[2].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[2];
                             TargetOrderSet.instance.CreateArray(currentShape_fd);
                             TargetOrderSet.instance.SetOrder();
                         }
@@ -463,22 +549,22 @@ public class State_FreeDraw : IState
                         currentShape_fd.SetActive(false);
                         if (subState_index_V == 1) //Poor Sub-state
                         {
-                            this.new_shapeVert_fd[5].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[5];
+                            this.new_shapeVert_fd[10].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[10];
                             TargetOrderSet.instance.CreateArray(currentShape_fd);
                             TargetOrderSet.instance.SetOrder();
                         }
                         else if (subState_index_V == 2) //Avg Sub-state
                         {
-                            this.new_shapeVert_fd[4].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[4];
+                            this.new_shapeVert_fd[8].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[8];
                             TargetOrderSet.instance.CreateArray(currentShape_fd);
                             TargetOrderSet.instance.SetOrder();
                         }
                         else if (subState_index_V == 3) //Exc Sub-state
                         {
-                            this.new_shapeVert_fd[3].SetActive(true);
-                            currentShape_fd = this.new_shapeVert_fd[3];
+                            this.new_shapeVert_fd[6].SetActive(true);
+                            currentShape_fd = this.new_shapeVert_fd[6];
                             TargetOrderSet.instance.CreateArray(currentShape_fd);
                             TargetOrderSet.instance.SetOrder();
                         }
@@ -607,15 +693,15 @@ public class State_FreeDraw : IState
 
                                 if (subState_index_V == 1)
                                 {
-                                    this.new_shapeVert_fd[2].SetActive(true);
-                                    currentShape_fd = this.new_shapeVert_fd[2];
+                                    this.new_shapeVert_fd[4].SetActive(true);
+                                    currentShape_fd = this.new_shapeVert_fd[4];
                                     TargetOrderSet.instance.CreateArray(currentShape_fd);
                                     TargetOrderSet.instance.SetOrder();
                                 }
                                 else if (subState_index_V == 2)
                                 {
-                                    this.new_shapeVert_fd[1].SetActive(true);
-                                    currentShape_fd = this.new_shapeVert_fd[1];
+                                    this.new_shapeVert_fd[2].SetActive(true);
+                                    currentShape_fd = this.new_shapeVert_fd[2];
                                     TargetOrderSet.instance.CreateArray(currentShape_fd);
                                     TargetOrderSet.instance.SetOrder();
                                 }
@@ -636,22 +722,22 @@ public class State_FreeDraw : IState
                                 }
                                 if (subState_index_V == 1)
                                 {
-                                    this.new_shapeVert_fd[5].SetActive(true);
-                                    currentShape_fd = this.new_shapeVert_fd[5];
+                                    this.new_shapeVert_fd[10].SetActive(true);
+                                    currentShape_fd = this.new_shapeVert_fd[10];
                                     TargetOrderSet.instance.CreateArray(currentShape_fd);
                                     TargetOrderSet.instance.SetOrder();
                                 }
                                 else if (subState_index_V == 2)
                                 {
-                                    this.new_shapeVert_fd[4].SetActive(true);
-                                    currentShape_fd = this.new_shapeVert_fd[4];
+                                    this.new_shapeVert_fd[8].SetActive(true);
+                                    currentShape_fd = this.new_shapeVert_fd[8];
                                     TargetOrderSet.instance.CreateArray(currentShape_fd);
                                     TargetOrderSet.instance.SetOrder();
                                 }
                                 else if (subState_index_V == 3)
                                 {
-                                    this.new_shapeVert_fd[3].SetActive(true);
-                                    currentShape_fd = this.new_shapeVert_fd[3];
+                                    this.new_shapeVert_fd[6].SetActive(true);
+                                    currentShape_fd = this.new_shapeVert_fd[6];
                                     TargetOrderSet.instance.CreateArray(currentShape_fd);
                                     TargetOrderSet.instance.SetOrder();
                                 }
