@@ -17,6 +17,7 @@ public class Instantiate_target : MonoBehaviour
 
     public Slider shoulderLiftOffset;
     public Slider hipLeanOffset;
+    public Slider pathTimer;
 
     public float maxComp;
     public float compCount;
@@ -25,6 +26,8 @@ public class Instantiate_target : MonoBehaviour
     public float manualSpeed;
     public float radius;
     public int nTargets;
+    public float maxPathTimer;
+
 
     public Vector3 targetScale = new Vector3 (0.125f, 0.125f, 0.125f);
 

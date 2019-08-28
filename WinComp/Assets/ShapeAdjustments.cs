@@ -43,4 +43,9 @@ public class ShapeAdjustments : MonoBehaviour
             Instantiate_target.instance.horizontalFD.isOn = false;
         }
     }
+
+    public void SetTimeLimit (float time)
+    {
+        Instantiate_target.instance.maxPathTimer = time;
+    }
 }

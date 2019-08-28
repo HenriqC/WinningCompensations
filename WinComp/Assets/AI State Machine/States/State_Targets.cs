@@ -180,7 +180,7 @@ public class State_Targets : IState
                         Instantiate_target.instance.maxRange_R2 = 0f;
                         // ---------------------------------------------- //
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
-                        CognitiveSphereSpawner.instance.spawnRate_P = 10f;                        
+                        CognitiveSphereSpawner.instance.spawnRate_P = 6f;                        
                         if (State.leftArmSelected)
                         {
                             Instantiate_target.instance.L_Area_1.SetActive(false);
@@ -224,7 +224,7 @@ public class State_Targets : IState
                         //CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         //CognitiveSphereSpawner.instance.spawnRate_B = 10f;                        
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
-                        CognitiveSphereSpawner.instance.spawnRate_P = 8f;
+                        CognitiveSphereSpawner.instance.spawnRate_P = 4f;
                         if (State.leftArmSelected)
                         {
                             Instantiate_target.instance.L_Area_1.SetActive(false);
@@ -268,7 +268,7 @@ public class State_Targets : IState
                         //CognitiveSphereSpawner.instance.spawnStart_B = 1f;
                         //CognitiveSphereSpawner.instance.spawnRate_B = 6f;                       
                         CognitiveSphereSpawner.instance.spawnStart_P = 1f;
-                        CognitiveSphereSpawner.instance.spawnRate_P = 6f;
+                        CognitiveSphereSpawner.instance.spawnRate_P = 3f;
 
                         Instantiate_target.instance.changeSpeed.speed = 0.8f;
                         if (State.leftArmSelected)

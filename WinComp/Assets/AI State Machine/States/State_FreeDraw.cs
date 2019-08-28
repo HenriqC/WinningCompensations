@@ -46,7 +46,8 @@ public class State_FreeDraw : IState
         Instantiate_target.instance.linearDraw_param.SetActive(true);
         Instantiate_target.instance.shapes_param.SetActive(false);
 
-        Instantiate_target.instance.MaxRepTimer(30);
+        Instantiate_target.instance.pathTimer.value = 5;
+        Instantiate_target.instance.MaxRepTimer(Instantiate_target.instance.maxPathTimer);
         var remTargets = GameObject.FindGameObjectsWithTag("TargetCollider");
         var purpleSphere = GameObject.FindGameObjectsWithTag("CognitiveCollider_P");
 
@@ -125,6 +126,9 @@ public class State_FreeDraw : IState
                 State.tries = 0;
                 Instantiate_target.instance.verticalFD.isOn = false;
                 Instantiate_target.instance.horizontalFD.isOn = false;
+                Instantiate_target.instance.pathTimer.value = 5;
+                Instantiate_target.instance.MaxRepTimer(Instantiate_target.instance.maxPathTimer);
+
                 if (currentShape_fd != null)
                 {
                     currentShape_fd.SetActive(false);
@@ -143,6 +147,9 @@ public class State_FreeDraw : IState
                 State.tries = 0;
                 Instantiate_target.instance.horizontalFD.isOn = false;
                 Instantiate_target.instance.verticalFD.isOn = false;
+                Instantiate_target.instance.pathTimer.value = 5;
+                Instantiate_target.instance.MaxRepTimer(Instantiate_target.instance.maxPathTimer);
+
                 if (currentShape_fd != null)
                 {
                     currentShape_fd.SetActive(false);
@@ -471,7 +478,7 @@ public class State_FreeDraw : IState
             if (Instantiate_target.instance.maxTimer == 0)
             {
                 // Aqui é onde o FT vai poder definir o tempo que cada forma fica no ecrã --------------------------- //
-                Instantiate_target.instance.MaxRepTimer(10);
+                Instantiate_target.instance.MaxRepTimer(Instantiate_target.instance.maxPathTimer);
 
                 if (horiz == true)
                 {
@@ -574,7 +581,7 @@ public class State_FreeDraw : IState
 
             if (shapeComplete == true)
             {
-                Instantiate_target.instance.MaxRepTimer(5);
+                Instantiate_target.instance.MaxRepTimer(Instantiate_target.instance.maxPathTimer);
                 Instantiate_target.instance.compCount = 0;
                 TargetOrderSet.instance.CreateArray(currentShape_fd);
                 TargetOrderSet.instance.SetOrder();
@@ -643,7 +650,7 @@ public class State_FreeDraw : IState
 
                 if (Instantiate_target.instance.compCount == poor_countMaxFD)
                 {
-                    if (currentShape_fd == this.new_shapeVert_fd[2] || currentShape_fd == this.new_shapeVert_fd[5] || currentShape_fd == this.new_shapeHoriz_fd[0])
+                    if (currentShape_fd == this.new_shapeVert_fd[10] || currentShape_fd == this.new_shapeVert_fd[4] || currentShape_fd == this.new_shapeHoriz_fd[0])
                     {
                         Instantiate_target.instance.compCount = 0;
                         desce = true;                        
