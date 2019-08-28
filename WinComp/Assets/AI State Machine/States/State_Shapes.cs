@@ -42,7 +42,7 @@ public class State_Shapes : IState
 
         Instantiate_target.instance.MaxRepTimer(30);
         Instantiate_target.instance.levelDiff.text = "1";
-        State.exerciseName = "Shape Fill";
+        State.exerciseName = "Shapes";
         //CognitiveSphereSpawner.instance.stopSpawning_B = true;
         CognitiveSphereSpawner.instance.stopSpawning_P = true;        
 
