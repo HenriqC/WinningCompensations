@@ -72,6 +72,12 @@ public class State_Targets : IState
         {
             State.maxReps = 10;
         }
+
+        if (State.maxSets <= 0)
+        {
+            State.maxSets = 3;
+        }
+        State.completedSets = 0;
         State.correctReps = 0;
         State.tries = 0;
     }
@@ -323,8 +329,15 @@ public class State_Targets : IState
                         Object.Destroy(hit.collider.gameObject);
                     }                    
                 }
-                if (State.correctReps == State.maxReps /*&& subState_index == 4*/)
+                if (State.correctReps == State.maxReps)
                 {
+                    Instantiate_target.instance.nTargets = 0;
+                    State.completedSets++;
+                    State.correctReps = 0;
+                    State.tries = 0;
+                }
+                if (State.completedSets > State.maxSets)
+                {                    
                     Debug.Log("Muda de estado");
                     Object.Destroy(hit.collider.gameObject);
                     Exit();
@@ -373,6 +386,7 @@ public class State_Targets : IState
     }
     public void Exit()
     {
+        State.completedSets = 0;
         State.correctReps = 0;
         State.tries = 0;
         Instantiate_target.instance.DestroyObject(Instantiate_target.instance.ObInstance);

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Parameters : MonoBehaviour {
 
     public InputField reps;
+    public InputField sets;
     public InputField duration;
     public InputField rest;
 
@@ -15,6 +16,15 @@ public class Parameters : MonoBehaviour {
         if (value == "")
             value = "" + 0;
         State.maxReps = Int32.Parse(value);
+    }
+
+    public void setMaxSets(string value)
+    {
+        if (value == "")
+        {
+            value = "" + 0;
+        }
+        State.maxSets = Int32.Parse(value);
     }
 
     public void setDuration(string value) {

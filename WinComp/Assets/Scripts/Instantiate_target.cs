@@ -26,6 +26,7 @@ public class Instantiate_target : MonoBehaviour
     public float manualSpeed;
     public float radius;
     public int nTargets;
+    public int setCounter;
     public float maxPathTimer;
 
 

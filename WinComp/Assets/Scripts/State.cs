@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class State {
     public static int maxReps;
+    public static int maxSets;
+    public static int completedSets;
     public static int setDuration;
     public static int restDuration;
     public static int sessionTimeInt;
@@ -42,7 +44,8 @@ public static class State {
         return !leftArmSelected;
     }
 
-    public static void resetState() {
+    public static void resetState()
+    {
         tries = 0;
         correctReps = 0;
         isRestingTime = false;
@@ -62,6 +65,7 @@ public static class State {
         setDuration = 60;
         restDuration = 60;
         maxReps = 10;
+        maxSets = 3;
 
-}
+    }
 }

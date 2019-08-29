@@ -17,6 +17,8 @@ public class PatientController : MonoBehaviour {
     public Text setTimeTherapist;
     public Text restTimeTherapist;
     public Text triesTherapist;
+    public Text completedSets;
+    public Text maxSets;
 
     public GameObject restPatient;
     public GameObject restTherapist;
@@ -155,5 +157,7 @@ public class PatientController : MonoBehaviour {
         maxRepetitionsPatient.text = "" + State.maxReps;
         correctRepetitionsTherapist.text = "" + State.correctReps;
         triesTherapist.text = "" + State.tries;
+        completedSets.text = "" + State.completedSets;
+        maxSets.text = "" + State.maxSets;
     }
 }
