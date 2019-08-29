@@ -8,6 +8,8 @@ public class Create_Arrays : MonoBehaviour
     public static Create_Arrays instance = null;
     public Button setArray;
     public Button resetArray;
+    public bool setPressed = false;
+    public bool resetPressed = false;
 
     public int counterFlag;
     public GameObject TogglesParent;
@@ -88,6 +90,7 @@ public class Create_Arrays : MonoBehaviour
                 selectedShapes[j] = shapesParent.transform.GetChild(5).gameObject;
             }
         }
+        setPressed = true;
     }
 
     public void ResetButtonPressed()
@@ -100,5 +103,6 @@ public class Create_Arrays : MonoBehaviour
         selectedShapes = new GameObject[0];
         onToggles = new Toggle [0];
         nbOn = 0;
+        resetPressed = true;
     }
 }

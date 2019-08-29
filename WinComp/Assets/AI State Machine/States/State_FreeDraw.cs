@@ -72,33 +72,6 @@ public class State_FreeDraw : IState
         subState_index_V = 1;
         subState_index_H = 1;
         poor_countMaxFD = 4;
-        
-        // ------------------------------------------------------------------------------------- //
-        /*if (Instantiate_target.instance.horizontalFD.isOn == true)
-        {
-            new_shapeHoriz_fd[0].SetActive(true);
-            currentShape_fd = this.new_shapeHoriz_fd[0];
-            TargetOrderSet.instance.CreateArray(currentShape_fd);
-            TargetOrderSet.instance.SetOrder();
-        }
-        else if (Instantiate_target.instance.verticalFD.isOn == true)
-        {
-            if (State.leftArmSelected)
-            {
-                new_shapeVert_fd[5].SetActive(true);
-                currentShape_fd = this.new_shapeVert_fd[5];
-                TargetOrderSet.instance.CreateArray(currentShape_fd);
-                TargetOrderSet.instance.SetOrder();
-            }
-            else if (!State.leftArmSelected)
-            {
-                new_shapeVert_fd[2].SetActive(true);
-                currentShape_fd = this.new_shapeVert_fd[2];
-                TargetOrderSet.instance.CreateArray(currentShape_fd);
-                TargetOrderSet.instance.SetOrder();
-            }
-        }*/
-        // ------------------------------------------------------------------------------------- //
 
         Instantiate_target.instance.compCount = 0;
 
