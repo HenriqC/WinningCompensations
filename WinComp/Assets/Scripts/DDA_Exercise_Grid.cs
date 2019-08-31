@@ -71,10 +71,26 @@ public class DDA_Exercise_Grid : MonoBehaviour
 
     void Awake()
     {
-        nTargets = true;
-        nShapes = false;
-        nFreeDraw = false;
 
+        if (Select_exercises.instance.TargetsOn == true)
+        {
+            nTargets = true;
+            nFreeDraw = false;
+            nShapes = false;
+        }
+        else if (Select_exercises.instance.LineOn == true && Select_exercises.instance.TargetsOn == false)
+        {
+            nTargets = false;
+            nFreeDraw = true;
+            nShapes = false;
+        }
+        else if (Select_exercises.instance.ShapesOn == true && Select_exercises.instance.TargetsOn == false && Select_exercises.instance.TargetsOn == false)
+        {
+            nTargets = false;
+            nFreeDraw = false;
+            nShapes = true;
+        }
+        
         if (instance == null)
         {
             instance = this;
@@ -127,11 +143,6 @@ public class DDA_Exercise_Grid : MonoBehaviour
             nFreeDraw = false;
             this.stateMachine.ChangeState(new State_FreeDraw(this.cPosition_fd, this.new_shapeVert_fd, this.new_shapeHoriz_fd, this.Targets_Tag_fd, this.color_fd));
         }
-        /*else if (nFreeDraw == true)
-        {
-            nFreeDraw = false;
-            this.stateMachine.ChangeState(new State_FreeDraw());
-        }*/
 
         this.stateMachine.ExecuteStateUpdate(); //Alteração para um estado diferente
     }

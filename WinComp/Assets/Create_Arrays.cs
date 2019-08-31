@@ -55,8 +55,7 @@ public class Create_Arrays : MonoBehaviour
             {
                 counterFlag++;
                 onToggles[counterFlag-1] = toggles[l].GetComponent<Toggle>();                
-            }
-            
+            }            
         }                  
     }
 

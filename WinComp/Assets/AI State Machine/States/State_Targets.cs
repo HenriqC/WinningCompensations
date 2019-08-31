@@ -111,6 +111,13 @@ public class State_Targets : IState
                     Instantiate_target.instance.nTargets++;                    
                     State.correctReps++;
                     State.tries++;
+                    if (State.correctReps == State.maxReps)
+                    {
+                        Instantiate_target.instance.restActivated = true;
+                        Instantiate_target.instance.setChanged = true;
+                        Instantiate_target.instance.nTargets = 0;
+                        State.completedSets++;
+                    }
 
                     Instantiate_target.instance.PlayClip();
 
@@ -329,19 +336,6 @@ public class State_Targets : IState
                         Object.Destroy(hit.collider.gameObject);
                     }                    
                 }
-                if (State.correctReps == State.maxReps)
-                {
-                    Instantiate_target.instance.nTargets = 0;
-                    State.completedSets++;
-                    State.correctReps = 0;
-                    State.tries = 0;
-                }
-                if (State.completedSets > State.maxSets)
-                {                    
-                    Debug.Log("Muda de estado");
-                    Object.Destroy(hit.collider.gameObject);
-                    Exit();
-                }                
             }            
 
             // ------------------- ---------------------------------------- ------------------------------------------- //
@@ -381,7 +375,26 @@ public class State_Targets : IState
                     Instantiate_target.instance.nTargets = 0;
                 }
                 
-            }            
+            }
+            
+            if (Instantiate_target.instance.restActivated == true)
+            {
+                Instantiate_target.instance.restActivated = false;
+                Instantiate_target.instance.nTargets = 0;
+            }
+
+            if (Instantiate_target.instance.setChanged == true)
+            {
+                Instantiate_target.instance.setChanged = false;
+                State.correctReps = 0;
+                State.tries = 0;
+            }
+            if (State.completedSets > State.maxSets)
+            {
+                Debug.Log("Muda de estado");
+                Object.Destroy(hit.collider.gameObject);
+                Exit();
+            }
         }
     }
     public void Exit()
@@ -407,10 +420,24 @@ public class State_Targets : IState
         Instantiate_target.instance.R_Area_5.SetActive(false);
 
         // Variáveis de mudança de exercício
-        DDA_Exercise_Grid.instance.nTargets = false;
-        DDA_Exercise_Grid.instance.nShapes = false;
-        DDA_Exercise_Grid.instance.nFreeDraw = true;
-        //Instantiate_target.instance.horizontalFD.isOn = true;
+
+        if (Select_exercises.instance.LineOn == true)
+        {
+            DDA_Exercise_Grid.instance.nTargets = false;
+            DDA_Exercise_Grid.instance.nShapes = false;
+            DDA_Exercise_Grid.instance.nFreeDraw = true;
+        }
+        else if (Select_exercises.instance.LineOn == false && Select_exercises.instance.ShapesOn == true)
+        {
+            DDA_Exercise_Grid.instance.nTargets = false;
+            DDA_Exercise_Grid.instance.nFreeDraw = false;
+            DDA_Exercise_Grid.instance.nShapes = true;            
+        }
+        else if (Select_exercises.instance.LineOn == false && Select_exercises.instance.ShapesOn == false)
+        {
+            Enter();
+        }
+
     }    
 }
 

@@ -14,6 +14,7 @@ public static class State {
 
     public static int tries;
     public static int correctReps;
+    public static int previousSet;
     public static int restCount;
 
     public static bool leftArmSelected;

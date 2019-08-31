@@ -29,6 +29,9 @@ public class Instantiate_target : MonoBehaviour
     public int setCounter;
     public float maxPathTimer;
 
+    public bool restActivated = false;
+    public bool setChanged;
+
 
     public Vector3 targetScale = new Vector3 (0.125f, 0.125f, 0.125f);
 

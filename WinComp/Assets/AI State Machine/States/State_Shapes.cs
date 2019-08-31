@@ -64,6 +64,7 @@ public class State_Shapes : IState
         {
             State.maxReps = 20;
         }
+        State.completedSets = 0;
         State.correctReps = 0;
         State.tries = 0;
     }
@@ -93,6 +94,8 @@ public class State_Shapes : IState
 
             if (Create_Arrays.instance.resetPressed == true)
             {
+                Create_Arrays.instance.resetPressed = false;
+                currentShape.SetActive(false);
                 State.correctReps = 0;
                 State.tries = 0;
             }
@@ -141,18 +144,9 @@ public class State_Shapes : IState
                 }
                 else if (hit.collider.tag == "ExerciseCollider_5" && TargetOrderSet.instance.orderFlag == TargetOrderSet.instance.targetChildren.Length -1)
                 {
-                    // Aqui é onde vou mudar para só sair deste ex quando o nr de sets feitos for igual ao nr de sets definidos pelo FT ------------------------ //
-                    if (State.correctReps == State.maxReps)
-                    {
-                        terminou = true;
-                        Exit();
-                    }
-                    else
-                    {
-                        shapeComplete = true;
-                    }                                        
+                    shapeComplete = true;
                 }                
-            }
+            }           
 
             if (Instantiate_target.instance.maxTimer == 0)
             {
@@ -200,8 +194,15 @@ public class State_Shapes : IState
 
                 State.tries += 1;
                 State.correctReps+=1;
-                
-                
+                if (State.correctReps == State.maxReps)
+                {
+                    Instantiate_target.instance.setChanged = true;
+                    subState_index = 0;
+                    State.completedSets++;
+                    State.correctReps = 0;
+                    State.tries = 0;
+                }
+
                 float complete = State.correctReps;
                 int minutes = (State.sessionTimeInt / State.correctReps) / 60;
                 int seconds = (State.sessionTimeInt / State.correctReps) % 60;
@@ -260,6 +261,25 @@ public class State_Shapes : IState
                     }
                 }
             }
+            if (Instantiate_target.instance.restActivated == true)
+            {
+                Instantiate_target.instance.restActivated = false;
+                Instantiate_target.instance.setChanged = true;
+                subState_index = 0;
+                State.completedSets++;
+                State.correctReps = 0;
+                State.tries = 0;
+            }
+            if (Instantiate_target.instance.setChanged == true)
+            {
+                Instantiate_target.instance.setChanged = false;
+                State.previousSet = State.correctReps;
+            }
+            if (State.completedSets > State.maxSets)
+            {
+                terminou = true;
+                Exit();
+            }
         }
     }
 
@@ -268,21 +288,60 @@ public class State_Shapes : IState
         if (sobe == true)
         {
             currentShape.SetActive(false);
-            DDA_Exercise_Grid.instance.nShapes = false;
-            DDA_Exercise_Grid.instance.nTargets = true;
+            if (Select_exercises.instance.TargetsOn == true)
+            {                
+                DDA_Exercise_Grid.instance.nTargets = true;
+                DDA_Exercise_Grid.instance.nFreeDraw = false;
+                DDA_Exercise_Grid.instance.nShapes = false;
+            }
+            else if (Select_exercises.instance.TargetsOn == false && Select_exercises.instance.LineOn == true)
+            {
+                DDA_Exercise_Grid.instance.nTargets = false;
+                DDA_Exercise_Grid.instance.nFreeDraw = true;
+                DDA_Exercise_Grid.instance.nShapes = false;
+            }
+            else if (Select_exercises.instance.TargetsOn == false && Select_exercises.instance.LineOn == false)
+            {
+                Enter();
+            }
+            
         }
         else if (desce == true)
         {
             currentShape.SetActive(false);
-            DDA_Exercise_Grid.instance.nShapes = false;
-            DDA_Exercise_Grid.instance.nFreeDraw = true;
+            if (Select_exercises.instance.LineOn == true)
+            {
+                DDA_Exercise_Grid.instance.nTargets = false;
+                DDA_Exercise_Grid.instance.nFreeDraw = true;
+                DDA_Exercise_Grid.instance.nShapes = false;
+            }
+            else if (Select_exercises.instance.LineOn == false && Select_exercises.instance.TargetsOn == true)
+            {
+                DDA_Exercise_Grid.instance.nTargets = true;
+                DDA_Exercise_Grid.instance.nFreeDraw = false;
+                DDA_Exercise_Grid.instance.nShapes = false;                
+            }
+            else if (Select_exercises.instance.TargetsOn == false && Select_exercises.instance.LineOn == false)
+            {
+                Enter();
+            }
         }
         else if (terminou == true)
         {
             currentShape.SetActive(false);
-            DDA_Exercise_Grid.instance.nShapes = false;
-            DDA_Exercise_Grid.instance.nTargets = true;
-        }
-        
+
+            if (Select_exercises.instance.TargetsOn == true)
+            {
+                DDA_Exercise_Grid.instance.nTargets = true;
+                DDA_Exercise_Grid.instance.nFreeDraw = false;
+                DDA_Exercise_Grid.instance.nShapes = false;                
+            }
+            else if (Select_exercises.instance.TargetsOn == false && Select_exercises.instance.LineOn == true)
+            {
+                DDA_Exercise_Grid.instance.nTargets = false;
+                DDA_Exercise_Grid.instance.nFreeDraw = true;
+                DDA_Exercise_Grid.instance.nShapes = false;
+            }
+        }        
     }
 }

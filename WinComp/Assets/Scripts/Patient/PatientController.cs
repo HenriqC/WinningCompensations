@@ -19,6 +19,7 @@ public class PatientController : MonoBehaviour {
     public Text triesTherapist;
     public Text completedSets;
     public Text maxSets;
+    public Text previousSetReps;
 
     public GameObject restPatient;
     public GameObject restTherapist;
@@ -143,13 +144,24 @@ public class PatientController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
-        if (State.hasFinishedExercise) {
+        if (Instantiate_target.instance.restActivated == true)
+        {
+            Instantiate_target.instance.restActivated = false;
+            activateRest();
+            Instantiate_target.instance.setChanged = true;
+        }
+        if (Instantiate_target.instance.setChanged == true)
+        {
+            Instantiate_target.instance.setChanged = false;
+            activateSet();
+        }
+        if (State.hasFinishedExercise)
+        {
             startCounterPatient.transform.gameObject.SetActive(false);
             CancelInvoke("countDown");
             CancelInvoke("restTimeDec");
             CancelInvoke("setTimeDec");
-            CancelInvoke("sessionTimeInc"); 
+            CancelInvoke("sessionTimeInc");
         }
         completed.SetActive(State.hasFinishedExercise);
 
@@ -159,5 +171,6 @@ public class PatientController : MonoBehaviour {
         triesTherapist.text = "" + State.tries;
         completedSets.text = "" + State.completedSets;
         maxSets.text = "" + State.maxSets;
+        previousSetReps.text = "" + State.previousSet;
     }
 }

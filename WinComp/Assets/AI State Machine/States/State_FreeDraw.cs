@@ -586,10 +586,25 @@ public class State_FreeDraw : IState
                 State.correctReps += 1;
                 if (State.correctReps == State.maxReps)
                 {
-                    sobe = true;
-                    Exit();
-                }
+                    Instantiate_target.instance.setChanged = true;
+                    if (vert == true)
+                    {
+                        subState_index_V = 1;
+                    }
+                    else if (horiz == true)
+                    {
+                        subState_index_H = 1;
+                    }
+                    State.completedSets++;
+                    State.correctReps = 0;
+                    State.tries = 0;
 
+                    if (State.completedSets > State.maxSets)
+                    {
+                        sobe = true;
+                        Exit();
+                    }
+                }
                 State.tries += 1;
                 float complete = State.correctReps;
                 int minutes = (State.sessionTimeInt / State.correctReps) / 60;
@@ -725,29 +740,70 @@ public class State_FreeDraw : IState
                         }                                                                          
                     }
                 }
+            }           
 
-                /*if (State.correctReps > 0)
+            if (Instantiate_target.instance.restActivated == true)
+            {
+                Instantiate_target.instance.restActivated = false;
+                if (vert == true)
                 {
-                    State.correctReps -= 1;
-                }*/
+                    subState_index_V = 1;
+                }
+                else if (horiz == true)
+                {
+                    subState_index_H = 1;
+                }
+                State.completedSets++;
+                State.correctReps = 0;
+                State.tries = 0;
             }
+            if (Instantiate_target.instance.setChanged == true)
+            {
+                Instantiate_target.instance.setChanged = false;
+                State.previousSet = State.correctReps;
+            }            
         }
     }
 
     public void Exit()
     {
+        State.completedSets = 0;
+        State.correctReps = 0;
+        State.tries = 0;
         currentShape_fd.SetActive(false);
         if (desce)
         {
             currentShape_fd.SetActive(false);
-            DDA_Exercise_Grid.instance.nFreeDraw = false;
-            DDA_Exercise_Grid.instance.nTargets = true;
+            if (Select_exercises.instance.TargetsOn == true)
+            {
+                DDA_Exercise_Grid.instance.nTargets = true;
+                DDA_Exercise_Grid.instance.nFreeDraw = false;
+                DDA_Exercise_Grid.instance.nShapes = false;
+            }
+            else 
+            {
+                Enter();
+            }            
         }
         else if (sobe)
         {
             currentShape_fd.SetActive(false);
-            DDA_Exercise_Grid.instance.nFreeDraw = false;
-            DDA_Exercise_Grid.instance.nShapes = true;
+            if (Select_exercises.instance.ShapesOn == true)
+            {
+                DDA_Exercise_Grid.instance.nTargets = false;
+                DDA_Exercise_Grid.instance.nFreeDraw = false;
+                DDA_Exercise_Grid.instance.nShapes = true;
+            }
+            else if (Select_exercises.instance.ShapesOn == false && Select_exercises.instance.TargetsOn == true)
+            {
+                DDA_Exercise_Grid.instance.nTargets = true;
+                DDA_Exercise_Grid.instance.nFreeDraw = false;
+                DDA_Exercise_Grid.instance.nShapes = false;
+            }
+            else if (Select_exercises.instance.TargetsOn == false && Select_exercises.instance.LineOn == true && Select_exercises.instance.ShapesOn)
+            {
+                Enter();
+            }            
         }
     }
 }
