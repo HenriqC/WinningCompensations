@@ -10524,7 +10524,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Set duration (seconds)
+  m_Text: Time in exercise (s)
 --- !u!222 &482753519
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26182,7 +26182,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Rest duration (seconds)
+  m_Text: Rest duration (s)
 --- !u!222 &1225273225
 CanvasRenderer:
   m_ObjectHideFlags: 0
