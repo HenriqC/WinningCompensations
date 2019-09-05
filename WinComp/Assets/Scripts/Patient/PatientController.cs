@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PatientController : MonoBehaviour {
+    public static PatientController instance = null;
     public Text sessionTimePatient;
     public Text correctRepetitionsPatient;
     public Text setTimePatient;
@@ -30,6 +31,18 @@ public class PatientController : MonoBehaviour {
     private int restTimeInt;
     private int startCounterInt;
 
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
     void init() {
         if (State.setDuration <= 0) {
             State.setDuration = 60;
@@ -90,6 +103,8 @@ public class PatientController : MonoBehaviour {
         restTherapist.SetActive(true);
         State.isTherapyOnGoing = false;
         State.restCount++;
+        State.previousSet = State.correctReps;
+        Instantiate_target.instance.setChanged = true;
         initRestTimer();
     }
 
@@ -101,17 +116,27 @@ public class PatientController : MonoBehaviour {
     }
 
     private void setTimeDec() {
-        if (setTimeInt == 0) {
+        if (setTimeInt == 0)
+        {
             CancelInvoke("setTimeDec");
             activateRest();
             return;
-        }
+        }        
 
         setTimeInt--;
         int minutes = setTimeInt / 60;
         int seconds = setTimeInt % 60;
         setTimePatient.text = minutes.ToString("00") + ":" + seconds.ToString("00");
         setTimeTherapist.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+    }
+
+    public void setTimeReset()
+    {
+        if (State.correctReps == State.maxReps)
+        {
+            activateRest();
+            return;
+        }
     }
 
     private void restTimeDec() {
@@ -128,7 +153,6 @@ public class PatientController : MonoBehaviour {
         restTimeTherapist.text = minutes.ToString("00") + ":" + seconds.ToString("00");
     }
 
-
     private void OnEnable() {
         init();
     }
@@ -144,17 +168,7 @@ public class PatientController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Instantiate_target.instance.restActivated == true)
-        {
-            Instantiate_target.instance.restActivated = false;
-            activateRest();
-            Instantiate_target.instance.setChanged = true;
-        }
-        if (Instantiate_target.instance.setChanged == true)
-        {
-            Instantiate_target.instance.setChanged = false;
-            activateSet();
-        }
+
         if (State.hasFinishedExercise)
         {
             startCounterPatient.transform.gameObject.SetActive(false);

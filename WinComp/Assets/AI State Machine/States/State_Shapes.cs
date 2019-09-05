@@ -62,7 +62,11 @@ public class State_Shapes : IState
 
         if (State.maxReps <= 0)
         {
-            State.maxReps = 20;
+            State.maxReps = 10;
+        }
+        if (State.maxSets <= 0)
+        {
+            State.maxSets = 3;
         }
         State.completedSets = 0;
         State.correctReps = 0;
@@ -196,11 +200,9 @@ public class State_Shapes : IState
                 State.correctReps+=1;
                 if (State.correctReps == State.maxReps)
                 {
+                    PatientController.instance.setTimeReset();
                     Instantiate_target.instance.setChanged = true;
-                    subState_index = 0;
-                    State.completedSets++;
-                    State.correctReps = 0;
-                    State.tries = 0;
+                    State.previousSet = State.correctReps;
                 }
 
                 float complete = State.correctReps;
@@ -261,19 +263,15 @@ public class State_Shapes : IState
                     }
                 }
             }
-            if (Instantiate_target.instance.restActivated == true)
+            
+            if (Instantiate_target.instance.setChanged == true)
             {
-                Instantiate_target.instance.restActivated = false;
-                Instantiate_target.instance.setChanged = true;
+                Instantiate_target.instance.setChanged = false;
                 subState_index = 0;
                 State.completedSets++;
                 State.correctReps = 0;
                 State.tries = 0;
-            }
-            if (Instantiate_target.instance.setChanged == true)
-            {
-                Instantiate_target.instance.setChanged = false;
-                State.previousSet = State.correctReps;
+                
             }
             if (State.completedSets > State.maxSets)
             {

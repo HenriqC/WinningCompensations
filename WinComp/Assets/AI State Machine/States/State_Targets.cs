@@ -111,14 +111,16 @@ public class State_Targets : IState
                     Instantiate_target.instance.nTargets++;                    
                     State.correctReps++;
                     State.tries++;
+
                     if (State.correctReps == State.maxReps)
-                    {
-                        Instantiate_target.instance.restActivated = true;
+                    {                        
                         Instantiate_target.instance.setChanged = true;
-                        Instantiate_target.instance.nTargets = 0;
-                        State.completedSets++;
+                        PatientController.instance.setTimeReset();
+                        Instantiate_target.instance.nTargets = 0;                        
+                        State.previousSet = State.correctReps;
                     }
 
+                    
                     Instantiate_target.instance.PlayClip();
 
                     float complete = State.correctReps;
@@ -376,16 +378,10 @@ public class State_Targets : IState
                 }
                 
             }
-            
-            if (Instantiate_target.instance.restActivated == true)
-            {
-                Instantiate_target.instance.restActivated = false;
-                Instantiate_target.instance.nTargets = 0;
-            }
-
             if (Instantiate_target.instance.setChanged == true)
             {
                 Instantiate_target.instance.setChanged = false;
+                State.completedSets++;
                 State.correctReps = 0;
                 State.tries = 0;
             }

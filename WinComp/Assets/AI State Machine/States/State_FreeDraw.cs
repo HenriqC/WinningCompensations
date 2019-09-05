@@ -77,7 +77,11 @@ public class State_FreeDraw : IState
 
         if (State.maxReps <= 0)
         {
-            State.maxReps = 20;
+            State.maxReps = 10;
+        }
+        if (State.maxSets <= 0)
+        {
+            State.maxSets = 3;
         }
         State.correctReps = 0;
         State.tries = 0;
@@ -586,7 +590,9 @@ public class State_FreeDraw : IState
                 State.correctReps += 1;
                 if (State.correctReps == State.maxReps)
                 {
+                    PatientController.instance.setTimeReset();
                     Instantiate_target.instance.setChanged = true;
+                    State.previousSet = State.correctReps;
                     if (vert == true)
                     {
                         subState_index_V = 1;
@@ -595,16 +601,8 @@ public class State_FreeDraw : IState
                     {
                         subState_index_H = 1;
                     }
-                    State.completedSets++;
-                    State.correctReps = 0;
-                    State.tries = 0;
-
-                    if (State.completedSets > State.maxSets)
-                    {
-                        sobe = true;
-                        Exit();
-                    }
                 }
+                
                 State.tries += 1;
                 float complete = State.correctReps;
                 int minutes = (State.sessionTimeInt / State.correctReps) / 60;
@@ -740,28 +738,19 @@ public class State_FreeDraw : IState
                         }                                                                          
                     }
                 }
-            }           
-
-            if (Instantiate_target.instance.restActivated == true)
+            }
+            if (State.completedSets > State.maxSets)
             {
-                Instantiate_target.instance.restActivated = false;
-                if (vert == true)
-                {
-                    subState_index_V = 1;
-                }
-                else if (horiz == true)
-                {
-                    subState_index_H = 1;
-                }
-                State.completedSets++;
-                State.correctReps = 0;
-                State.tries = 0;
+                sobe = true;
+                Exit();
             }
             if (Instantiate_target.instance.setChanged == true)
             {
                 Instantiate_target.instance.setChanged = false;
-                State.previousSet = State.correctReps;
-            }            
+                State.completedSets++;
+                State.correctReps = 0;
+                State.tries = 0;
+            }
         }
     }
 
