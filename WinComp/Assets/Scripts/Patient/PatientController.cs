@@ -104,7 +104,11 @@ public class PatientController : MonoBehaviour {
         State.isTherapyOnGoing = false;
         State.restCount++;
         State.previousSet = State.correctReps;
+        Debug.LogError(State.correctReps);
+        Debug.LogError(State.tries);
+        Debug.LogError(State.Correctness);
         Instantiate_target.instance.setChanged = true;
+        new ReportGenerator().Savecsv();
         initRestTimer();
     }
 

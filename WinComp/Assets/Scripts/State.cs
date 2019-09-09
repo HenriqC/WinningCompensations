@@ -9,6 +9,7 @@ public static class State {
     public static int setDuration;
     public static int restDuration;
     public static int sessionTimeInt;
+    public static int Correctness;
 
     public static int currentTarget;
 

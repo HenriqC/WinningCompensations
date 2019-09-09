@@ -14,7 +14,7 @@ public class State_Targets : IState
     private Transform cursor;
     private Transform secondaryCursor;
     public Vector3 originPoint;
-    //public int exc_count;
+    private bool hasWroteReport;
     private AudioClip beep;
 
     public State_Targets(Vector3 originPoint, Transform cursor, Transform secondaryCursor, GameObject new_target, GameObject ownerGameObject, float instantiateRadius, string tagToLookFor)
@@ -384,11 +384,13 @@ public class State_Targets : IState
                 State.completedSets++;
                 State.correctReps = 0;
                 State.tries = 0;
+                
             }
             if (State.completedSets > State.maxSets)
             {
                 Debug.Log("Muda de estado");
-                Object.Destroy(hit.collider.gameObject);
+                Object.Destroy(hit.collider.gameObject);                
+                
                 Exit();
             }
         }

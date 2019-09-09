@@ -1,2 +1,5 @@
-Exercise;Arm;Session Time;Tries;Correct Repetitions;Average Time per Repetition;Rest count;Left Shoulder Up;Right Shoulder Up;Leaned Left;Leaned Right
-Line Draw;Right;03:00;2;0;00:00;5;1;5;0;0
+Exercise;Arm;Session Time;Tries;Correct Repetitions;Correctness;Average Time per Repetition;Rest count;Left Shoulder Up;Right Shoulder Up;Leaned Left;Leaned Right
+Line Draw;Right;01:32;14;15;100;00:06;6;0;1;0;0
+Line Draw;Right;01:55;14;15;100;00:07;7;0;1;0;0
+Line Draw;Right;02:19;14;15;100;00:09;8;0;1;0;0
+Line Draw;Right;02:27;1;0;0;00:00;9;0;1;0;0

@@ -50,7 +50,6 @@ public class State_Shapes : IState
         DDA_Exercise_Grid.instance.nTargets = false;
         DDA_Exercise_Grid.instance.nFreeDraw = false;
         Debug.Log ("Entrou Shapes");
-
         subState_index = 0;
         poor_countMax = 4;
         new_shape = new GameObject[Create_Arrays.instance.selectedShapes.Length];
@@ -271,7 +270,6 @@ public class State_Shapes : IState
                 State.completedSets++;
                 State.correctReps = 0;
                 State.tries = 0;
-                
             }
             if (State.completedSets > State.maxSets)
             {

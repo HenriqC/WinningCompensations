@@ -24,6 +24,7 @@ public class State_FreeDraw : IState
     private bool desce;
     private bool vert;
     private bool horiz;
+    private bool hasWroteReport;
     private float timer = 5f;
     private float poor_countMaxFD;
 
@@ -67,8 +68,6 @@ public class State_FreeDraw : IState
         DDA_Exercise_Grid.instance.nTargets = false;
         DDA_Exercise_Grid.instance.nFreeDraw = false;
         Debug.Log("Entrou FreeDraw");
-
-        
         subState_index_V = 1;
         subState_index_H = 1;
         poor_countMaxFD = 4;
@@ -741,6 +740,11 @@ public class State_FreeDraw : IState
             }
             if (State.completedSets > State.maxSets)
             {
+                if (!hasWroteReport)
+                {
+                    new ReportGenerator().Savecsv();
+                    hasWroteReport = true;
+                }
                 sobe = true;
                 Exit();
             }
