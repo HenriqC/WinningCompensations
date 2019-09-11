@@ -44,7 +44,7 @@ public class ReportGenerator {
         String avgTimeRep = minutes.ToString("00") + ":" + seconds.ToString("00");
 
 
-        line = new string[]{State.exerciseName, arm, sessionTime, "" + State.tries, "" + State.correctReps, "" + (State.correctReps/State.tries)*100, avgTimeRep, "" + State.restCount, "" + State.leftShoulderUp, "" + State.rightShoulderUp, "" + State.leaningLeft, "" + State.leaningLeft};
+        line = new string[]{State.exerciseName, arm, sessionTime, "" + State.tries, "" + State.correctReps, "" + ((float)State.correctReps/State.tries)*100f, avgTimeRep, "" + State.restCount, "" + State.leftShoulderUp, "" + State.rightShoulderUp, "" + State.leaningLeft, "" + State.leaningLeft};
         File.AppendAllText(filePath, generateStringWithDelimiter(line));
     }
 
