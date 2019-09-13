@@ -198,10 +198,11 @@ public class State_Shapes : IState
                 State.tries += 1;
                 State.correctReps+=1;
                 if (State.correctReps == State.maxReps)
-                {
-                    PatientController.instance.setTimeReset();
+                {                    
                     Instantiate_target.instance.setChanged = true;
-                    State.previousSet = State.correctReps;
+                    PatientController.instance.CancelInvoke("setTimeDec");
+                    PatientController.instance.activateRest();
+                    return;
                 }
 
                 float complete = State.correctReps;
@@ -262,16 +263,23 @@ public class State_Shapes : IState
                     }
                 }
             }
-            
+            if (PatientController.instance.setTimeInt == 0)
+            {
+                PatientController.instance.CancelInvoke("setTimeDec");
+                PatientController.instance.activateRest();
+                return;
+            }
+
             if (Instantiate_target.instance.setChanged == true)
             {
                 Instantiate_target.instance.setChanged = false;
-                subState_index = 0;
                 State.completedSets++;
+                subState_index = 0;                
                 State.correctReps = 0;
                 State.tries = 0;
             }
-            if (State.completedSets > State.maxSets)
+
+            if (State.completedSets == State.maxSets)
             {
                 terminou = true;
                 Exit();

@@ -34,11 +34,7 @@ public class BodyScreenController : MonoBehaviour {
         stopButton.SetActive(false);
         restartButton.SetActive(true);
         State.hasFinishedExercise = true;
-        State.isTherapyOnGoing = false;
-        if (!hasWroteReport) {
-            new ReportGenerator().Savecsv();
-            hasWroteReport = true;
-        }        
+        State.isTherapyOnGoing = false;     
     }
 
     public void Restart() {

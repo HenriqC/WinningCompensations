@@ -587,22 +587,16 @@ public class State_FreeDraw : IState
                 }
 
                 State.correctReps += 1;
+                State.tries += 1;
                 if (State.correctReps == State.maxReps)
-                {
-                    PatientController.instance.setTimeReset();
+                {                    
                     Instantiate_target.instance.setChanged = true;
-                    State.previousSet = State.correctReps;
-                    if (vert == true)
-                    {
-                        subState_index_V = 1;
-                    }
-                    else if (horiz == true)
-                    {
-                        subState_index_H = 1;
-                    }
+                    PatientController.instance.CancelInvoke("setTimeDec");
+                    PatientController.instance.activateRest();
+                    return;
                 }
                 
-                State.tries += 1;
+                
                 float complete = State.correctReps;
                 int minutes = (State.sessionTimeInt / State.correctReps) / 60;
                 int seconds = (State.sessionTimeInt / State.correctReps) % 60;
@@ -738,23 +732,35 @@ public class State_FreeDraw : IState
                     }
                 }
             }
-            if (State.completedSets > State.maxSets)
+
+            if (PatientController.instance.setTimeInt == 0)
             {
-                if (!hasWroteReport)
-                {
-                    new ReportGenerator().Savecsv();
-                    hasWroteReport = true;
-                }
-                sobe = true;
-                Exit();
+                PatientController.instance.CancelInvoke("setTimeDec");
+                PatientController.instance.activateRest();
+                return;
             }
+
             if (Instantiate_target.instance.setChanged == true)
             {
                 Instantiate_target.instance.setChanged = false;
+                if (vert == true)
+                {
+                    subState_index_V = 1;
+                }
+                else if (horiz == true)
+                {
+                    subState_index_H = 1;
+                }                
                 State.completedSets++;
                 State.correctReps = 0;
                 State.tries = 0;
             }
+
+            if (State.completedSets == State.maxSets)
+            {
+                sobe = true;
+                Exit();
+            }            
         }
     }
 

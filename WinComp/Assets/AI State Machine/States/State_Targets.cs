@@ -115,9 +115,9 @@ public class State_Targets : IState
                     if (State.correctReps == State.maxReps)
                     {                        
                         Instantiate_target.instance.setChanged = true;
-                        PatientController.instance.setTimeReset();
-                        Instantiate_target.instance.nTargets = 0;                        
-                        State.previousSet = State.correctReps;
+                        PatientController.instance.CancelInvoke("setTimeDec");
+                        PatientController.instance.activateRest();
+                        return;
                     }
 
                     
@@ -180,8 +180,8 @@ public class State_Targets : IState
                         Debug.LogError("Basic");
                         Instantiate_target.instance.levelDiff.text = "1";
 
-                        Instantiate_target.instance.shoulderLiftOffset.value = 0.08f;
-                        Instantiate_target.instance.hipLeanOffset.value = 0.08f;
+                        Instantiate_target.instance.shoulderLiftOffset.value = 0.09f;
+                        Instantiate_target.instance.hipLeanOffset.value = 0.09f;
 
                         // Targets no lado esquerdo
                         Instantiate_target.instance.minRange_L1 = 175f;
@@ -222,8 +222,8 @@ public class State_Targets : IState
                         Debug.LogError("Poor");
                         Instantiate_target.instance.levelDiff.text = "2";
 
-                        Instantiate_target.instance.shoulderLiftOffset.value = 0.06f;
-                        Instantiate_target.instance.hipLeanOffset.value = 0.06f;
+                        Instantiate_target.instance.shoulderLiftOffset.value = 0.075f;
+                        Instantiate_target.instance.hipLeanOffset.value = 0.075f;
 
                         // Targets no lado esquerdo
                         Instantiate_target.instance.minRange_L1 = 135f;
@@ -345,10 +345,6 @@ public class State_Targets : IState
             {
                 State.compensationInCurrentRep = false;
                 Instantiate_target.instance.CooldownTimer(3);
-                /*if (State.correctReps > 0)
-                {
-                    State.correctReps--;
-                }*/
                 if (subState_index > 1 && n_targets > 0)
                 {
                     Instantiate_target.instance.nTargets--;
@@ -378,15 +374,25 @@ public class State_Targets : IState
                 }
                 
             }
+
+            if (PatientController.instance.setTimeInt == 0)
+            {
+                PatientController.instance.CancelInvoke("setTimeDec");
+                PatientController.instance.activateRest();
+                return;
+            }
             if (Instantiate_target.instance.setChanged == true)
             {
                 Instantiate_target.instance.setChanged = false;
+                Instantiate_target.instance.nTargets = 0;
+                Instantiate_target.instance.subState = 1;
                 State.completedSets++;
                 State.correctReps = 0;
-                State.tries = 0;
-                
+                State.tries = 0;             
             }
-            if (State.completedSets > State.maxSets)
+            
+
+            if (State.completedSets == State.maxSets)
             {
                 Debug.Log("Muda de estado");
                 Object.Destroy(hit.collider.gameObject);                

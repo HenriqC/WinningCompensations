@@ -1,5 +1,4 @@
-Exercise;Arm;Session Time;Tries;Correct Repetitions;Correctness;Average Time per Repetition;Rest count;Left Shoulder Up;Right Shoulder Up;Leaned Left;Leaned Right
-Target Reach;Right;00:12;17;14;82,35294;00:00;1;0;1;0;0
-Target Reach;Right;00:23;16;14;87,5;00:01;2;0;1;0;0
-Target Reach;Right;00:36;16;14;87,5;00:02;3;0;3;0;0
-Target Reach;Right;00:47;14;14;100;00:03;4;0;3;0;0
+Exercise;Arm;Session Time;Tries;Correct Repetitions;Correctness;Average Time per Repetition;Rest count;Left Shoulder Up;Right Shoulder Up;Leaned Left;Leaned Right;Obs
+Target Reach;Right;00:17;19;15;78,94736;00:01;1;0;0;0;0
+Target Reach;Right;00:59;26;15;57,69231;00:03;2;0;1;0;0
+Target Reach;Right;02:08;30;11;36,66667;00:11;3;0;1;0;0

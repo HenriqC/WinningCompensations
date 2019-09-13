@@ -27,7 +27,7 @@ public class PatientController : MonoBehaviour {
     public GameObject completed;
 
     private int sessionTimeInt;
-    private int setTimeInt;
+    public int setTimeInt;
     private int restTimeInt;
     private int startCounterInt;
 
@@ -79,7 +79,7 @@ public class PatientController : MonoBehaviour {
         InvokeRepeating("sessionTimeInc", 0, 1);
     }
 
-    private void initSetTimer() {
+    public void initSetTimer() {
         setTimeInt = State.setDuration;
         InvokeRepeating("setTimeDec", 0, 1);
     }
@@ -98,34 +98,26 @@ public class PatientController : MonoBehaviour {
         State.sessionTimeInt = sessionTimeInt;
     }
 
-    private void activateRest() {
+    public void activateRest() {
         restPatient.SetActive(true);
         restTherapist.SetActive(true);
         State.isTherapyOnGoing = false;
         State.restCount++;
         State.previousSet = State.correctReps;
-        Debug.LogError(State.correctReps);
-        Debug.LogError(State.tries);
-        Debug.LogError(State.Correctness);
         Instantiate_target.instance.setChanged = true;
+        State.Correctness = ((float)State.correctReps / (float)State.tries) * 100f;
         new ReportGenerator().Savecsv();
         initRestTimer();
     }
 
-    private void activateSet() {
+    public void activateSet() {
         restPatient.SetActive(false);
         restTherapist.SetActive(false);
         State.isTherapyOnGoing = true;
         initSetTimer();
     }
 
-    private void setTimeDec() {
-        if (setTimeInt == 0)
-        {
-            CancelInvoke("setTimeDec");
-            activateRest();
-            return;
-        }        
+    public void setTimeDec() {        
 
         setTimeInt--;
         int minutes = setTimeInt / 60;
@@ -134,21 +126,13 @@ public class PatientController : MonoBehaviour {
         setTimeTherapist.text = minutes.ToString("00") + ":" + seconds.ToString("00");
     }
 
-    public void setTimeReset()
-    {
-        if (State.correctReps == State.maxReps)
-        {
-            activateRest();
-            return;
-        }
-    }
-
     private void restTimeDec() {
         if (restTimeInt == 0) {
             CancelInvoke("restTimeDec");
             activateSet();
             return;
         }
+        
 
         restTimeInt--;
         int minutes = restTimeInt / 60;
